@@ -1,0 +1,16 @@
+{
+  "name": "mydimz",
+  "version": "1.0.0",
+  "description": "Monorepo project for web, mobile, and API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
