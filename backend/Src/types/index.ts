@@ -50,3 +50,12 @@ export interface AuthResponse {
   token: string;
   user: Omit<User, 'password'>;
 }
+
+export interface ProductRequest {
+  name: string;
+  price: number;
+  stock: number;
+  category: string;
+  description?: string;
+  barcode?: string;
+}
