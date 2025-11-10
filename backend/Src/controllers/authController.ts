@@ -8,8 +8,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'warung-ibuk-iyos-secret-key';
 export const login = async (req: Request, res: Response) =>{
   try {
     const { username, password }: LoginRequest = req.body;
-    
 
+if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password are required' });
 
   }
 }
