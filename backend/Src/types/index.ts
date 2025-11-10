@@ -30,3 +30,12 @@ export interface Sale {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface SaleItem {
+  id: number;
+  saleId: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  product: Product;
+}
