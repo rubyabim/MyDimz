@@ -19,3 +19,14 @@ export interface Product {
   createdAt: Date;
   updatedAt: Date;
 }
+
+
+export interface Sale {
+  id: number;
+  date: Date;
+  total: number;
+  cashier: string;
+  items: SaleItem[];
+  createdAt: Date;
+  updatedAt: Date;
+}
