@@ -59,3 +59,11 @@ export interface ProductRequest {
   description?: string;
   barcode?: string;
 }
+
+export interface SaleRequest {
+  items: Array<{
+    productId: number;
+    quantity: number;
+  }>;
+  cashier: string;
+}
