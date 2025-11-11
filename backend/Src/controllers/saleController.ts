@@ -66,3 +66,7 @@ for (const item of items) {
     res.status(500).json({ error: 'Failed to create sale' });
   }
 };
+
+export const getSales = async (req: Request, res: Response) => {
+  try {
+    const { startDate, endDate } = req.query;
