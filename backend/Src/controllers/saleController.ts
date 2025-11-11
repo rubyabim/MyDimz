@@ -41,3 +41,12 @@ for (const item of items) {
         }
       });
     }
+
+    const sale: Sale = await prisma.sale.create({
+      data: {
+        total,
+        cashier,
+        items: {
+          create: saleItems
+        }
+      },
