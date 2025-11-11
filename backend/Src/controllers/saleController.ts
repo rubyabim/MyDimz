@@ -21,4 +21,11 @@ for (const item of items) {
         return res.status(404).json({ error: `Product with id ${item.productId} not found` });
 }
      }
+
+     if (product.stock < item.quantity) {
+        return res.status(400).json({ error: `Insufficient stock for ${product.name}` });
     }
+     const itemTotal = product.price * item.quantity;
+      total += itemTotal;
+
+}
