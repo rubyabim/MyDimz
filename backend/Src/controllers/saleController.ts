@@ -50,3 +50,12 @@ for (const item of items) {
           create: saleItems
         }
       },
+
+      include: {
+        items: {
+          include: {
+            product: true
+          }
+        }
+      }
+    });
