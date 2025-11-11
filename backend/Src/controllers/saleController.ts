@@ -28,4 +28,10 @@ for (const item of items) {
      const itemTotal = product.price * item.quantity;
       total += itemTotal;
 
+       saleItems.push({
+        productId: item.productId,
+        quantity: item.quantity,
+        price: product.price
+      });
+
 }
