@@ -11,5 +11,11 @@ export const createSale = async (req: Request, res: Response) => {
     }
 let total = 0;
     const saleItems = [];
-
+    
+for (const item of items) {
+      const product = await prisma.product.findUnique({
+        where: { id: item.productId }
+      });
 }
+     }
+    }
