@@ -59,3 +59,10 @@ for (const item of items) {
         }
       }
     });
+
+     res.status(201).json(sale);
+  } catch (error) {
+    console.error('Create sale error:', error);
+    res.status(500).json({ error: 'Failed to create sale' });
+  }
+};
