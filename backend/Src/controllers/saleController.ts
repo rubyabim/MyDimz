@@ -34,4 +34,10 @@ for (const item of items) {
         price: product.price
       });
 
-}
+  await prisma.product.update({
+        where: { id: item.productId },
+        data: {
+          stock: product.stock - item.quantity
+        }
+      });
+    }
