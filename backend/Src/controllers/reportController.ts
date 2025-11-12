@@ -33,3 +33,4 @@ export const generateDailyReport = async (req: Request, res: Response) => {
     
     const doc = new PDFDocument();
     res.setHeader('Content-Type', 'application/pdf');
+     res.setHeader('Content-Disposition', `attachment; filename="laporan-harian-${date}.pdf"`);
