@@ -53,3 +53,4 @@ export const generateDailyReport = async (req: Request, res: Response) => {
     );
 
     doc.text(`Total Penjualan: Rp ${totalSales.toLocaleString('id-ID')}`, 120, y);
+y += 20;
