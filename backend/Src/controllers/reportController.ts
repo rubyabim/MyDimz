@@ -38,3 +38,4 @@ export const generateDailyReport = async (req: Request, res: Response) => {
       doc.pipe(res);
 
       doc.fontSize(20).text('WARUNG IBUK IYOS', 100, 100);
+      doc.fontSize(16).text('Laporan Harian Penjualan', 100, 130);
