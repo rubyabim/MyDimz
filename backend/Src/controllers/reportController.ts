@@ -49,3 +49,5 @@ export const generateDailyReport = async (req: Request, res: Response) => {
 
            const totalSales = sales.reduce((sum: number, sale: Sale) => sum + sale.total, 0);
             const totalItems = sales.reduce((sum: number, sale: Sale) => 
+                 sum + sale.items.reduce((itemSum: number, item) => itemSum + item.quantity, 0), 0
+    );
