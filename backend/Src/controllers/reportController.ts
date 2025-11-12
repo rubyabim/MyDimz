@@ -51,3 +51,5 @@ export const generateDailyReport = async (req: Request, res: Response) => {
             const totalItems = sales.reduce((sum: number, sale: Sale) => 
                  sum + sale.items.reduce((itemSum: number, item) => itemSum + item.quantity, 0), 0
     );
+
+    doc.text(`Total Penjualan: Rp ${totalSales.toLocaleString('id-ID')}`, 120, y);
