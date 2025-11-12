@@ -16,7 +16,10 @@ export const generateDailyReport = async (req: Request, res: Response) => {
     endDate.setDate(endDate.getDate() + 1);
 
     const sales = await prisma.sale.findMany({
-
+         where: {
         
+      },
+
+
 }
    ) }
