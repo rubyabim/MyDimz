@@ -41,3 +41,5 @@ export const generateDailyReport = async (req: Request, res: Response) => {
       doc.fontSize(16).text('Laporan Harian Penjualan', 100, 130);
        doc.fontSize(12).text(`Tanggal: ${date}`, 100, 160);
         doc.text(`Dicetak pada: ${new Date().toLocaleDateString('id-ID')}`, 100, 180);
+
+         let y = 220;
