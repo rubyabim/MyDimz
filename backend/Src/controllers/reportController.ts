@@ -18,7 +18,7 @@ export const generateDailyReport = async (req: Request, res: Response) => {
     const sales = await prisma.sale.findMany({
          where: {
          date: {
-        
+         gte: startDate
       },
 
 
