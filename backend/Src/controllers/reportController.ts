@@ -12,5 +12,6 @@ export const generateDailyReport = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Date parameter is required' });
 }
     const startDate = new Date(date as string);
+    const endDate = new Date(date as string);
 
 }
