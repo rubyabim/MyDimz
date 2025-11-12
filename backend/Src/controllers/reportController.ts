@@ -59,3 +59,4 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
 y += 20;
 
     doc.text(`Total Item Terjual: ${totalItems}`, 120, y);
+y += 40;
