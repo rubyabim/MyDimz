@@ -128,3 +128,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
       }
     });
     
+    const doc = new PDFDocument();
