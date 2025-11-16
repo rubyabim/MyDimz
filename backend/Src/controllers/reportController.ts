@@ -224,3 +224,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
     const doc = new PDFDocument();
      res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename="laporan-bulanan-${year}-${month}.pdf"`);
+      doc.pipe(res);
