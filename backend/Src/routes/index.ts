@@ -10,3 +10,4 @@ import {  login,
           deleteProduct,
           getPublicProducts,
           getProductById,
+          getProductCategories
