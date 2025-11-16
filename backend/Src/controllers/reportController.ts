@@ -64,3 +64,6 @@ y += 40;
  if (sales.length > 0) {
       doc.fontSize(14).text('Detail Transaksi:', 100, y);
       y += 30;
+
+       sales.forEach((sale: Sale, index: number) => {
+        if (y > 700) {
