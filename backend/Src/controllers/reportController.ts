@@ -240,3 +240,5 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
    const totalSales = sales.reduce((sum: number, sale: Sale) => sum + sale.total, 0);
     const totalTransactions = sales.length;
      const dailySales: { [key: string]: number } = {};
+
+      sales.forEach((sale: Sale) => {
