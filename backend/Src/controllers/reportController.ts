@@ -82,3 +82,6 @@ y += 40;
 
          sale.items.forEach((item) => {
           doc.text(`  ${item.product.name} - ${item.quantity} x Rp ${item.price.toLocaleString('id-ID')}`, 140, y);
+
+           y += 12;
+        });
