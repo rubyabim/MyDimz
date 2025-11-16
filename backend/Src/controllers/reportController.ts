@@ -205,3 +205,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
         where: {
           date: {
              gte: startDate,
+             lte: endDate
