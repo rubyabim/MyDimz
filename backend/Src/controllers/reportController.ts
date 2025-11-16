@@ -183,3 +183,10 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
     } else {
       doc.text('Tidak ada transaksi pada tanggal ini', 120, y);
     }
+
+     doc.end();
+  } catch (error) {
+    console.error('Generate daily report error:', error);
+    res.status(500).json({ error: 'Failed to generate report' });
+  }
+};
