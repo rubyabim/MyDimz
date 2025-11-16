@@ -70,3 +70,5 @@ y += 40;
            doc.addPage();
           y = 100;
         }
+
+        doc.fontSize(10).text(`Transaksi #${index + 1} - ${sale.date.toLocaleString('id-ID')}`, 120, y);
