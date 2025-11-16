@@ -211,3 +211,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
 
        include: {
         items: {
+           include: {
