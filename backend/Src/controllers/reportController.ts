@@ -242,3 +242,9 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
      const dailySales: { [key: string]: number } = {};
 
       sales.forEach((sale: Sale) => {
+          const date = sale.date.toISOString().split('T')[0];
+      if (!dailySales[date]) {
+        dailySales[date] = 0;
+      }
+      dailySales[date] += sale.total;
+    });
