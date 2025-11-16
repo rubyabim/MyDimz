@@ -203,3 +203,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
 
        const sales = await prisma.sale.findMany({
         where: {
+          date: {
