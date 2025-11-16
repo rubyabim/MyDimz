@@ -167,3 +167,5 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
         }
 
         doc.fontSize(10).text(`Transaksi #${index + 1} - ${sale.date.toLocaleString('id-ID')}`, 120, y);
+          y += 15;
+        doc.text(`Kasir: ${sale.cashier}`, 120, y);
