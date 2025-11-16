@@ -190,3 +190,7 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
     res.status(500).json({ error: 'Failed to generate report' });
   }
 };
+
+export const generateMonthlyReport = async (req: Request, res: Response) => {
+  try {
+    const { year, month } = req.query;
