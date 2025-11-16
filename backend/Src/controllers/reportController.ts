@@ -225,3 +225,6 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
      res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename="laporan-bulanan-${year}-${month}.pdf"`);
       doc.pipe(res);
+
+      // Add content to PDF similar to daily report
+     doc.fontSize(20).text('WARUNG IBUK IYOS', 100, 100);
