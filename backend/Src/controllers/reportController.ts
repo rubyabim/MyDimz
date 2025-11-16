@@ -228,3 +228,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
 
       // Add content to PDF similar to daily report
      doc.fontSize(20).text('WARUNG IBUK IYOS', 100, 100);
+     doc.fontSize(16).text('Laporan Bulanan Penjualan', 100, 130);
