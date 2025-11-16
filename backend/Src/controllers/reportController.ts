@@ -159,3 +159,9 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
     if (sales.length > 0) {
       doc.fontSize(14).text('Detail Transaksi:', 100, y);
       y += 30;
+
+      sales.forEach((sale: Sale, index: number) => {
+        if (y > 700) {
+          doc.addPage();
+          y = 100;
+        }
