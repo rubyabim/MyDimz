@@ -129,3 +129,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
     });
     
     const doc = new PDFDocument();
+  res.setHeader('Content-Type', 'application/pdf');
