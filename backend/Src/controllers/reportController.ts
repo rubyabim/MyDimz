@@ -173,4 +173,5 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
         doc.text(`Total: Rp ${sale.total.toLocaleString('id-ID')}`, 120, y);
         y += 10;
 
-         sale.items.forEach((item) => 
+         sale.items.forEach((item) => {
+          doc.text(`  ${item.product.name} - ${item.quantity} x Rp ${item.price.toLocaleString('id-ID')}`, 140, y);
