@@ -208,3 +208,5 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
              lte: endDate
               }
       },
+
+       include: {
