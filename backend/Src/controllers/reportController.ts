@@ -75,3 +75,7 @@ y += 40;
 
          y += 15;
         doc.text(`Kasir: ${sale.cashier}`, 120, y);
+
+         y += 15;
+        doc.text(`Total: Rp ${sale.total.toLocaleString('id-ID')}`, 120, y);
+        y += 10;
