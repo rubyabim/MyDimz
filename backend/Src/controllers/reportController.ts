@@ -139,3 +139,7 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
   doc.text(`Dicetak pada: ${new Date().toLocaleDateString('id-ID')}`, 100, 180);
 
       let y = 220;
+
+       doc.fontSize(14).text('Ringkasan Penjualan:', 100, y);
+    
+       
