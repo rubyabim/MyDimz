@@ -4,4 +4,5 @@ import {  login,
      from '../controllers/authController';
 
      import { 
-         getProducts, 
+         getProducts,
+          createProduct, 
