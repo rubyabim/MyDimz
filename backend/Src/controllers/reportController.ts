@@ -99,4 +99,6 @@ y += 40;
   }
 };
 
-export const generateMonthlyReport = async (req: Request, res: Response) => 
+export const generateMonthlyReport = async (req: Request, res: Response) => {
+  try {
+    const { year, month } = req.query;
