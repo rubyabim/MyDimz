@@ -135,3 +135,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
   doc.pipe(res);
   doc.fontSize(20).text('WARUNG IBUK IYOS', 100, 100);
   doc.fontSize(16).text('Laporan Harian Penjualan', 100, 130);
+  doc.fontSize(12).text(`Tanggal: ${date}`, 100, 160);
