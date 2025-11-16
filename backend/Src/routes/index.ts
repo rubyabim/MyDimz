@@ -11,3 +11,4 @@ import {  login,
           getPublicProducts,
           getProductById,
           getProductCategories
+          } from '../controllers/productController';
