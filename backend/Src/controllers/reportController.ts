@@ -194,3 +194,6 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
 export const generateMonthlyReport = async (req: Request, res: Response) => {
   try {
     const { year, month } = req.query;
+     if (!year || !month) {
+      return res.status(400).json({ error: 'Year and month parameters are required' });
+    }
