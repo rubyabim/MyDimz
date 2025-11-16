@@ -197,3 +197,5 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
      if (!year || !month) {
       return res.status(400).json({ error: 'Year and month parameters are required' });
     }
+
+      const startDate = new Date(parseInt(year as string), parseInt(month as string) - 1, 1);
