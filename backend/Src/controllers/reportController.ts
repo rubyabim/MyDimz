@@ -219,7 +219,8 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
       }
     });
 
-    
+
     // PDF generation logic similar to daily report but adjusted for monthly data
     const doc = new PDFDocument();
      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename="laporan-bulanan-${year}-${month}.pdf"`);
