@@ -177,3 +177,9 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
           doc.text(`  ${item.product.name} - ${item.quantity} x Rp ${item.price.toLocaleString('id-ID')}`, 140, y);
            y += 12;
         });
+
+         y += 20;
+      });
+    } else {
+      doc.text('Tidak ada transaksi pada tanggal ini', 120, y);
+    }
