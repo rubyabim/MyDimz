@@ -91,3 +91,12 @@ y += 40;
     } else {
       doc.text('Tidak ada transaksi pada tanggal ini', 120, y);
     }
+
+    doc.end();
+  } catch (error) {
+    console.error('Generate daily report error:', error);
+    res.status(500).json({ error: 'Failed to generate report' });
+  }
+};
+
+export const generateMonthlyReport = async (req: Request, res: Response) => 
