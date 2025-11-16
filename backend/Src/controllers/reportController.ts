@@ -142,3 +142,5 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
 
        doc.fontSize(14).text('Ringkasan Penjualan:', 100, y);
      y += 30;
+
+     const totalSales = sales.reduce((sum: number, sale: Sale) => sum + sale.total, 0);
