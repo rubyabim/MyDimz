@@ -213,3 +213,8 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
         items: {
            include: {
             product: true
+
+                }
+        }
+      }
+    });
