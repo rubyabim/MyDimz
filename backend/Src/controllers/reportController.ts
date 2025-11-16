@@ -141,5 +141,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
       let y = 220;
 
        doc.fontSize(14).text('Ringkasan Penjualan:', 100, y);
-    
-       
+     y += 30;
