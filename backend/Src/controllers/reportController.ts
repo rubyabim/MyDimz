@@ -172,3 +172,5 @@ doc.text(`Total Transaksi: ${sales.length}`, 120, y);
          y += 15;
         doc.text(`Total: Rp ${sale.total.toLocaleString('id-ID')}`, 120, y);
         y += 10;
+
+         sale.items.forEach((item) => 
