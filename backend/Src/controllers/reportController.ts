@@ -67,3 +67,6 @@ y += 40;
 
        sales.forEach((sale: Sale, index: number) => {
         if (y > 700) {
+           doc.addPage();
+          y = 100;
+        }
