@@ -109,4 +109,6 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
 
      const startDate = new Date(parseInt(year as string), parseInt(month as string) - 1, 1);
      const endDate = new Date(parseInt(year as string), parseInt(month as string), 0);
-      const sales = await prisma.sale.findMany({
+      
+     const sales = await prisma.sale.findMany({
+      where: {
