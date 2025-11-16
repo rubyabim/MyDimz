@@ -60,3 +60,7 @@ y += 20;
 
     doc.text(`Total Item Terjual: ${totalItems}`, 120, y);
 y += 40;
+
+ if (sales.length > 0) {
+      doc.fontSize(14).text('Detail Transaksi:', 100, y);
+      y += 30;
