@@ -232,3 +232,5 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
          doc.fontSize(12).text(`Periode: ${new Date(parseInt(year as string), parseInt(month as string) - 
           1).toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}`, 100, 160);
           doc.text(`Dicetak pada: ${new Date().toLocaleDateString('id-ID')}`, 100, 180);
+
+           let y = 220;
