@@ -133,3 +133,4 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
   res.setHeader('Content-Disposition', `attachment; filename="laporan-bulanan-${year}-${month}.pdf"`);
 
   doc.pipe(res);
+  doc.fontSize(20).text('WARUNG IBUK IYOS', 100, 100);
