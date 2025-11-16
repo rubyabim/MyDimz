@@ -88,4 +88,6 @@ y += 40;
 
          y += 20;
       });
-    } else 
+    } else {
+      doc.text('Tidak ada transaksi pada tanggal ini', 120, y);
+    }
