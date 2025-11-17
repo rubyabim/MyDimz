@@ -15,10 +15,13 @@ import {  login,
           import {  
             createSale, 
               getSales
-              from '../controllers/saleController';
+              
+              from'../controllers/saleController';
 
               import { 
                  authenticateToken, 
+                 requireAdmin 
+}
 }
 
 
