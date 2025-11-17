@@ -18,5 +18,7 @@ import {  login,
               from '../controllers/saleController';
 
               import { 
+                 authenticateToken, 
 }
+
 
