@@ -15,12 +15,14 @@ import {  login,
           import {  
             createSale, 
               getSales
-              
+
               from'../controllers/saleController';
 
               import { 
                  authenticateToken, 
                  requireAdmin 
+
+                 from '../middleware/auth';
 }
 }
 
