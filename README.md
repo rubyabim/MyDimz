@@ -1,4 +1,4 @@
-# WARUNG IBUK IYOS - Sistem Manajemen Toko Kelontong
+WARUNG IBUK IYOS - Sistem Manajemen Toko Kelontong
 
 Sistem lengkap untuk mengelola toko kelontong dengan fitur:
 - Backend API dengan Node.js & TypeScript
@@ -7,115 +7,115 @@ Sistem lengkap untuk mengelola toko kelontong dengan fitur:
 - Database SQLite dengan Prisma ORM
 - Laporan PDF otomatis
 
-### 1. Setup Backend
-\`\`\`bash
+1. Setup Backend
+bash
 cd backend
 npm install
 npx prisma generate
 npx prisma db push
 npm run dev
-\`\`\`
 
-### 2. Setup Web
-\`\`\`bash
+
+2. Setup Web
+bash
 cd web
 npm install
 npm run dev
-\`\`\`
 
-### 3. Inisialisasi Admin
-\`\`\`bash
+
+3. Inisialisasi Admin
+bash
 curl -X POST http://localhost:5000/api/init
-\`\`\`
 
-## 📋 FITUR UTAMA
 
-### Backend API (Port 5000)
+ 📋 FITUR UTAMA
+
+ Backend API (Port 5000)
 ✅ Authentication JWT
 ✅ CRUD Produk
 ✅ Manajemen Penjualan
 ✅ Laporan PDF
 ✅ Public API untuk produk
 
-### Web Application (Port 3000)
+Web Application (Port 3000)
 ✅ Website public untuk customer
 ✅ Admin dashboard
 ✅ Manajemen produk
 ✅ Edit harga & stok real-time
 ✅ Generate laporan
 
-## 🔧 API ENDPOINTS
+🔧 API ENDPOINTS
 
-### Public Routes
-- \`GET /api/public/products\` - List produk
-- \`GET /api/public/products/categories\` - Kategori produk
-- \`GET /api/public/products/:id\` - Detail produk
+ Public Routes
+- GET /api/public/products- List produk
+- GET /api/public/products/categories - Kategori produk
+- GET /api/public/products/:id- Detail produk
 
 ### Protected Routes (Perlu login)
-- \`POST /api/auth/login\` - Login admin
-- \`GET /api/products\` - List produk (admin)
-- \`POST /api/products\` - Tambah produk
-- \`PUT /api/products/:id\` - Edit produk
-- \`DELETE /api/products/:id\` - Hapus produk
-- \`POST /api/sales\` - Buat penjualan
-- \`GET /api/sales\` - Riwayat penjualan
-- \`GET /api/reports/daily\` - Laporan harian PDF
-- \`GET /api/reports/monthly\` - Laporan bulanan PDF
+- POST /api/auth/login- Login admin
+- GET /api/products - List produk (admin)
+- POST /api/products - Tambah produk
+- PUT /api/products/:id - Edit produk
+- DELETE /api/products/:id - Hapus produk
+- POST /api/sales- Buat penjualan
+- GET /api/sales - Riwayat penjualan
+- GET /api/reports/daily - Laporan harian PDF
+- GET /api/reports/monthly - Laporan bulanan PDF
 
-## 👤 LOGIN 
+👤 LOGIN 
 
-**Admin Panel:**
+Admin Panel:
 - URL: http://localhost:3000/dashboard
-**Website Public:**
+Website Public:
 - URL: http://localhost:3000
 - URL Produk: http://localhost:3000/products
 
-## 🗃️ DATABASE
+🗃️ DATABASE
 
-Menggunakan SQLite dengan Prisma ORM. File database: \`backend/dev.db\`
+Menggunakan SQLite dengan Prisma ORM. File database: backend/dev.db
 
-**Tabel:**
-- \`users\` - Data user admin/kasir
-- \`products\` - Data produk
-- \`sales\` - Data penjualan
-- \`sale_items\` - Item dalam penjualan
+Tabel:
+- users- Data user admin/kasir
+- products - Data produk
+- sales - Data penjualan
+- sale_items - Item dalam penjualan
 
-## 📊 FITUR LAPORAN
+ 📊 FITUR LAPORAN
 
-### Laporan Harian
+Laporan Harian
 - Ringkasan penjualan harian
 - Detail transaksi
 - Total item terjual
 
-### Laporan Bulanan
+Laporan Bulanan
 - Ringkasan bulanan
 - Penjualan per hari
 - Rata-rata transaksi
 
-## 🛠️ DEVELOPMENT
+🛠️ DEVELOPMENT
 
-### Backend Development
-\`\`\`bash
+Backend Development
+bash
 cd backend
 npm run dev  # Development mode dengan auto-reload
-\`\`\`
 
-### Web Development
-\`\`\`bash
+
+Web Development
+bash
 cd web
 npm run dev  # Development mode
-\`\`\`
 
-### Database Management
-\`\`\`bash
+
+Database Management
+bash
 npx prisma studio  # GUI untuk melihat data
-\`\`\`
 
-## 📱 MOBILE APP (Future)
+
+📱 MOBILE APP (Future)
 
 Aplikasi mobile untuk POS (Point of Sale) akan dikembangkan menggunakan React Native.
 
-## 🤝 KONTRIBUSI
+🤝 KONTRIBUSI
 
 1. Fork repository
 2. Buat feature branch
