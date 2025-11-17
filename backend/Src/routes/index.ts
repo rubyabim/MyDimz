@@ -14,6 +14,7 @@ import {  login,
           } from '../controllers/productController';
           import {  
             createSale, 
-              getSales 
+              getSales
+              from '../controllers/saleController';
 }
 
