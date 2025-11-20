@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { prisma } from '../utils/database';
-import { Product, ProductRequest, Category } from '../types';
+import { Product, ProductRequest, PublicProductsResponse, Category } from '../types';
+
 export const getProducts = async (req: Request, res: Response) => {
   try {
     const products: Product[] = await prisma.product.findMany({

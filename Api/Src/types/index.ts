@@ -20,7 +20,6 @@ export interface Product {
   updatedAt: Date;
 }
 
-
 export interface Sale {
   id: number;
   date: Date;
@@ -39,7 +38,6 @@ export interface SaleItem {
   price: number;
   product: Product;
 }
-
 
 export interface LoginRequest {
   username: string;
@@ -66,6 +64,20 @@ export interface SaleRequest {
     quantity: number;
   }>;
   cashier: string;
+}
+
+export interface PublicProductsResponse {
+  products: Product[];
+  total: number;
+  page: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+export interface Category {
+  name: string;
+  count: number;
 }
 
 declare global {

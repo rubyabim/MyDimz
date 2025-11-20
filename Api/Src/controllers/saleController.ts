@@ -43,9 +43,10 @@ export const createSale = async (req: Request, res: Response) => {
       });
     }
 
-    const sale = await prisma.sale.create({
+    const sale: Sale = await prisma.sale.create({
       data: {
         total,
+        cashier,
         items: {
           create: saleItems
         }
@@ -78,7 +79,7 @@ export const getSales = async (req: Request, res: Response) => {
       };
     }
 
-    const sales = await prisma.sale.findMany({
+    const sales: Sale[] = await prisma.sale.findMany({
       where,
       include: {
         items: {
