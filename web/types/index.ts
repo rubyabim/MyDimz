@@ -6,4 +6,6 @@ export interface User {
     updatedAt: string;
 }
 
-export interface Product
+export interface Product {
+    
+}
