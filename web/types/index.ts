@@ -16,5 +16,5 @@ export interface Product {
     description?: string;
     barcode?: string;
     createdAt: string;
-
+    updatedAt: string;
 }
