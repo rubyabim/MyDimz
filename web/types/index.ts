@@ -24,5 +24,5 @@ export interface CartItem extends Product {
 }
 
 export interface Sale {
-    
+    id: number;
 }
