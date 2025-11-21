@@ -33,4 +33,6 @@ export interface Sale {
     updatedAt: string;
 }
 
-export interface SaleItem {}
+export interface SaleItem {
+    id: number;
+}
