@@ -29,4 +29,5 @@ export interface Sale {
     total: number;
     cashier: string;
     items: SaleItem[];
+    createdAt: string;
 }
