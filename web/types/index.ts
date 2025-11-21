@@ -46,4 +46,6 @@ export interface LoginRequest {
     password: string;
 }
 
-export interface AuthResponse {}
+export interface AuthResponse {
+    token: string;
+}
