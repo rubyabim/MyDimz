@@ -56,4 +56,5 @@ export interface ProductFormData {
     price: number | string;
     stock: number | string;
     category: string;
+    description?: string;
 }
