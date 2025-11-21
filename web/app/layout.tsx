@@ -8,4 +8,6 @@ export const metadata = {
   description: 'Sistem management toko kelontong Warung Ibuk Iyos',
 }
 
-export default function RootLayout ()
+export default function RootLayout ({
+  
+})
