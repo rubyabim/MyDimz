@@ -59,3 +59,5 @@ export interface ProductFormData {
     description?: string;
     barcode?: string;
 }
+
+export interface 
