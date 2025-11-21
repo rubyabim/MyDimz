@@ -34,4 +34,6 @@ body {
   -webkit-line-clamp: 1;
 }
 
-.line-clamp-2 {}
+.line-clamp-2 {
+  overflow: hidden;
+}
