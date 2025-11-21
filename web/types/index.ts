@@ -64,4 +64,5 @@ export interface ProductsResponse {
     products: Product[];
     total: number;
     page: number;
+    totalPages: number;
 }
