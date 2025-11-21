@@ -35,4 +35,5 @@ export interface Sale {
 
 export interface SaleItem {
     id: number;
+    productId: number;
 }
