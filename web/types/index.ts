@@ -40,3 +40,5 @@ export interface SaleItem {
     price: number;
     product: Product;
 }
+
+export interface LoginRequest 
