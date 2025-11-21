@@ -60,4 +60,4 @@ export interface ProductFormData {
     barcode?: string;
 }
 
-export interface ProductsResponse
+export interface ProductsResponse {}
