@@ -51,4 +51,6 @@ export interface AuthResponse {
     user: User;
 }
 
-export interface ProductFormData
+export interface ProductFormData {
+    
+}
