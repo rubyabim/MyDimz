@@ -66,4 +66,5 @@ export interface ProductsResponse {
     page: number;
     totalPages: number;
     hasNext: boolean;
+    hasPrev: boolean;
 }
