@@ -19,4 +19,6 @@ export interface Product {
     updatedAt: string;
 }
 
-export interface CartItem extends Product
+export interface CartItem extends Product {
+    
+}
