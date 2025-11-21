@@ -69,4 +69,6 @@ export interface ProductsResponse {
     hasPrev: boolean;
 }
 
-export interface Category
+export interface Category{
+    
+}
