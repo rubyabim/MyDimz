@@ -15,5 +15,6 @@ export interface Product {
     image?: string;
     description?: string;
     barcode?: string;
-    
+    createdAt: string;
+
 }
