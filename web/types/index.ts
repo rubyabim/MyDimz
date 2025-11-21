@@ -43,4 +43,5 @@ export interface SaleItem {
 
 export interface LoginRequest {
     username: string;
+    password: string;
 }
