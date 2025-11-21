@@ -23,4 +23,6 @@ export interface CartItem extends Product {
     quantity: number;
 }
 
-export interface Sale
+export interface Sale {
+    
+}
