@@ -37,4 +37,5 @@ export interface SaleItem {
     id: number;
     productId: number;
     quantity: number;
+    price: number;
 }
