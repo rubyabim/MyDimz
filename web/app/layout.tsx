@@ -3,4 +3,6 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {}
+export const metadata = {
+  title: 'Warung Ibuk Iyos - Management System',
+}
