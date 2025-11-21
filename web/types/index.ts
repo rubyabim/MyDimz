@@ -71,4 +71,5 @@ export interface ProductsResponse {
 
 export interface Category{
     name: string;
+    count: number;
 }
