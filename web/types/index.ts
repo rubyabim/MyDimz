@@ -68,3 +68,5 @@ export interface ProductsResponse {
     hasNext: boolean;
     hasPrev: boolean;
 }
+
+export interface
