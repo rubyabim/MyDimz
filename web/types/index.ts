@@ -65,4 +65,5 @@ export interface ProductsResponse {
     total: number;
     page: number;
     totalPages: number;
+    hasNext: boolean;
 }
