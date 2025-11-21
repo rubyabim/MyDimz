@@ -4,7 +4,9 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  // Connection URLs are no longer allowed in schema files (Prisma 7+).
+  // Move your DATABASE_URL to prisma.config.ts and configure migrations/runtime there.
+  // For runtime, pass 'adapter' for a direct DB connection or 'accelerateUrl' for Accelerate to the PrismaClient constructor.
 }
 
 model User {

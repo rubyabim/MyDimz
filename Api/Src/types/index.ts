@@ -1,3 +1,5 @@
+// src/types/index.ts
+
 export interface User {
   id: number;
   username: string;
@@ -20,6 +22,15 @@ export interface Product {
   updatedAt: Date;
 }
 
+export interface SaleItem {
+  id: number;
+  saleId: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  product: Product;
+}
+
 export interface Sale {
   id: number;
   date: Date;
@@ -28,15 +39,6 @@ export interface Sale {
   items: SaleItem[];
   createdAt: Date;
   updatedAt: Date;
-}
-
-export interface SaleItem {
-  id: number;
-  saleId: number;
-  productId: number;
-  quantity: number;
-  price: number;
-  product: Product;
 }
 
 export interface LoginRequest {
@@ -80,6 +82,7 @@ export interface Category {
   count: number;
 }
 
+// Extend Express Request supaya ada req.user
 declare global {
   namespace Express {
     interface Request {
@@ -91,3 +94,6 @@ declare global {
     }
   }
 }
+
+// WAJIB: export {} supaya file ini dianggap sebagai module
+export {};

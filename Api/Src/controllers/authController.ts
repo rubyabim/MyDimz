@@ -1,3 +1,5 @@
+// src/controllers/authController.ts
+
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -11,11 +13,13 @@ export const login = async (req: Request, res: Response) => {
     const { username, password }: LoginRequest = req.body;
 
     if (!username || !password) {
-      return res.status(400).json({ error: 'Username and password are required' });
+      return res
+        .status(400)
+        .json({ error: 'Username and password are required' });
     }
 
     const user = await prisma.user.findUnique({
-      where: { username }
+      where: { username },
     });
 
     if (!user || !bcrypt.compareSync(password, user.password)) {
@@ -35,8 +39,8 @@ export const login = async (req: Request, res: Response) => {
         username: user.username,
         role: user.role,
         createdAt: user.createdAt,
-        updatedAt: user.updatedAt
-      }
+        updatedAt: user.updatedAt,
+      },
     };
 
     res.json(response);
@@ -49,7 +53,7 @@ export const login = async (req: Request, res: Response) => {
 export const initializeAdmin = async (req: Request, res: Response) => {
   try {
     const existingAdmin = await prisma.user.findFirst({
-      where: { username: 'admin' }
+      where: { username: 'admin' },
     });
 
     if (!existingAdmin) {
@@ -58,8 +62,8 @@ export const initializeAdmin = async (req: Request, res: Response) => {
         data: {
           username: 'admin',
           password: hashedPassword,
-          role: 'admin'
-        }
+          role: 'admin',
+        },
       });
       res.json({ message: 'Admin user created successfully' });
     } else {

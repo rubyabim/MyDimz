@@ -1,12 +1,27 @@
+// src/controllers/productController.ts
+
 import { Request, Response } from 'express';
 import { prisma } from '../utils/database';
-import { Product, ProductRequest, PublicProductsResponse, Category } from '../types';
+import {
+  Product,
+  ProductRequest,
+  PublicProductsResponse,
+  Category,
+} from '../types';
 
 export const getProducts = async (req: Request, res: Response) => {
   try {
-    const products: Product[] = await prisma.product.findMany({
-      orderBy: { createdAt: 'desc' }
+    const rawProducts = await prisma.product.findMany({
+      orderBy: { createdAt: 'desc' },
     });
+
+    const products: Product[] = rawProducts.map((p) => ({
+      ...p,
+      image: p.image === null ? undefined : p.image,
+      description: p.description === null ? undefined : p.description,
+      barcode: p.barcode === null ? undefined : p.barcode,
+    }));
+
     res.json(products);
   } catch (error) {
     console.error('Get products error:', error);
@@ -16,23 +31,23 @@ export const getProducts = async (req: Request, res: Response) => {
 
 export const getPublicProducts = async (req: Request, res: Response) => {
   try {
-    const { category, search, page = 1, limit = 12 } = req.query;
-    
-    let where: any = {};
-    
+    const { category, search, page = '1', limit = '12' } = req.query;
+
+    const where: any = {};
+
     if (category && category !== 'all') {
       where.category = category as string;
     }
-    
+
     if (search) {
       where.name = {
         contains: search as string,
-        mode: 'insensitive' as any
+        mode: 'insensitive',
       };
     }
 
-    const pageNum = parseInt(page as string);
-    const limitNum = parseInt(limit as string);
+    const pageNum = parseInt(page as string, 10);
+    const limitNum = parseInt(limit as string, 10);
     const skip = (pageNum - 1) * limitNum;
 
     const [products, total] = await Promise.all([
@@ -40,18 +55,20 @@ export const getPublicProducts = async (req: Request, res: Response) => {
         where,
         skip,
         take: limitNum,
-        orderBy: { createdAt: 'desc' }
+        orderBy: { createdAt: 'desc' },
       }),
-      prisma.product.count({ where })
+      prisma.product.count({ where }),
     ]);
 
+    const totalPages = Math.ceil(total / limitNum);
+
     const response: PublicProductsResponse = {
-      products,
+      products: products as Product[],
       total,
       page: pageNum,
-      totalPages: Math.ceil(total / limitNum),
-      hasNext: pageNum < Math.ceil(total / limitNum),
-      hasPrev: pageNum > 1
+      totalPages,
+      hasNext: pageNum < totalPages,
+      hasPrev: pageNum > 1,
     };
 
     res.json(response);
@@ -64,9 +81,9 @@ export const getPublicProducts = async (req: Request, res: Response) => {
 export const getProductById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    
+
     const product = await prisma.product.findUnique({
-      where: { id: parseInt(id) }
+      where: { id: parseInt(id, 10) },
     });
 
     if (!product) {
@@ -85,13 +102,13 @@ export const getProductCategories = async (req: Request, res: Response) => {
     const categories = await prisma.product.groupBy({
       by: ['category'],
       _count: {
-        id: true
-      }
+        id: true,
+      },
     });
 
-    const response: Category[] = categories.map(cat => ({
+    const response: Category[] = categories.map((cat) => ({
       name: cat.category,
-      count: cat._count.id
+      count: cat._count.id,
     }));
 
     res.json(response);
@@ -103,22 +120,32 @@ export const getProductCategories = async (req: Request, res: Response) => {
 
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const { name, price, stock, category, description, barcode }: ProductRequest = req.body;
+    const {
+      name,
+      price,
+      stock,
+      category,
+      description,
+      barcode,
+    }: ProductRequest = req.body;
 
-    if (!name || !price || !stock || !category) {
-      return res.status(400).json({ error: 'Name, price, stock, and category are required' });
+    if (!name || price == null || stock == null || !category) {
+      return res
+        .status(400)
+        .json({ error: 'Name, price, stock, and category are required' });
     }
 
-    const product: Product = await prisma.product.create({
+    const product: Product = (await prisma.product.create({
       data: {
         name,
-        price: parseInt(price.toString()),
-        stock: parseInt(stock.toString()),
+        price: Number(price),
+        stock: Number(stock),
         category,
         description,
-        barcode
-      }
-    });
+        barcode,
+      },
+    })) as unknown as Product;
+
     res.status(201).json(product);
   } catch (error) {
     console.error('Create product error:', error);
@@ -129,19 +156,27 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name, price, stock, category, description, barcode }: ProductRequest = req.body;
+    const {
+      name,
+      price,
+      stock,
+      category,
+      description,
+      barcode,
+    }: ProductRequest = req.body;
 
-    const product: Product = await prisma.product.update({
-      where: { id: parseInt(id) },
+    const product: Product = (await prisma.product.update({
+      where: { id: parseInt(id, 10) },
       data: {
         name,
-        price: parseInt(price.toString()),
-        stock: parseInt(stock.toString()),
+        price: Number(price),
+        stock: Number(stock),
         category,
         description,
-        barcode
-      }
-    });
+        barcode,
+      },
+    })) as unknown as Product;
+
     res.json(product);
   } catch (error) {
     console.error('Update product error:', error);
@@ -154,7 +189,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     await prisma.product.delete({
-      where: { id: parseInt(id) }
+      where: { id: parseInt(id, 10) },
     });
     res.json({ message: 'Product deleted successfully' });
   } catch (error) {
