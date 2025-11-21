@@ -41,4 +41,4 @@ export interface SaleItem {
     product: Product;
 }
 
-export interface LoginRequest 
+export interface LoginRequest {}
