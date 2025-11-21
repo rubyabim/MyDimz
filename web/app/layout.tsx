@@ -5,4 +5,5 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Warung Ibuk Iyos - Management System',
+  description: 'Sistem management toko kelontong Warung Ibuk Iyos',
 }
