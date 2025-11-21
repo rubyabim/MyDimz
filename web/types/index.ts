@@ -32,3 +32,5 @@ export interface Sale {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface SaleItem
