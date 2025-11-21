@@ -62,4 +62,5 @@ export interface ProductFormData {
 
 export interface ProductsResponse {
     products: Product[];
+    total: number;
 }
