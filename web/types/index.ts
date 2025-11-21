@@ -52,5 +52,5 @@ export interface AuthResponse {
 }
 
 export interface ProductFormData {
-    
+    name: string;
 }
