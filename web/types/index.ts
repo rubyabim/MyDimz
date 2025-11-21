@@ -38,4 +38,5 @@ export interface SaleItem {
     productId: number;
     quantity: number;
     price: number;
+    product: Product;
 }
