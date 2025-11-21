@@ -57,4 +57,5 @@ export interface ProductFormData {
     stock: number | string;
     category: string;
     description?: string;
+    barcode?: string;
 }
