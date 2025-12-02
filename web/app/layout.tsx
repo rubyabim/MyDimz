@@ -1,23 +1,24 @@
-import { Inter } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from 'next';
+import './globals.css';
+import { CartProvider } from './components/CartContext';
 
-const inter = Inter({ subsets: ['latin'] })
+export const metadata: Metadata = {
+  title: 'Toko Kelontong MyDimz',
+  description: 'Belanja kebutuhan sehari-hari dengan mudah',
+};
 
-export const metadata = {
-  title: 'Warung Ibuk Iyos - Management System',
-  description: 'Sistem management toko kelontong Warung Ibuk Iyos',
-}
-
-export default function RootLayout ({
+export default function RootLayout({
   children,
-}:{
-  children: React.ReactNode
+}: {
+  children: React.ReactNode;
 }) {
   return (
     <html lang="id">
-    <body className={inter.className}>
-      {children}
+      <body className="min-h-screen font-poppins bg-[var(--color-bg)]">
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
-  )
+  );
 }

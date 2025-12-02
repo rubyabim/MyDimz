@@ -1,65 +1,172 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
+import Header from './components/Header';
+import ProductCard from './components/ProductCard';
+import { fetchPublicProducts } from '../lib/api';
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+  stock: number;
+}
 
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    void loadProducts();
+  }, []);
+
+  const loadProducts = async () => {
+    try {
+      const data = await fetchPublicProducts();
+
+      if (Array.isArray(data)) {
+        setProducts(data);
+      } else if (data?.products) {
+        setProducts(data.products);
+      } else {
+        setProducts([]);
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+
+      setProducts([
+        {
+          id: 1,
+          name: 'Beras Premium 5kg',
+          price: 75000,
+          category: 'Makanan',
+          image: 'https://via.placeholder.com/300x200?text=Beras',
+          stock: 50,
+        },
+        {
+          id: 2,
+          name: 'Minyak Goreng 2L',
+          price: 32000,
+          category: 'Kebutuhan Rumah',
+          image: 'https://via.placeholder.com/300x200?text=Minyak',
+          stock: 30,
+        },
+        {
+          id: 3,
+          name: 'Gula Pasir 1kg',
+          price: 15000,
+          category: 'Makanan',
+          image: 'https://via.placeholder.com/300x200?text=Gula',
+          stock: 100,
+        },
+        {
+          id: 4,
+          name: 'Teh Celup',
+          price: 8500,
+          category: 'Minuman',
+          image: 'https://via.placeholder.com/300x200?text=Teh',
+          stock: 80,
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-blue-50">
+      <Header />
+
+      {/* HERO SECTION */}
+      <section className="relative bg-gradient-to-r from-blue-300 to-blue-400 text-white py-24 shadow-md">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-5xl font-extrabold mb-4 leading-tight drop-shadow">
+              Selamat Datang di Warung Ibuk Iyos
+            </h1>
+
+            <p className="text-lg mb-8 text-white/95">
+              Belanja kebutuhan sehari-hari kini lebih mudah, cepat, dan murah!
+            </p>
+
+            <div className="flex items-center justify-center gap-4">
+              <button className="px-8 py-3 rounded-full bg-white text-blue-600 font-semibold shadow hover:shadow-lg transition">
+                Mulai Belanja
+              </button>
+
+              <button className="px-6 py-3 rounded-full border border-white text-white font-semibold hover:bg-white/20 transition">
+                Lihat Produk
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Decorative Background */}
+        <div className="absolute -bottom-10 left-10 w-56 h-56 bg-white/20 rounded-full blur-3xl" />
+        <div className="absolute -top-10 right-10 w-64 h-64 bg-white/10 rounded-full blur-2xl" />
+      </section>
+
+      {/* KATEGORI PRODUK */}
+      <section className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-blue-900">Kategori Produk</h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { name: 'Makanan', icon: '🍛' },
+            { name: 'Minuman', icon: '🥤' },
+            { name: 'Bumbu Dapur', icon: '🧂' },
+            { name: 'Kebutuhan Rumah', icon: '🏠' },
+          ].map((item) => (
+            <div
+              key={item.name}
+              className="
+                bg-white p-6 rounded-xl shadow border border-blue-200
+                hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer
+              "
+            >
+              <div className="text-center">
+                <div className="text-4xl mb-3">{item.icon}</div>
+                <h3 className="font-semibold text-blue-700">{item.name}</h3>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
+      </section>
+
+      {/* PRODUK TERBARU */}
+      <section className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-blue-900">Produk Terbaru</h2>
+
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-600" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.map((product: Product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-blue-700 text-white py-8 mt-12">
+        <div className="container mx-auto px-4 flex flex-col items-center text-center gap-2">
+          <div>
+            <div className="font-bold text-lg">MyDimz</div>
+            <div className="text-sm text-white/80">
+              Belanja kebutuhan sehari-hari dengan mudah
+            </div>
+          </div>
+
+          <div className="text-sm text-white/70">
+            &copy; 2025 MyDimz — All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

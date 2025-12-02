@@ -1,8 +1,10 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   images: {
+    // Allow the dev API server (localhost:5000) to be used as a remote image
+    // source. This covers the upload URLs like http://localhost:5000/uploads/<file>.
+    // Add your production host(s) here (e.g. 'api.mydimz.com') when deploying.
     remotePatterns: [
       {
         protocol: "http",
