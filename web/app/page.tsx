@@ -17,34 +17,39 @@ interface Product {
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-  // === SLIDER BACKGROUND dengan ANIMASI GESER ===
-  const backgroundImages = [
-    "/slider/1.png",
-    "/slider/2.jpg",
-    "/slider/3.jpg",
-  ];
-
   const [bgIndex, setBgIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Slider otomatis dengan animasi geser
+  const backgroundImages = ["/slider/1.png", "/slider/2.jpg", "/slider/3.jpg"];
+
+  const categories = [
+    { name: 'Makanan', icon: '🍛' },
+    { name: 'Minuman', icon: '🥤' },
+    { name: 'Bumbu Dapur', icon: '🧂' },
+    { name: 'Kebutuhan Rumah', icon: '🏠' },
+  ];
+
+  const fallbackProducts: Product[] = [
+    { id: 1, name: 'Beras Premium 5kg', price: 75000, category: 'Makanan', image: 'https://via.placeholder.com/300x200?text=Beras', stock: 50 },
+    { id: 2, name: 'Minyak Goreng 2L', price: 32000, category: 'Kebutuhan Rumah', image: 'https://via.placeholder.com/300x200?text=Minyak', stock: 30 },
+    { id: 3, name: 'Gula Pasir 1kg', price: 15000, category: 'Makanan', image: 'https://via.placeholder.com/300x200?text=Gula', stock: 100 },
+    { id: 4, name: 'Teh Celup', price: 8500, category: 'Minuman', image: 'https://via.placeholder.com/300x200?text=Teh', stock: 80 },
+  ];
+
+  // Slider otomatis
   useEffect(() => {
     const interval = setInterval(() => {
       setIsAnimating(true);
-      
       setTimeout(() => {
         setBgIndex((prev) => (prev + 1) % backgroundImages.length);
         setIsAnimating(false);
-      }, 600); // durasi animasi slide
-      
-    }, 5000); // ganti slide setiap 5 detik
+      }, 600);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
 
-  // ===========================
-
+  // Load products
   useEffect(() => {
     void loadProducts();
   }, []);
@@ -62,42 +67,7 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Error fetching products:', error);
-
-      // fallback data
-      setProducts([
-        {
-          id: 1,
-          name: 'Beras Premium 5kg',
-          price: 75000,
-          category: 'Makanan',
-          image: 'https://via.placeholder.com/300x200?text=Beras',
-          stock: 50,
-        },
-        {
-          id: 2,
-          name: 'Minyak Goreng 2L',
-          price: 32000,
-          category: 'Kebutuhan Rumah',
-          image: 'https://via.placeholder.com/300x200?text=Minyak',
-          stock: 30,
-        },
-        {
-          id: 3,
-          name: 'Gula Pasir 1kg',
-          price: 15000,
-          category: 'Makanan',
-          image: 'https://via.placeholder.com/300x200?text=Gula',
-          stock: 100,
-        },
-        {
-          id: 4,
-          name: 'Teh Celup',
-          price: 8500,
-          category: 'Minuman',
-          image: 'https://via.placeholder.com/300x200?text=Teh',
-          stock: 80,
-        },
-      ]);
+      setProducts(fallbackProducts);
     } finally {
       setLoading(false);
     }
@@ -115,9 +85,9 @@ export default function Home() {
     <div className="min-h-screen bg-blue-50">
       <Header />
 
-      {/* HERO SECTION dengan SLIDER GESER OTOMATIS */}
+      {/* HERO SECTION */}
       <section className="relative text-white py-24 shadow-md overflow-hidden">
-        {/* Container untuk semua gambar background */}
+        {/* Background Images */}
         <div className="absolute inset-0">
           {backgroundImages.map((img, index) => (
             <div
@@ -129,51 +99,44 @@ export default function Home() {
                   ? '-translate-x-full opacity-0'
                   : 'translate-x-full opacity-0'
               }`}
-              style={{
-                backgroundImage: `url(${img})`,
-              }}
+              style={{ backgroundImage: `url(${img})` }}
             />
           ))}
         </div>
 
-        {/* Overlay dengan blur dan darkening */}
+        {/* Overlay */}
         <div 
           className="absolute inset-0 backdrop-blur-sm bg-black/40"
-          style={{
-            backdropFilter: 'blur(2px)',
-            WebkitBackdropFilter: 'blur(2px)',
-          }}
+          style={{ backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(2px)' }}
         />
 
+        {/* Content */}
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg">
               Selamat Datang di Warung Ibuk Iyos
             </h1>
-
             <p className="text-lg mb-8 text-white/95 drop-shadow">
               Belanja kebutuhan sehari-hari kini lebih mudah, cepat, dan murah!
             </p>
           </div>
         </div>
 
-        {/* Indikator Slider */}
+        {/* Slider Indicators */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
           {backgroundImages.map((_, index) => (
             <button
               key={index}
               onClick={() => handleDotClick(index)}
               className={`h-2 rounded-full transition-all duration-300 ${
-                index === bgIndex 
-                  ? 'bg-white w-10' 
-                  : 'bg-white/50 hover:bg-white/75 w-2'
+                index === bgIndex ? 'bg-white w-10' : 'bg-white/50 hover:bg-white/75 w-2'
               }`}
               aria-label={`Slide ${index + 1}`}
             />
           ))}
         </div>
 
-        {/* Decorative Blur Effect */}
+        {/* Decorative Elements */}
         <div className="absolute -bottom-10 left-10 w-56 h-56 bg-white/20 rounded-full blur-3xl z-0" />
         <div className="absolute -top-10 right-10 w-64 h-64 bg-white/10 rounded-full blur-2xl z-0" />
       </section>
@@ -181,20 +144,11 @@ export default function Home() {
       {/* KATEGORI */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold mb-8 text-blue-900">Kategori Produk</h2>
-
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { name: 'Makanan', icon: '🍛' },
-            { name: 'Minuman', icon: '🥤' },
-            { name: 'Bumbu Dapur', icon: '🧂' },
-            { name: 'Kebutuhan Rumah', icon: '🏠' },
-          ].map((item) => (
+          {categories.map((item) => (
             <div
               key={item.name}
-              className="
-                bg-white p-6 rounded-xl shadow border border-blue-200
-                hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer
-              "
+              className="bg-white p-6 rounded-xl shadow border border-blue-200 hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer"
             >
               <div className="text-center">
                 <div className="text-4xl mb-3">{item.icon}</div>
@@ -208,39 +162,34 @@ export default function Home() {
       {/* PRODUK */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold mb-8 text-blue-900">Produk Terbaru</h2>
-
         {loading ? (
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-600" />
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((product: Product) => (
+            {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         )}
       </section>
 
-      {/* FOOTER BARU dengan GOOGLE MAPS */}
+      {/* FOOTER */}
       <footer className="bg-blue-900 text-white mt-12">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* INFO WARUNG */}
             <div>
-              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                <span className="text-2xl"></span> MyDimz
-              </h3>
+              <h3 className="text-xl font-bold mb-4">MyDimz</h3>
               <p className="text-blue-100 mb-4 text-sm leading-relaxed">
                 Warung Ibuk Iyos menyediakan kebutuhan sehari-hari dengan harga terjangkau dan kualitas terbaik.
               </p>
               <div className="space-y-2 text-sm">
                 <p className="flex items-start gap-2">
                   <span className="text-lg">📍</span>
-                  <span className="text-blue-100">
-                    Warung Ibuk Iyos, Bandar Lampung
-                  </span>
+                  <span className="text-blue-100">Warung Ibuk Iyos, Bandar Lampung</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <span className="text-lg">📞</span>
@@ -257,50 +206,26 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-bold mb-4">Link Cepat</h3>
               <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="text-blue-100 hover:text-white transition">
-                    Tentang Kami
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-blue-100 hover:text-white transition">
-                    Produk
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-blue-100 hover:text-white transition">
-                    Promo
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-blue-100 hover:text-white transition">
-                    Hubungi Kami
-                  </a>
-                </li>
+                <li><a href="#" className="text-blue-100 hover:text-white transition">Tentang Kami</a></li>
+                <li><a href="#" className="text-blue-100 hover:text-white transition">Produk</a></li>
+                <li><a href="#" className="text-blue-100 hover:text-white transition">Promo</a></li>
+                <li><a href="#" className="text-blue-100 hover:text-white transition">Hubungi Kami</a></li>
               </ul>
 
               <div className="mt-6">
                 <h4 className="font-semibold mb-3">Ikuti Kami</h4>
                 <div className="flex gap-3">
-                  <a 
-                    href="#" 
-                    className="w-9 h-9 bg-blue-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition"
-                    aria-label="Facebook"
-                  >
+                  <a href="#" className="w-9 h-9 bg-blue-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition" aria-label="Facebook">
                     <span>📘</span>
                   </a>
-                  <a 
-                    href="#" 
-                    className="w-9 h-9 bg-blue-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition"
-                    aria-label="Instagram"
-                  >
-                    <span>📷</span>
+                  <a href="#" className="w-12 h-12 rounded-full flex items-center justify-center transition hover:opacity-80" aria-label="Instagram">
+                    <img 
+                      src="https://img.freepik.com/premium-vector/instagram-vector-logo-icon-social-media-logotype_901408-392.jpg?semt=ais_hybrid&w=740&q=80"
+                      alt="Instagram"
+                      className="w-10 h-10 object-contain"
+                    />
                   </a>
-                  <a 
-                    href="#" 
-                    className="w-9 h-9 bg-blue-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition"
-                    aria-label="WhatsApp"
-                  >
+                  <a href="#" className="w-9 h-9 bg-blue-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition" aria-label="WhatsApp">
                     <span>💬</span>
                   </a>
                 </div>
@@ -333,7 +258,6 @@ export default function Home() {
                 📍 Lihat di Google Maps →
               </a>
             </div>
-
           </div>
         </div>
 
