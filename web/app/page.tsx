@@ -228,6 +228,20 @@ export default function Home() {
                     />
                   </a>
 
+                  {/* Instagram */}
+                  <a 
+                    href="#" 
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition hover:scale-110"
+                    aria-label="Instagram"
+                  >
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png"
+                      alt="Instagram"
+                      className="w-10 h-10 object-contain"
+                    />
+                  </a>
+
+
                  
                 </div>
               </div>
