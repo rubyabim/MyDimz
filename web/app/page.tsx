@@ -215,19 +215,20 @@ export default function Home() {
               <div className="mt-6">
                 <h4 className="font-semibold mb-3">Ikuti Kami</h4>
                 <div className="flex gap-3">
-                  <a href="#" className="w-9 h-9 bg-blue-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition" aria-label="Facebook">
-                    <span>📘</span>
-                  </a>
-                  <a href="#" className="w-12 h-12 rounded-full flex items-center justify-center transition hover:opacity-80" aria-label="Instagram">
+                  {/* Facebook */}
+                  <a 
+                    href="#" 
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition hover:scale-110"
+                    aria-label="Facebook"
+                  >
                     <img 
-                      src="https://img.freepik.com/premium-vector/instagram-vector-logo-icon-social-media-logotype_901408-392.jpg?semt=ais_hybrid&w=740&q=80"
-                      alt="Instagram"
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/2048px-2023_Facebook_icon.svg.png"
+                      alt="Facebook"
                       className="w-10 h-10 object-contain"
                     />
                   </a>
-                  <a href="#" className="w-9 h-9 bg-blue-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition" aria-label="WhatsApp">
-                    <span>💬</span>
-                  </a>
+
+                 
                 </div>
               </div>
             </div>
