@@ -8,24 +8,36 @@ Sistem lengkap untuk mengelola toko kelontong dengan fitur:
 - Laporan PDF otomatis
 
 1. Setup Backend
-bash
-cd backend
-npm install
-npx prisma generate
-npx prisma db push
+```powershell
+cd Api
+npm install --legacy-peer-deps
+npx prisma generate --schema prisma/schema.prisma
+npx prisma db push --schema prisma/schema.prisma
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 npm run dev
+```
 
 
 2. Setup Web
-bash
+```powershell
 cd web
-npm install
+npm install --legacy-peer-deps
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 npm run dev
+```
 
 
 3. Inisialisasi Admin
-bash
-curl -X POST http://localhost:5000/api/init
+```powershell
+Invoke-WebRequest -Method POST http://localhost:5000/api/init -UseBasicParsing | Select-Object -ExpandProperty Content
+```
+
+4. Setup Mobile (Expo)
+```powershell
+cd mobile
+npm install --legacy-peer-deps
+expo start
+```
 
 
  📋 FITUR UTAMA

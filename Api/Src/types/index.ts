@@ -56,6 +56,7 @@ export interface ProductRequest {
   price: number;
   stock: number;
   category: string;
+  image?: string;
   description?: string;
   barcode?: string;
 }

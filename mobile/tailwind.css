@@ -1,0 +1,72 @@
+/* Import Google fonts for web (helpful for the web build) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shared design tokens (mirrors `web/app/globals.css`) */
+:root {
+	--color-bg: #f8fafc;
+	--color-primary: #16a34a;
+	--color-accent: #0284c7;
+	--container-width: 1200px;
+}
+
+@layer base {
+	html, body {
+		height: 100%;
+		background: linear-gradient(180deg, rgba(6,95,70,0.04) 0%, rgba(255,255,255,1) 35%);
+		color: #0f172a;
+		font-family: 'Poppins', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	.container {
+		max-width: var(--container-width);
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+@layer components {
+	.btn {
+		@apply inline-flex items-center justify-center rounded-lg font-semibold transition-all focus:outline-none;
+	}
+
+	.btn-primary {
+		@apply btn bg-primary-500 text-white px-5 py-2 shadow-md hover:bg-primary-700 transform active:scale-95;
+	}
+
+	.btn-ghost {
+		@apply btn bg-white text-gray-700 border border-gray-200 px-4 py-2 hover:bg-gray-50;
+	}
+
+	.card {
+		@apply bg-white rounded-lg overflow-hidden shadow-card-lg;
+	}
+}
+
+@layer utilities {
+	.animate-fade-in {
+		animation: fadeIn 1s ease-in;
+	}
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(-20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}
+
+/* Bind a couple extra tweaks used on web for consistent look */
+img{display:block;max-width:100%}
+.site-footer a:hover{text-decoration:underline}
+h1,h2,h3,h4{letter-spacing:-0.01em}
+a{color:var(--color-accent,#0284c7);text-decoration:none}
+.btn:focus{box-shadow:0 0 0 4px rgba(2,132,199,0.12)}

@@ -4,9 +4,8 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  // Connection URLs are no longer allowed in schema files (Prisma 7+).
-  // Move your DATABASE_URL to prisma.config.ts and configure migrations/runtime there.
-  // For runtime, pass 'adapter' for a direct DB connection or 'accelerateUrl' for Accelerate to the PrismaClient constructor.
+  url      = env("DATABASE_URL")
+  
 }
 
 model User {
@@ -37,25 +36,29 @@ model Product {
 }
 
 model Sale {
-  id        Int      @id @default(autoincrement())
-  date      DateTime @default(now())
-  total     Int
-  cashier   String
-  items     SaleItem[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            Int       @id @default(autoincrement())
+  customerId    Int       @default(0)
+  totalAmount   Int
+  paymentMethod String    @default("cash")
+  status        String    @default("completed")
+  notes         String?
+  items         SaleItem[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   @@map("sales")
 }
 
 model SaleItem {
-  id        Int @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   saleId    Int
   productId Int
   quantity  Int
-  price     Int
+  unitPrice Int
+  subtotal  Int
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   sale      Sale    @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 
   @@map("sale_items")
 }

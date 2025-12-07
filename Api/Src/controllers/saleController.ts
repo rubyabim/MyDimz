@@ -23,6 +23,9 @@ export const createSale = async (req: Request, res: Response) => {
       [];
 
     for (const item of items) {
+      if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
+        return res.status(400).json({ error: 'Quantity must be a positive integer' });
+      }
       const product = await prisma.product.findUnique({
         where: { id: item.productId },
       });
@@ -86,9 +89,14 @@ export const getSales = async (req: Request, res: Response) => {
 
     const where: any = {};
     if (startDate && endDate) {
+      const start = new Date(startDate as string);
+      const end = new Date(endDate as string);
+      if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+        return res.status(400).json({ error: 'Invalid startDate or endDate' });
+      }
       where.date = {
-        gte: new Date(startDate as string),
-        lte: new Date(endDate as string),
+        gte: start,
+        lte: end,
       };
     }
 

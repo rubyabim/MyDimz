@@ -1,7 +1,11 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+﻿import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
+
+// TAMBAHKAN INI - Import tailwind.css untuk NativeWind
+import '../tailwind.css';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -12,13 +16,24 @@ export const unstable_settings = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
+  // HAPUS SEMUA BAGIAN INI:
+  // if (Platform.OS === 'web') {
+  //   try {
+  //     require('../dist/tailwind.css');
+  //   } catch {
+  //     require('../tailwind.css');
+  //   }
+  // }
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <SafeAreaProvider>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
       </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+      </SafeAreaProvider>
     </ThemeProvider>
   );
 }

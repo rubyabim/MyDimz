@@ -7,6 +7,11 @@ import { prisma } from '../utils/database';
 import { LoginRequest, AuthResponse } from '../types';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'warung-ibuk-iyos-secret-key';
+if (!process.env.JWT_SECRET) {
+  // Warn on startup if using default secret, but do not throw error so devs can run locally
+  // eslint-disable-next-line no-console
+  console.warn('Using default JWT_SECRET. Set process.env.JWT_SECRET in production');
+}
 
 export const login = async (req: Request, res: Response) => {
   try {

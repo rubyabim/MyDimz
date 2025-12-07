@@ -1,0 +1,1185 @@
+openapi: 3.1.0
+info:
+  title: Warung Ibuk Iyos - Complete REST API
+  description: |
+    REST API lengkap untuk sistem e-commerce dengan CRUD operations di semua bagian.
+    
+    **Features:**
+    - ✅ Products: [CREATE], [READ], [UPDATE], [DELETE]
+    - ✅ Sales/Checkout: [CREATE], [READ], [UPDATE], [DELETE]  
+    - ✅ Reports: Daily, Monthly, Statistics
+    - ✅ Authentication: JWT Bearer Token
+    - ✅ Public Endpoints: Tanpa autentikasi untuk customer
+    
+    **Postman Setup:**
+    1. Import file ini ke Postman
+    2. Setup environment variables: {{baseUrl}}, {{token}}
+    3. Login dulu untuk mendapat token
+    4. Gunakan token otomatis di request berikutnya
+    
+    **Environment Variables yang diperlukan:**
+    - baseUrl: http://localhost:5000/api (development) atau https://api.warungibukiyos.com/api (production)
+    - token: Token JWT dari login (otomatis tersimpan setelah login)
+    - username: admin
+    - password: password123
+    
+  version: 1.0.0
+  contact:
+    name: Developer Support
+    email: dev@warungibukiyos.local
+  license:
+    name: MIT
+  x-postman-collection: |
+    Untuk menggunakan di Postman:
+    1. Klik "Import" → Pilih file openapi.yaml ini
+    2. Create Environment baru dengan variable:
+       - baseUrl: http://localhost:5000/api
+       - token: (akan terisi otomatis setelah login)
+    3. Test endpoint /auth/login dulu untuk mendapat token
+    4. Token akan otomatis disimpan dan digunakan di request lain
+
+servers:
+  - url: "{{baseUrl}}"
+    description: Dynamic URL (set di environment variable)
+    variables:
+      baseUrl:
+        default: http://localhost:5000/api
+        description: API Base URL
+  - url: http://localhost:5000/api
+    description: Development Server (Local)
+  - url: https://api.warungibukiyos.com/api
+    description: Production Server
+
+tags:
+  - name: Authentication
+    description: Login dan mendapatkan JWT token
+  - name: Products CRUD
+    description: Produk management - Create, Read, Update, Delete (Admin only)
+  - name: Products Public
+    description: List produk untuk customer (tanpa autentikasi)
+  - name: Sales CRUD
+    description: Transaksi penjualan - Create, Read, Update, Delete
+  - name: Reports
+    description: Laporan dan analisis penjualan
+  - name: Health
+    description: Status check API
+
+paths:
+  # ============ AUTHENTICATION ============
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: "[LOGIN] Admin Login"
+      description: Mendapatkan JWT token untuk akses admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: admin
+                password:
+                  type: string
+                  format: password
+                  example: password123
+      responses:
+        '200':
+          description: Login berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                  message:
+                    type: string
+                    example: Login berhasil
+                  expiresIn:
+                    type: integer
+                    example: 86400
+          headers:
+            X-Token:
+              schema:
+                type: string
+              description: JWT Token untuk authentication
+        '401':
+          description: Username atau password salah
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Username atau password salah
+      x-postman-request:
+        description: |
+          **SETUP OTOMATIS UNTUK POSTMAN:**
+          
+          Setelah response login berhasil, token akan otomatis disimpan ke environment variable "token" dengan script:
+          ```
+          var jsonData = pm.response.json();
+          pm.environment.set("token", jsonData.token);
+          ```
+          
+          Token ini akan otomatis digunakan di semua request berikutnya karena header Authorization sudah dikonfigurasi.
+
+  /init:
+    post:
+      tags:
+        - Authentication
+      summary: "[ADMIN] Initialize Admin User"
+      description: Membuat user admin pertama kali (hanya bisa dijalankan sekali)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: admin
+                password:
+                  type: string
+                  format: password
+                  example: password123
+      responses:
+        '201':
+          description: Admin user berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Admin user created successfully
+        '400':
+          description: Admin user sudah pernah dibuat sebelumnya
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Admin user already exists
+
+  # ============ PRODUCTS PUBLIC (READ) ============
+  /public/products:
+    get:
+      tags:
+        - Products Public
+      summary: "[READ] Daftar Produk Publik"
+      description: Mendapatkan list semua produk untuk customer (tanpa autentikasi)
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: Filter kategori (Makanan, Minuman, etc)
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Cari nama produk
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: Nomor halaman
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: Jumlah item per halaman
+      responses:
+        '200':
+          description: Daftar produk berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  limit:
+                    type: integer
+
+  /public/products/categories:
+    get:
+      tags:
+        - Products Public
+      summary: "[READ] Daftar Kategori"
+      description: Mendapatkan list semua kategori produk
+      responses:
+        '200':
+          description: Daftar kategori berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categories:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - Makanan
+                      - Minuman
+                      - Snack
+
+  /public/products/{id}:
+    get:
+      tags:
+        - Products Public
+      summary: "[READ] Detail Produk"
+      description: Mendapatkan detail satu produk spesifik (tanpa autentikasi)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID Produk
+      responses:
+        '200':
+          description: Detail produk berhasil diambil
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Produk tidak ditemukan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Produk tidak ditemukan
+
+  # ============ PRODUCTS ADMIN CRUD ============
+  /products:
+    get:
+      tags:
+        - Products CRUD
+      summary: "[READ] Semua Produk (Admin)"
+      description: Mendapatkan daftar semua produk (admin only)
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Daftar produk admin berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '401':
+          description: Unauthorized - Token tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+
+    post:
+      tags:
+        - Products CRUD
+      summary: "[CREATE] Produk Baru"
+      description: Membuat produk baru (admin only)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - price
+                - category
+                - stock
+              properties:
+                name:
+                  type: string
+                  example: Beras Premium 5kg
+                price:
+                  type: number
+                  example: 75000
+                category:
+                  type: string
+                  example: Makanan
+                description:
+                  type: string
+                  example: Beras berkualitas premium
+                stock:
+                  type: integer
+                  example: 50
+                image:
+                  type: string
+                  format: uri
+                  example: https://example.com/image.jpg
+                discount:
+                  type: number
+                  example: 5
+      responses:
+        '201':
+          description: Produk berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Data invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Semua field harus diisi
+        '401':
+          description: Unauthorized
+
+  /products/{id}:
+    get:
+      tags:
+        - Products CRUD
+      summary: "[READ] Detail Produk (Admin)"
+      description: Mendapatkan detail produk spesifik (admin only)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detail produk berhasil diambil
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Produk tidak ditemukan
+
+    put:
+      tags:
+        - Products CRUD
+      summary: "[UPDATE] Edit Produk"
+      description: Mengubah data produk yang sudah ada (admin only)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                category:
+                  type: string
+                description:
+                  type: string
+                stock:
+                  type: integer
+                image:
+                  type: string
+                discount:
+                  type: number
+      responses:
+        '200':
+          description: Produk berhasil diupdate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Produk tidak ditemukan
+
+    delete:
+      tags:
+        - Products CRUD
+      summary: "[DELETE] Hapus Produk"
+      description: Menghapus produk dari database (admin only)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Produk berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Produk berhasil dihapus
+        '404':
+          description: Produk tidak ditemukan
+
+  # ============ SALES CRUD ============
+  /sales:
+    get:
+      tags:
+        - Sales CRUD
+      summary: "[READ] Semua Transaksi Penjualan"
+      description: Mendapatkan daftar semua transaksi penjualan (admin only)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Filter dari tanggal (YYYY-MM-DD)
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Filter sampai tanggal (YYYY-MM-DD)
+      responses:
+        '200':
+          description: Daftar transaksi berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sales:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Sale'
+                  total:
+                    type: integer
+
+    post:
+      tags:
+        - Sales CRUD
+      summary: "[CREATE] Checkout / Catat Penjualan"
+      description: Mencatat transaksi penjualan baru (publik - tanpa auth)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - items
+                - totalAmount
+              properties:
+                customerId:
+                  type: string
+                  example: customer-123
+                items:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - productId
+                      - quantity
+                      - unitPrice
+                    properties:
+                      productId:
+                        type: integer
+                        example: 1
+                      quantity:
+                        type: integer
+                        example: 2
+                      unitPrice:
+                        type: number
+                        example: 75000
+                totalAmount:
+                  type: number
+                  example: 200000
+                paymentMethod:
+                  type: string
+                  enum: [cash, transfer, e-wallet]
+                  example: cash
+                status:
+                  type: string
+                  enum: [completed, pending, cancelled]
+                  example: completed
+                notes:
+                  type: string
+                  example: Order dari toko
+      responses:
+        '201':
+          description: Transaksi berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+        '400':
+          description: Data invalid atau stok tidak cukup
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Stok tidak cukup untuk produk ID 1
+
+  /sales/{id}:
+    get:
+      tags:
+        - Sales CRUD
+      summary: "[READ] Detail Transaksi"
+      description: Mendapatkan detail transaksi spesifik (admin only)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detail transaksi berhasil diambil
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+        '404':
+          description: Transaksi tidak ditemukan
+
+    put:
+      tags:
+        - Sales CRUD
+      summary: "[UPDATE] Ubah Status Transaksi"
+      description: Mengubah status atau catatan transaksi (admin only)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [completed, pending, cancelled]
+                  example: completed
+                notes:
+                  type: string
+                  example: Sudah diterima customer
+      responses:
+        '200':
+          description: Transaksi berhasil diupdate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+        '404':
+          description: Transaksi tidak ditemukan
+
+    delete:
+      tags:
+        - Sales CRUD
+      summary: "[DELETE] Hapus Transaksi"
+      description: Menghapus record transaksi (admin only)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Transaksi berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Transaksi berhasil dihapus
+        '404':
+          description: Transaksi tidak ditemukan
+
+  # ============ UPLOADS ============
+  /uploads:
+    post:
+      tags:
+        - Products CRUD
+      summary: "[CREATE] Upload File/Gambar Produk"
+      description: Upload gambar produk untuk keperluan product management (admin only)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: File gambar produk (jpg, png, webp, etc)
+      responses:
+        '200':
+          description: File berhasil diupload
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  path:
+                    type: string
+                    example: /uploads/abc123def456
+                    description: Path relatif file yang diupload
+                  url:
+                    type: string
+                    format: uri
+                    example: http://localhost:5000/uploads/abc123def456
+                    description: URL lengkap ke file yang diupload
+        '400':
+          description: File tidak dikirim atau format tidak valid
+        '401':
+          description: Token tidak valid atau tidak diberikan
+
+  # ============ REPORTS ============
+  # ============ SALES DAILY (Data endpoint) ============
+  /sales/daily:
+    get:
+      tags:
+        - Sales CRUD
+      summary: "[READ] Penjualan Harian (Data JSON)"
+      description: Mendapatkan data penjualan untuk tanggal tertentu dengan detail transaksi
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: date
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Tanggal laporan (YYYY-MM-DD), default hari ini
+      responses:
+        '200':
+          description: Data penjualan harian berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    format: date
+                    example: "2024-01-16"
+                  totalRevenue:
+                    type: number
+                    example: 500000
+                  totalTransactions:
+                    type: integer
+                    example: 5
+                  totalItems:
+                    type: integer
+                    example: 12
+                  sales:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Sale'
+
+  # ============ SALES MONTHLY (Data endpoint) ============
+  /sales/monthly:
+    get:
+      tags:
+        - Sales CRUD
+      summary: "[READ] Penjualan Bulanan (Data JSON)"
+      description: Mendapatkan data penjualan untuk bulan tertentu dengan breakdown per hari
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: year
+          in: query
+          schema:
+            type: integer
+          description: Tahun (YYYY)
+        - name: month
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+          description: Bulan (1-12)
+      responses:
+        '200':
+          description: Data penjualan bulanan berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  period:
+                    type: string
+                    example: "2024-01"
+                  totalRevenue:
+                    type: number
+                    example: 5000000
+                  totalTransactions:
+                    type: integer
+                    example: 50
+                  totalItems:
+                    type: integer
+                    example: 200
+                  byDay:
+                    type: object
+                    description: Breakdown penjualan per hari (YYYY-MM-DD)
+                    example:
+                      "2024-01-01":
+                        revenue: 100000
+                        transactions: 2
+                        items: 5
+                      "2024-01-02":
+                        revenue: 150000
+                        transactions: 3
+                        items: 8
+                  sales:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Sale'
+
+  # ============ SALES STATS ============
+  /sales/stats:
+    get:
+      tags:
+        - Sales CRUD
+      summary: "[READ] Statistik Penjualan"
+      description: Mendapatkan ringkasan statistik penjualan hari ini dan all-time
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Statistik penjualan berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  all:
+                    type: object
+                    properties:
+                      revenue:
+                        type: number
+                        example: 50000000
+                      transactions:
+                        type: integer
+                        example: 500
+                  today:
+                    type: object
+                    properties:
+                      revenue:
+                        type: number
+                        example: 1000000
+                      transactions:
+                        type: integer
+                        example: 10
+
+  # ============ SALES BY ID (CRUD) ============
+
+  # ============ REPORTS (PDF & JSON) ============
+  /reports/daily:
+    get:
+      tags:
+        - Reports
+      summary: "[READ] Laporan Harian (PDF)"
+      description: Menghasilkan laporan penjualan harian dalam format PDF untuk print/archive
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Tanggal laporan (YYYY-MM-DD)
+      responses:
+        '200':
+          description: File PDF laporan harian
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Parameter date tidak diberikan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /reports/daily/json:
+    get:
+      tags:
+        - Reports
+      summary: "[READ] Laporan Harian (JSON)"
+      description: Mendapatkan data laporan harian dalam format JSON
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Tanggal laporan (YYYY-MM-DD)
+      responses:
+        '200':
+          description: Data laporan harian
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    format: date
+                  sales:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Sale'
+
+  /reports/monthly:
+    get:
+      tags:
+        - Reports
+      summary: "[READ] Laporan Bulanan (PDF)"
+      description: Menghasilkan laporan penjualan bulanan dalam format PDF untuk print/archive
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Tahun (YYYY)
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+          description: Bulan (1-12)
+      responses:
+        '200':
+          description: File PDF laporan bulanan
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Parameter year atau month tidak diberikan
+
+  /reports/monthly/json:
+    get:
+      tags:
+        - Reports
+      summary: "[READ] Laporan Bulanan (JSON)"
+      description: Mendapatkan data laporan bulanan dalam format JSON dengan breakdown per hari
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Tahun (YYYY)
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+          description: Bulan (1-12)
+      responses:
+        '200':
+          description: Data laporan bulanan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  year:
+                    type: integer
+                  month:
+                    type: integer
+                  dailySummary:
+                    type: object
+                    description: Ringkasan per hari (YYYY-MM-DD)
+                  sales:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Sale'
+
+  /reports/yearly:
+    get:
+      tags:
+        - Reports
+      summary: "[READ] Laporan Tahunan (PDF)"
+      description: Menghasilkan laporan penjualan tahunan dalam format PDF
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Tahun (YYYY)
+      responses:
+        '200':
+          description: File PDF laporan tahunan
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Parameter year tidak diberikan
+
+  /reports/yearly/json:
+    get:
+      tags:
+        - Reports
+      summary: "[READ] Laporan Tahunan (JSON)"
+      description: Mendapatkan data laporan tahunan dalam format JSON dengan breakdown per bulan
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Tahun (YYYY)
+      responses:
+        '200':
+          description: Data laporan tahunan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  year:
+                    type: integer
+                  monthlyTotals:
+                    type: object
+                    description: Total penjualan per bulan (01-12)
+                    example:
+                      "01": 5000000
+                      "02": 4500000
+                  sales:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Sale'
+
+  # ============ HEALTH CHECK ============
+  /health:
+    get:
+      tags:
+        - Health
+      summary: "[READ] API Health Status"
+      description: Mengecek status kesehatan API
+      responses:
+        '200':
+          description: API sehat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  message:
+                    type: string
+                    example: Warung Ibuk Iyos API is running
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2024-01-16T10:00:00.000Z"
+
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - id
+        - name
+        - price
+        - category
+        - stock
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Beras Premium 5kg
+        price:
+          type: number
+          example: 75000
+        category:
+          type: string
+          example: Makanan
+        description:
+          type: string
+          example: Beras berkualitas premium
+        image:
+          type: string
+          format: uri
+          example: https://example.com/image.jpg
+        stock:
+          type: integer
+          example: 50
+        discount:
+          type: number
+          example: 5
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-01-15T10:00:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-01-15T10:00:00Z"
+
+    Sale:
+      type: object
+      required:
+        - id
+        - items
+        - totalAmount
+      properties:
+        id:
+          type: integer
+          example: 1
+        customerId:
+          type: string
+          example: customer-123
+        totalAmount:
+          type: number
+          example: 200000
+        paymentMethod:
+          type: string
+          enum: [cash, transfer, e-wallet]
+          example: cash
+        status:
+          type: string
+          enum: [completed, pending, cancelled]
+          example: completed
+        notes:
+          type: string
+          example: Order dari toko
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              productId:
+                type: integer
+              quantity:
+                type: integer
+              unitPrice:
+                type: number
+              subtotal:
+                type: number
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-01-16T10:00:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-01-16T10:00:00Z"
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token diperoleh dari endpoint /auth/login. Gunakan format "Bearer {token}" di header Authorization.
+
+security:
+  - BearerAuth: []

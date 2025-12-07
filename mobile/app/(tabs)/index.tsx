@@ -1,98 +1,416 @@
+import { useEffect, useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+} from 'react-native';
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { fetchPublicProducts, getToken } from '@/lib/api';
+import ProductCard from '@/components/ProductCard';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+const { width } = Dimensions.get('window');
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const [products, setProducts] = useState([] as any[]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [bgIndex, setBgIndex] = useState(0);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const router = useRouter();
+  const colorScheme = useColorScheme();
+  
+  // Web-inspired color scheme (Blue)
+  const primary = '#2563eb';
+  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f8fafc';
+  const textDark = colorScheme === 'dark' ? '#f1f5f9' : '#0f172a';
+  const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
+  const textSecondary = colorScheme === 'dark' ? '#cbd5e1' : '#64748b';
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  // Slider images
+  const backgroundImages = [
+    'https://via.placeholder.com/400x240?text=Warung+Ibuk+Iyos+1',
+    'https://via.placeholder.com/400x240?text=Warung+Ibuk+Iyos+2',
+    'https://via.placeholder.com/400x240?text=Warung+Ibuk+Iyos+3',
+  ];
+
+  // Auto slider
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const loadProducts = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const token = await getToken();
+      setIsAdmin(!!token);
+
+      const data = await fetchPublicProducts({ page: 1, limit: 8 });
+      if (!data) {
+        setProducts([]);
+        setError('Tidak dapat terhubung ke server');
+        setLoading(false);
+        return;
+      }
+
+      setProducts(data.products || data);
+      setLoading(false);
+    } catch (err) {
+      console.error('Error loading products:', err);
+      setProducts([]);
+      setError('Gagal memuat produk');
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 20 }}>
+        {/* HERO SECTION dengan SLIDER */}
+        <View style={[styles.heroSection, { backgroundColor: primary }]}>
+          <Image
+            source={{ uri: backgroundImages[bgIndex] }}
+            style={styles.heroImage}
+            contentFit="cover"
+          />
+          
+          {/* Dark Overlay */}
+          <View style={styles.heroOverlay} />
+
+          {/* Hero Content */}
+          <View style={styles.heroContent}>
+            <Text style={styles.heroTitle}>Selamat Datang di Warung Ibuk Iyos</Text>
+            <Text style={styles.heroSubtitle}>
+              Belanja kebutuhan sehari-hari kini lebih mudah, cepat, dan murah!
+            </Text>
+          </View>
+
+          {/* Slider Indicators */}
+          <View style={styles.sliderIndicators}>
+            {backgroundImages.map((_, idx) => (
+              <View
+                key={idx}
+                style={[
+                  styles.indicatorDot,
+                  {
+                    width: idx === bgIndex ? 24 : 8,
+                    backgroundColor: idx === bgIndex ? '#ffffff' : 'rgba(255,255,255,0.5)',
+                  },
+                ]}
+              />
+            ))}
+          </View>
+        </View>
+
+        {/* KATEGORI SECTION */}
+        <View style={{ paddingHorizontal: 16, paddingVertical: 20 }}>
+          <Text style={[styles.sectionTitle, { color: textDark }]}>
+            Kategori Produk
+          </Text>
+
+          <View style={styles.categoryGrid}>
+            {[
+              { name: 'Makanan', icon: '🍛' },
+              { name: 'Minuman', icon: '🥤' },
+              { name: 'Bumbu', icon: '🧂' },
+              { name: 'Rumah', icon: '🏠' },
+            ].map((item) => (
+              <TouchableOpacity
+                key={item.name}
+                style={[styles.categoryCard, { backgroundColor: cardBg, borderColor: primary + '20' }]}
+              >
+                <Text style={styles.categoryIcon}>{item.icon}</Text>
+                <Text style={[styles.categoryName, { color: textDark }]}>
+                  {item.name}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        {/* FEATURED PRODUCTS SECTION */}
+        <View style={{ paddingHorizontal: 16, paddingVertical: 12 }}>
+          <View style={styles.sectionHeader}>
+            <Text style={[styles.sectionTitle, { color: textDark }]}>
+              ⭐ Produk Unggulan
+            </Text>
+            <TouchableOpacity onPress={() => router.push('/(tabs)/products')}>
+              <Text style={[styles.viewAllLink, { color: primary }]}>
+                Lihat Semua →
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {loading ? (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color={primary} />
+            </View>
+          ) : error ? (
+            <View style={[styles.errorContainer, { backgroundColor: cardBg }]}>
+              <Text style={[styles.errorText, { color: '#dc2626' }]}>{error}</Text>
+              <TouchableOpacity
+                style={[styles.retryBtn, { backgroundColor: primary }]}
+                onPress={loadProducts}
+              >
+                <Text style={styles.retryBtnText}>Coba Lagi</Text>
+              </TouchableOpacity>
+            </View>
+          ) : products.length === 0 ? (
+            <View style={[styles.emptyContainer, { backgroundColor: cardBg }]}>
+              <Text style={[styles.emptyText, { color: textSecondary }]}>
+                Belum ada produk tersedia
+              </Text>
+            </View>
+          ) : (
+            <FlatList
+              data={products}
+              numColumns={2}
+              scrollEnabled={false}
+              keyExtractor={(item) => String(item.id)}
+              columnWrapperStyle={styles.productRow}
+              renderItem={({ item }) => (
+                <View style={{ flex: 1, marginHorizontal: 4 }}>
+                  <ProductCard
+                    product={item}
+                    onPress={() => router.push(`/products/${item.id}`)}
+                  />
+                </View>
+              )}
+            />
+          )}
+        </View>
+
+        {/* FITUR SECTION */}
+        <View style={{ paddingHorizontal: 16, paddingVertical: 12 }}>
+          <Text style={[styles.sectionTitle, { color: textDark }]}>
+            Mengapa Memilih Kami?
+          </Text>
+
+          {[
+            {
+              icon: '✓',
+              title: 'Harga Terjangkau',
+              desc: 'Harga terbaik untuk kebutuhan Anda',
+            },
+            {
+              icon: '📦',
+              title: 'Produk Berkualitas',
+              desc: 'Pilihan produk terpercaya',
+            },
+            {
+              icon: '🚀',
+              title: 'Mudah & Cepat',
+              desc: 'Belanja dengan mudah melalui aplikasi',
+            },
+          ].map((feature, idx) => (
+            <View
+              key={idx}
+              style={[styles.featureCard, { backgroundColor: cardBg, borderColor: primary + '15' }]}
+            >
+              <Text style={styles.featureIcon}>{feature.icon}</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={[styles.featureTitle, { color: textDark }]}>
+                  {feature.title}
+                </Text>
+                <Text style={[styles.featureDesc, { color: textSecondary }]}>
+                  {feature.desc}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </View>
+
+        {/* CALL TO ACTION */}
+        <View style={{ paddingHorizontal: 16, paddingVertical: 12 }}>
+          <TouchableOpacity
+            style={[styles.ctaButton, { backgroundColor: primary }]}
+            onPress={() => router.push('/(tabs)/products')}
+          >
+            <Text style={styles.ctaButtonText}>🛍️ Mulai Belanja Sekarang</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
+  heroSection: {
+    height: 260,
+    position: 'relative',
+    overflow: 'hidden',
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  heroImage: {
+    width: '100%',
+    height: '100%',
     position: 'absolute',
+  },
+  heroOverlay: {
+    position: 'absolute',
+    inset: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.35)',
+  },
+  heroContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    zIndex: 10,
+  },
+  heroTitle: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 8,
+    lineHeight: 34,
+  },
+  heroSubtitle: {
+    fontSize: 14,
+    color: '#f1f5f9',
+    textAlign: 'center',
+  },
+  sliderIndicators: {
+    position: 'absolute',
+    bottom: 16,
+    left: '50%',
+    transform: [{ translateX: -40 }],
+    flexDirection: 'row',
+    gap: 6,
+    zIndex: 10,
+  },
+  indicatorDot: {
+    height: 6,
+    borderRadius: 3,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: '700',
+    marginBottom: 12,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  viewAllLink: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  categoryGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  categoryCard: {
+    width: '48%',
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    borderRadius: 14,
+    borderWidth: 1,
+    alignItems: 'center',
+    marginBottom: 10,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+  },
+  categoryIcon: {
+    fontSize: 32,
+    marginBottom: 8,
+  },
+  categoryName: {
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  productRow: {
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  loadingContainer: {
+    height: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorContainer: {
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+  },
+  errorText: {
+    fontSize: 14,
+    marginBottom: 12,
+  },
+  retryBtn: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  retryBtnText: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 13,
+  },
+  emptyContainer: {
+    borderRadius: 12,
+    padding: 24,
+    alignItems: 'center',
+  },
+  emptyText: {
+    fontSize: 14,
+  },
+  featureCard: {
+    flexDirection: 'row',
+    padding: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  featureIcon: {
+    fontSize: 24,
+    marginRight: 12,
+  },
+  featureTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 2,
+  },
+  featureDesc: {
+    fontSize: 12,
+  },
+  ctaButton: {
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: 'center',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+  },
+  ctaButtonText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 15,
   },
 });

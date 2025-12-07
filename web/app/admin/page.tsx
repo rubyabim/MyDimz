@@ -20,8 +20,16 @@ export default function AdminDashboard() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const token = getAuthToken();
+  const [mounted, setMounted] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
   const router = useRouter();
+
+  // Get token on client side only to avoid hydration mismatch
+  useEffect(() => {
+    const clientToken = getAuthToken();
+    setToken(clientToken);
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const load = async () => {
@@ -32,7 +40,7 @@ export default function AdminDashboard() {
         return;
       }
       try {
-        const data = await fetchAdminProducts(token || undefined, { search: search || undefined });
+        const data = await fetchAdminProducts(token, { search: search || undefined });
         if (Array.isArray(data)) setProducts(data);
         else if (data && Array.isArray(data.products)) setProducts(data.products);
       } catch (error) {
@@ -43,6 +51,11 @@ export default function AdminDashboard() {
     };
     void load();
   }, [token, search]);
+
+  // Show nothing during hydration
+  if (!mounted) {
+    return <div className="min-h-screen bg-gray-50" />;
+  }
 
   if (!token) {
     return (

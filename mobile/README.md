@@ -25,6 +25,48 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
+## Connecting to API server
+
+By default, this project tries to connect to the API server based on runtime:
+
+- Web (Expo web/browser): `http://localhost:5000/api`
+- Android emulator: `http://10.0.2.2:5000/api`
+- iOS simulator: `http://localhost:5000/api`
+- Override with `EXPO_PUBLIC_API_BASE_URL` environment variable if needed.
+
+Example PowerShell commands (Windows) to start the API and the mobile app:
+
+```powershell
+# Run the API
+cd "d:\Kuliah Informatika\Tugas Akhir\MyDimz\Api"
+npm install
+npm run dev
+
+# Run the mobile app
+cd "d:\Kuliah Informatika\Tugas Akhir\MyDimz\mobile"
+setx EXPO_PUBLIC_API_BASE_URL "http://localhost:5000/api"
+npm start
+```
+
+If you are using an Android emulator and the app still can't reach the API, use adb to reverse the port mapping:
+
+```powershell
+adb reverse tcp:5000 tcp:5000
+```
+
+If you are using a real device, set `EXPO_PUBLIC_API_BASE_URL` to your host machine's LAN IP address (e.g., `http://192.168.1.10:5000/api`).
+
+## Membuat produk demo (opsional)
+
+Jika ingin melihat contoh produk seperti "Test Product" (harga 10000) pada UI, jalankan:
+
+```powershell
+cd "d:\Kuliah Informatika\Tugas Akhir\MyDimz\Api"
+npm run seed-products
+```
+
+Ini akan menambahkan beberapa produk contoh jika belum ada, sehingga Anda bisa melihat tampilan produk dan fitur di aplikasi mobile.
+
 ## Get a fresh project
 
 When you're ready, run:
@@ -48,3 +90,31 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Menggunakan Tailwind / NativeWind
+
+Untuk menggunakan Tailwind CSS di app mobile (dan web via Expo), ikuti langkah berikut setelah meng-clone project:
+
+1. Install dependensi:
+
+```powershell
+cd "d:\Kuliah Informatika\Tugas Akhir\MyDimz\mobile"
+npm install
+```
+
+2. Buat CSS untuk web dan jalankan bundler (pada development web, PostCSS akan membangun CSS otomatis):
+
+```powershell
+npx tailwindcss -i ./tailwind.css -o ./dist/tailwind.css --watch
+```
+
+3. Jalankan app Expo seperti biasa (native dev environment akan menggunakan NativeWind runtime; web akan meng-include CSS dari `tailwind.css`).
+
+Note: Config sample sudah ditambahkan ke repositori (`tailwind.config.js`, `postcss.config.js`, `tailwind.css`). Jika anda ingin mem-build CSS untuk production web, jalankan:
+
+```powershell
+npx tailwindcss -i ./tailwind.css -o ./dist/tailwind.css --minify
+```
+
+Contoh penggunaan: ada komponen `TailwindExample` di `components/` yang sudah menggunakan className dari NativeWind.
+

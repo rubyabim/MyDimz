@@ -1,6 +1,7 @@
 // src/controllers/productController.ts
 
 import { Request, Response } from 'express';
+import type { Prisma } from '@prisma/client';
 import { prisma } from '../utils/database';
 import {
   Product,
@@ -11,9 +12,13 @@ import {
 
 export const getProducts = async (req: Request, res: Response) => {
   try {
-    const rawProducts = await prisma.product.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
+    const { category, search } = req.query;
+    const where: any = {};
+    if (category && category !== 'all') where.category = String(category);
+    if (search) {
+      where.name = { contains: String(search), mode: 'insensitive' };
+    }
+    const rawProducts = await prisma.product.findMany({ where, orderBy: { createdAt: 'desc' } });
 
     const products: Product[] = rawProducts.map((p) => ({
       ...p,
@@ -46,8 +51,8 @@ export const getPublicProducts = async (req: Request, res: Response) => {
       };
     }
 
-    const pageNum = parseInt(page as string, 10);
-    const limitNum = parseInt(limit as string, 10);
+    const pageNum = Math.max(1, parseInt(page as string, 10) || 1);
+    const limitNum = Math.max(1, parseInt(limit as string, 10) || 12);
     const skip = (pageNum - 1) * limitNum;
 
     const [products, total] = await Promise.all([
@@ -82,15 +87,27 @@ export const getProductById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
+    const parsedId = parseInt(id, 10);
+    if (Number.isNaN(parsedId)) {
+      return res.status(400).json({ error: 'Product id must be a valid number' });
+    }
+
     const product = await prisma.product.findUnique({
-      where: { id: parseInt(id, 10) },
+      where: { id: parsedId },
     });
 
     if (!product) {
       return res.status(404).json({ error: 'Product not found' });
     }
 
-    res.json(product);
+    const normalized: Product = {
+      ...product,
+      image: product.image === null ? undefined : product.image,
+      description: product.description === null ? undefined : product.description,
+      barcode: product.barcode === null ? undefined : product.barcode,
+    };
+
+    res.json(normalized);
   } catch (error) {
     console.error('Get product by id error:', error);
     res.status(500).json({ error: 'Failed to fetch product' });
@@ -127,6 +144,7 @@ export const createProduct = async (req: Request, res: Response) => {
       category,
       description,
       barcode,
+      image,
     }: ProductRequest = req.body;
 
     if (!name || price == null || stock == null || !category) {
@@ -135,20 +153,31 @@ export const createProduct = async (req: Request, res: Response) => {
         .json({ error: 'Name, price, stock, and category are required' });
     }
 
+    const priceNum = Number(price);
+    const stockNum = Number(stock);
+    if (Number.isNaN(priceNum) || Number.isNaN(stockNum)) {
+      return res.status(400).json({ error: 'Price and stock must be valid numbers' });
+    }
+
     const product: Product = (await prisma.product.create({
       data: {
         name,
-        price: Number(price),
-        stock: Number(stock),
+        price: priceNum,
+        stock: stockNum,
         category,
         description,
         barcode,
+        image,
       },
     })) as unknown as Product;
 
     res.status(201).json(product);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Create product error:', error);
+    // Prisma unique constraint (e.g., barcode unique).
+    if ((error as Prisma.PrismaClientKnownRequestError)?.code === 'P2002') {
+      return res.status(409).json({ error: 'Unique constraint failed' });
+    }
     res.status(500).json({ error: 'Failed to create product' });
   }
 };
@@ -163,23 +192,40 @@ export const updateProduct = async (req: Request, res: Response) => {
       category,
       description,
       barcode,
+      image,
     }: ProductRequest = req.body;
 
+    const parsedId = parseInt(id, 10);
+    if (Number.isNaN(parsedId)) {
+      return res.status(400).json({ error: 'Product id must be a valid number' });
+    }
+
+    const priceNum = price !== undefined ? Number(price) : undefined;
+    const stockNum = stock !== undefined ? Number(stock) : undefined;
+    if ((priceNum !== undefined && Number.isNaN(priceNum)) || (stockNum !== undefined && Number.isNaN(stockNum))) {
+      return res.status(400).json({ error: 'Price and stock must be valid numbers' });
+    }
+
     const product: Product = (await prisma.product.update({
-      where: { id: parseInt(id, 10) },
+      where: { id: parsedId },
       data: {
         name,
-        price: Number(price),
-        stock: Number(stock),
+        price: priceNum,
+        stock: stockNum,
         category,
         description,
         barcode,
+        image,
       },
     })) as unknown as Product;
 
     res.json(product);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Update product error:', error);
+    // Prisma record not found error
+    if ((error as any)?.code === 'P2025') {
+      return res.status(404).json({ error: 'Product not found' });
+    }
     res.status(500).json({ error: 'Failed to update product' });
   }
 };
@@ -187,13 +233,20 @@ export const updateProduct = async (req: Request, res: Response) => {
 export const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    const parsedId = parseInt(id, 10);
+    if (Number.isNaN(parsedId)) {
+      return res.status(400).json({ error: 'Product id must be a valid number' });
+    }
 
     await prisma.product.delete({
-      where: { id: parseInt(id, 10) },
+      where: { id: parsedId },
     });
     res.json({ message: 'Product deleted successfully' });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Delete product error:', error);
+    if ((error as any)?.code === 'P2025') {
+      return res.status(404).json({ error: 'Product not found' });
+    }
     res.status(500).json({ error: 'Failed to delete product' });
   }
 };
