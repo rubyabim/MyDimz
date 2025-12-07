@@ -1,113 +1,204 @@
 "use client";
 
-import Header from '../components/Header';
-import { useCart } from '../components/CartContext';
+import { useState } from "react";
+import Header from "../components/Header";
+import { useCart } from "../components/CartContext";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
   const { items, updateQuantity, removeFromCart, clearCart, total } = useCart();
+  const [processing, setProcessing] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const router = useRouter();
+
+  const handleCheckout = async () => {
+    if (items.length === 0) {
+      alert("Keranjang kosong!");
+      return;
+    }
+
+    try {
+      setProcessing(true);
+
+      // Simpan transaksi ke API
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"}/sales`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            customerId: 0, // Untuk customer umum
+            items: items.map((item) => ({
+              productId: item.id,
+              quantity: item.quantity,
+            })),
+            paymentMethod,
+            notes: `Online order via web`,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Checkout gagal");
+      }
+
+      // Clear cart dan redirect
+      clearCart();
+      alert("Pembelian berhasil! Terima kasih telah berbelanja.");
+      router.push("/");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Gagal melakukan checkout. Silakan coba lagi.");
+    } finally {
+      setProcessing(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       <Header />
 
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-6 text-blue-700">Keranjang Belanja</h1>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-blue-900">🛒 Keranjang Belanja</h1>
 
         {items.length === 0 ? (
-          <div className="p-6 text-center bg-white border border-blue-200 rounded-xl shadow">
-            <p className="text-blue-600 font-medium">Keranjang kosong.</p>
+          <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+            <div className="text-6xl mb-4">🛍️</div>
+            <p className="text-xl text-blue-600 font-semibold mb-6">Keranjang Anda kosong</p>
+            <Link
+              href="/products"
+              className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
+              Lanjut Belanja
+            </Link>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Daftar Produk */}
+            <div className="lg:col-span-2 space-y-4">
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+                >
+                  <div className="flex gap-4 items-start">
+                    {/* Gambar */}
+                    <img
+                      src={item.image || "https://via.placeholder.com/100"}
+                      alt={item.name}
+                      className="w-24 h-24 object-cover rounded-lg"
+                    />
 
-            {/* LIST ITEM */}
-            {items.map((it) => (
-              <div
-                key={it.id}
-                className="p-4 bg-white border border-blue-200 rounded-xl shadow flex items-center gap-4"
-              >
-                <img
-                  src={it.image}
-                  className="w-28 h-20 object-cover rounded-md border border-blue-100"
-                  alt={it.name}
-                />
+                    {/* Detail Produk */}
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-blue-900">{item.name}</h3>
+                      <p className="text-sm text-blue-600 mb-2">{item.category}</p>
+                      <p className="text-xl font-bold text-blue-700">
+                        Rp {item.price.toLocaleString("id-ID")}
+                      </p>
+                    </div>
 
-                <div className="flex-1">
-                  <div className="font-semibold text-blue-800">{it.name}</div>
-                  <div className="text-sm text-blue-500">
-                    Harga:{" "}
-                    {new Intl.NumberFormat("id-ID", {
-                      style: "currency",
-                      currency: "IDR",
-                    }).format(it.price)}
+                    {/* Quantity Control */}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        className="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
+                      >
+                        −
+                      </button>
+                      <span className="px-4 py-1 bg-blue-50 text-blue-900 font-semibold rounded">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    {/* Subtotal & Remove */}
+                    <div className="text-right">
+                      <p className="text-lg font-bold text-blue-900">
+                        Rp {(item.price * item.quantity).toLocaleString("id-ID")}
+                      </p>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-red-600 hover:text-red-800 font-semibold text-sm mt-2"
+                      >
+                        Hapus
+                      </button>
+                    </div>
                   </div>
                 </div>
-
-                {/* Quantity */}
-                <div className="flex items-center gap-2">
-                  <button
-                    className="px-2 py-1 border border-blue-300 text-blue-600 rounded hover:bg-blue-100"
-                    onClick={() => updateQuantity(it.id, it.quantity - 1)}
-                  >
-                    -
-                  </button>
-
-                  <div className="px-3 py-1 border border-blue-300 text-blue-700 rounded bg-blue-50">
-                    {it.quantity}
-                  </div>
-
-                  <button
-                    className="px-2 py-1 border border-blue-300 text-blue-600 rounded hover:bg-blue-100"
-                    onClick={() => updateQuantity(it.id, it.quantity + 1)}
-                  >
-                    +
-                  </button>
-                </div>
-
-                {/* Total per item */}
-                <div className="text-right">
-                  <div className="font-semibold text-blue-700">
-                    {new Intl.NumberFormat("id-ID", {
-                      style: "currency",
-                      currency: "IDR",
-                    }).format(it.price * it.quantity)}
-                  </div>
-
-                  <button
-                    className="mt-2 text-sm text-red-500 hover:text-red-600"
-                    onClick={() => removeFromCart(it.id)}
-                  >
-                    Hapus
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            {/* TOTAL */}
-            <div className="p-4 bg-white border border-blue-200 rounded-xl shadow flex items-center justify-between">
-              <div className="text-blue-600 font-medium">Total:</div>
-              <div className="text-xl font-bold text-blue-700">
-                {new Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                }).format(total)}
-              </div>
+              ))}
             </div>
 
-            {/* ACTION BUTTONS */}
-            <div className="flex gap-3 justify-end">
-              <button
-                className="px-5 py-2 rounded-full border border-blue-300 text-blue-600 hover:bg-blue-100"
-                onClick={() => clearCart()}
-              >
-                Kosongkan
-              </button>
+            {/* Summary & Checkout */}
+            <div className="lg:col-span-1">
+              <div className="bg-white rounded-xl shadow-lg p-6 sticky top-20">
+                {/* Order Summary */}
+                <h2 className="text-2xl font-bold text-blue-900 mb-6">Ringkasan Pesanan</h2>
 
-              <button
-                className="px-6 py-2 rounded-full bg-blue-600 text-white shadow hover:bg-blue-700"
-              >
-                Checkout (dummy)
-              </button>
+                <div className="space-y-3 mb-6 border-b border-blue-200 pb-6">
+                  <div className="flex justify-between text-blue-700">
+                    <span>Subtotal ({items.length} item):</span>
+                    <span>Rp {total.toLocaleString("id-ID")}</span>
+                  </div>
+                  <div className="flex justify-between text-blue-700">
+                    <span>Pajak (10%):</span>
+                    <span>Rp {(total * 0.1).toLocaleString("id-ID")}</span>
+                  </div>
+                  <div className="flex justify-between text-blue-700">
+                    <span>Pengiriman:</span>
+                    <span className="text-green-600 font-semibold">Gratis</span>
+                  </div>
+                </div>
+
+                <div className="flex justify-between text-2xl font-bold text-blue-900 mb-6 bg-blue-100 p-3 rounded-lg">
+                  <span>Total:</span>
+                  <span>Rp {(total * 1.1).toLocaleString("id-ID")}</span>
+                </div>
+
+                {/* Payment Method */}
+                <div className="mb-6">
+                  <label className="block text-sm font-semibold text-blue-900 mb-2">
+                    Metode Pembayaran
+                  </label>
+                  <select
+                    value={paymentMethod}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="w-full px-3 py-2 border-2 border-blue-300 rounded-lg focus:outline-none focus:border-blue-600"
+                  >
+                    <option value="cash">💰 Tunai</option>
+                    <option value="transfer">💳 Transfer Bank</option>
+                    <option value="eWallet">📱 E-Wallet</option>
+                  </select>
+                </div>
+
+                {/* Checkout Button */}
+                <button
+                  onClick={handleCheckout}
+                  disabled={processing || items.length === 0}
+                  className={`w-full py-3 rounded-lg font-bold text-white transition-all ${
+                    processing || items.length === 0
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-green-600 hover:bg-green-700 shadow-lg hover:shadow-xl"
+                  }`}
+                >
+                  {processing ? "Memproses..." : "✓ Checkout"}
+                </button>
+
+                <button
+                  onClick={() => clearCart()}
+                  className="w-full mt-2 py-2 rounded-lg font-semibold text-red-600 border-2 border-red-300 hover:bg-red-50 transition-colors"
+                >
+                  Kosongkan Keranjang
+                </button>
+              </div>
             </div>
           </div>
         )}

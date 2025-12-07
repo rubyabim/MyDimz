@@ -79,8 +79,7 @@ export default function Login() {
               />
             </div>
 
-            <div className="text-xs text-blue-500 -mt-5">
-              Untuk testing: <b>admin / admin123</b>
+            <div className="text-xs text-blue-500 -mt-5">        
             </div>
 
             {/* Password */}

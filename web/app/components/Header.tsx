@@ -10,151 +10,192 @@ import { useCart } from './CartContext';
 export default function Header() {
   const { count } = useCart();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
-  const [query, setQuery] = useState('');
 
   useEffect(() => {
     setIsAdmin(Boolean(getAuthToken()));
   }, []);
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/products?search=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery('');
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const handleLogout = () => {
+    clearAuthToken();
+    setIsAdmin(false);
+    window.location.href = '/';
+  };
+
   return (
-    <header className="
-      sticky top-0 z-50 
-      bg-blue-100/80 
-      backdrop-blur-xl 
-      border-b border-blue-200 
-      shadow-md 
-      transition-all
-    ">
-      <div className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-blue-600 to-blue-500 shadow-lg border-b-4 border-blue-700">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-
-          {/* LOGO BARU (Foto) */}
-          <Link href="/" className="flex items-center space-x-3">
-            <Image
-              src="/warung.png"     // Pastikan nama file sesuai yang di folder public
-              width={48}
-              height={48}
-              alt="Logo Warung"
-              className="rounded-xl shadow-lg border border-blue-300 object-cover"
-            />
-
-            <span className="text-2xl font-extrabold text-blue-800 tracking-tight">
-              MyDimz
-            </span>
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center font-bold text-blue-600 text-xl shadow-lg">
+              🛍️
+            </div>
+            <span className="text-2xl font-black text-white hidden sm:inline-block">MyDimz</span>
           </Link>
 
-          {/* Search Bar */}
-          <div className="hidden md:flex flex-1 max-w-xl mx-8">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Cari produk..."
-              onKeyDown={(e) => {
-                if (e.key === 'Enter')
-                  router.push(`/products?search=${encodeURIComponent(query)}`);
-              }}
-              className="
-                w-full px-4 py-2 rounded-l-xl 
-                border border-blue-300
-                bg-white text-blue-900
-                focus:ring-2 focus:ring-blue-400
-                transition-all outline-none
-              "
-            />
-            <button
-              onClick={() => router.push(`/products?search=${encodeURIComponent(query)}`)}
-              className="
-                px-6 py-2 rounded-r-xl 
-                bg-blue-600 hover:bg-blue-700 
-                text-white transition shadow-md
-              "
-            >
-              🔍
-            </button>
-          </div>
+          {/* Search Bar - Hidden on Mobile */}
+          <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-sm mx-6">
+            <div className="flex w-full">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="🔍 Cari produk..."
+                className="flex-1 px-4 py-2 rounded-l-lg focus:outline-none text-blue-900"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-700 text-white font-semibold rounded-r-lg hover:bg-blue-800 transition-colors"
+              >
+                Cari
+              </button>
+            </div>
+          </form>
 
-          {/* Navigation */}
-          <nav className="flex items-center space-x-6">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/products" className="text-white font-semibold hover:text-blue-100 transition-colors">
+              📦 Produk
+            </Link>
 
-            {/* Login / Logout */}
+            {isAdmin && (
+              <>
+                <Link href="/admin" className="text-white font-semibold hover:text-blue-100 transition-colors">
+                  ⚙️ Admin
+                </Link>
+                <Link href="/sales" className="text-white font-semibold hover:text-blue-100 transition-colors">
+                  📊 Penjualan
+                </Link>
+              </>
+            )}
+
+            {/* Cart Button */}
+            <Link href="/cart" className="relative group">
+              <span className="text-2xl group-hover:scale-110 transition-transform">🛒</span>
+              {count > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg">
+                  {count}
+                </span>
+              )}
+            </Link>
+
+            {/* Auth Buttons */}
             {isAdmin ? (
               <button
-                className="
-                  text-blue-800 
-                  hover:text-blue-600 
-                  transition
-                "
-                onClick={() => {
-                  clearAuthToken();
-                  window.location.reload();
-                }}
+                onClick={handleLogout}
+                className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors"
               >
                 Logout
               </button>
             ) : (
               <Link
                 href="/login"
-                className="
-                  text-blue-800 
-                  hover:text-blue-600 
-                  transition
-                "
+                className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors"
               >
                 Login
               </Link>
             )}
-
-            {/* Produk */}
-            <Link
-              href="/products"
-              className="
-                text-blue-800 
-                hover:text-blue-600 
-                transition
-              "
-            >
-              Produk
-            </Link>
-
-            {/* Admin */}
-            {isAdmin && (
-              <Link
-                href="/admin"
-                className="
-                  text-blue-800 
-                  hover:text-blue-600 
-                  transition
-                "
-              >
-                Admin
-              </Link>
-            )}
-
-            {/* Cart */}
-            <button
-              className="relative"
-              onClick={() => (window.location.href = '/cart')}
-            >
-              <span className="text-2xl text-blue-800">🛒</span>
-
-              {count > 0 && (
-                <span
-                  className="
-                    absolute -top-2 -right-2 
-                    bg-red-500 text-white 
-                    text-xs rounded-full w-5 h-5 
-                    flex items-center justify-center
-                    shadow-md
-                  "
-                >
-                  {count}
-                </span>
-              )}
-            </button>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-white text-2xl"
+          >
+            {mobileMenuOpen ? '✕' : '☰'}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-4 space-y-3 pb-4 animate-in fade-in">
+            {/* Mobile Search */}
+            <form onSubmit={handleSearch}>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Cari produk..."
+                  className="flex-1 px-3 py-2 rounded-lg focus:outline-none text-blue-900 text-sm"
+                />
+                <button type="submit" className="px-3 py-2 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800">
+                  🔍
+                </button>
+              </div>
+            </form>
+
+            {/* Mobile Links */}
+            <div className="space-y-2">
+              <Link
+                href="/products"
+                className="block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold text-center"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                📦 Produk
+              </Link>
+
+              <Link
+                href="/cart"
+                className="block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold text-center relative"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                🛒 Keranjang {count > 0 && <span className="ml-2 bg-red-500 px-2 rounded-full">{count}</span>}
+              </Link>
+
+              {isAdmin && (
+                <>
+                  <Link
+                    href="/admin"
+                    className="block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold text-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    ⚙️ Admin
+                  </Link>
+                  <Link
+                    href="/sales"
+                    className="block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold text-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    📊 Penjualan
+                  </Link>
+                </>
+              )}
+
+              {isAdmin ? (
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 font-semibold"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  href="/login"
+                  className="block px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-semibold text-center"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Login
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

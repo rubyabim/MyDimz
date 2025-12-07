@@ -69,9 +69,6 @@ export default function AdminDashboard() {
         <div className="mb-6">
           <input value={search} onChange={(e) => setSearch(e.target.value)} className="w-full border rounded-md px-4 py-2" placeholder="Search products..." />
         </div>
-        <div className="mb-6">
-          <Link href="/admin/reports" className="btn-ghost">View Reports</Link>
-        </div>
 
         {loading ? (
           <div>Loading admin products...</div>

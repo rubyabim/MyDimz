@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import { fetchPublicProducts } from "../../lib/api";
@@ -13,129 +13,206 @@ interface Product {
   category: string;
   image: string;
   stock: number;
+  discount?: number;
+}
+
+interface Category {
+  id: number;
+  name: string;
+  count: number;
 }
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sortBy, setSortBy] = useState("latest");
   const searchParams = useSearchParams();
+  const router = useRouter();
 
-  // Initialize search from query param
+  // Initialize from query params
   useEffect(() => {
     const qSearch = searchParams?.get("search") || "";
-    if (qSearch !== search) setSearch(qSearch);
+    const qCategory = searchParams?.get("category") || "all";
+    setSearch(qSearch);
+    setFilter(qCategory);
+  }, [searchParams]);
+
+  // Load products when filters change
+  useEffect(() => {
     void loadProducts();
-  }, [filter, search, searchParams]);
+  }, [filter, search, sortBy]);
+
+  // Load categories
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
+  const loadCategories = async () => {
+    try {
+      const categorySet = new Set<string>();
+      const data = await fetchPublicProducts({});
+      const allProducts = Array.isArray(data) ? data : data?.products || [];
+      
+      allProducts.forEach((p: any) => {
+        if (p.category) categorySet.add(p.category);
+      });
+
+      const cats: Category[] = Array.from(categorySet).map((name, idx) => ({
+        id: idx,
+        name,
+        count: allProducts.filter((p: any) => p.category === name).length,
+      }));
+
+      setCategories(cats);
+    } catch (error) {
+      console.error("Error loading categories:", error);
+    }
+  };
 
   const loadProducts = async () => {
     try {
+      setLoading(true);
       const searchFilter = filter === "all" ? undefined : filter;
       const data = await fetchPublicProducts({
         category: searchFilter,
         search: search || undefined,
       });
 
-      if (Array.isArray(data)) setProducts(data as any);
-      else if (data && Array.isArray(data.products)) setProducts(data.products);
-      else setProducts([]);
-    } catch (error) {
-      // Dummy data saat API error
-      const dummyProducts: Product[] = [
-        {
-          id: 1,
-          name: "Beras Premium 5kg",
-          price: 75000,
-          category: "Makanan",
-          image: "https://via.placeholder.com/300x200?text=Beras",
-          stock: 50,
-        },
-        {
-          id: 2,
-          name: "Minyak Goreng 2L",
-          price: 32000,
-          category: "Kebutuhan Rumah",
-          image: "https://via.placeholder.com/300x200?text=Minyak",
-          stock: 30,
-        },
-        {
-          id: 3,
-          name: "Gula Pasir 1kg",
-          price: 15000,
-          category: "Makanan",
-          image: "https://via.placeholder.com/300x200?text=Gula",
-          stock: 100,
-        },
-        {
-          id: 4,
-          name: "Teh Celup",
-          price: 8500,
-          category: "Minuman",
-          image: "https://via.placeholder.com/300x200?text=Teh",
-          stock: 80,
-        },
-      ];
+      let productList = Array.isArray(data) ? data : data?.products || [];
 
-      if (filter === "all") setProducts(dummyProducts);
-      else setProducts(dummyProducts.filter((p) => p.category === filter));
+      // Sort products
+      if (sortBy === "price-low") {
+        productList = productList.sort((a: any, b: any) => a.price - b.price);
+      } else if (sortBy === "price-high") {
+        productList = productList.sort((a: any, b: any) => b.price - a.price);
+      } else if (sortBy === "name") {
+        productList = productList.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      }
+
+      setProducts(productList);
+    } catch (error) {
+      console.error("Error loading products:", error);
+      setProducts([]);
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handleSearch = (value: string) => {
+    setSearch(value);
+    const params = new URLSearchParams();
+    if (value) params.set("search", value);
+    if (filter !== "all") params.set("category", filter);
+    router.push(`/products?${params.toString()}`);
+  };
+
+  const handleCategoryFilter = (category: string) => {
+    setFilter(category);
+    const params = new URLSearchParams();
+    if (search) params.set("search", search);
+    if (category !== "all") params.set("category", category);
+    router.push(`/products?${params.toString()}`);
+  };
+
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       <Header />
 
-      <div className="container mx-auto px-4 py-10">
-        {/* PAGE TITLE */}
-        <h1 className="text-4xl font-extrabold mb-10 text-blue-700 drop-shadow-sm">
-          Semua Produk
-        </h1>
+      <div className="container mx-auto px-4 py-8">
+        {/* Page Title */}
+        <div className="mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-2">
+            Produk Kami
+          </h1>
+          <p className="text-blue-600 text-lg">
+            Temukan produk berkualitas dengan harga terbaik
+          </p>
+        </div>
 
-        {/* FILTER SECTION */}
-        <div className="mb-10 flex gap-4 flex-wrap">
-          {/* Search Box */}
-          <div className="flex-1 min-w-[250px]">
+        {/* Search Bar - Sticky di atas */}
+        <div className="mb-8 sticky top-0 z-40 bg-white rounded-xl shadow-lg p-4 md:p-6">
+          <div className="flex flex-col md:flex-row gap-4">
             <input
-              className="w-full border border-blue-300 bg-white px-4 py-2 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              placeholder="Cari produk..."
+              type="text"
+              placeholder="🔍 Cari produk..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="flex-1 px-4 py-3 rounded-lg border-2 border-blue-300 focus:outline-none focus:border-blue-600 text-blue-900 placeholder-blue-400 transition-colors"
             />
-          </div>
 
-          {/* Filter Buttons */}
-          {[
-            "all",
-            "Makanan",
-            "Minuman",
-            "Bumbu Dapur",
-            "Kebutuhan Rumah",
-          ].map((category) => (
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-4 py-3 rounded-lg border-2 border-blue-300 focus:outline-none focus:border-blue-600 text-blue-900 bg-white transition-colors"
+            >
+              <option value="latest">Terbaru</option>
+              <option value="price-low">Harga: Termurah</option>
+              <option value="price-high">Harga: Termahal</option>
+              <option value="name">Nama: A-Z</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Category Filter - Horizontal scroll yang responsive */}
+        <div className="mb-8 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-3 min-w-max">
             <button
-              key={category}
-              onClick={() => setFilter(category)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all border shadow-sm ${
-                filter === category
-                  ? "bg-blue-500 text-white border-blue-600 shadow-md"
-                  : "bg-white text-blue-700 border-blue-300 hover:bg-blue-100"
+              onClick={() => handleCategoryFilter("all")}
+              className={`px-6 py-2 rounded-full font-semibold whitespace-nowrap transition-all transform hover:scale-105 ${
+                filter === "all"
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "bg-white text-blue-600 border-2 border-blue-300 hover:bg-blue-100"
               }`}
             >
-              {category === "all" ? "Semua" : category}
+              Semua Produk
             </button>
-          ))}
+
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => handleCategoryFilter(cat.name)}
+                className={`px-6 py-2 rounded-full font-semibold whitespace-nowrap transition-all transform hover:scale-105 ${
+                  filter === cat.name
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "bg-white text-blue-600 border-2 border-blue-300 hover:bg-blue-100"
+                }`}
+              >
+                {cat.name} ({cat.count})
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* PRODUCT GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        {/* Results Info */}
+        <div className="mb-6 text-blue-600 font-semibold text-lg">
+          Ditemukan <span className="text-blue-800">{products.length}</span> produk
+          {search && ` untuk "${search}"`}
+          {filter !== "all" && ` di kategori ${filter}`}
         </div>
 
-        {products.length === 0 && (
-          <p className="text-center text-blue-700 mt-10 font-semibold">
-            Produk tidak ditemukan.
-          </p>
+        {/* Products Grid */}
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin h-12 w-12 border-4 border-blue-600 border-t-transparent rounded-full"></div>
+            <p className="mt-4 text-blue-600 font-semibold">Memuat produk...</p>
+          </div>
+        ) : products.length === 0 ? (
+          <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+            <div className="text-6xl mb-4">🔍</div>
+            <p className="text-xl text-blue-600 font-semibold mb-2">Produk tidak ditemukan</p>
+            <p className="text-blue-500">Coba cari dengan kata kunci lain atau pilih kategori yang berbeda</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 animate-fadeIn">
+            {products.map((product) => (
+              <div key={product.id} className="h-full transform transition-transform hover:scale-105">
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
