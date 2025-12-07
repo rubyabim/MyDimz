@@ -1,11 +1,13 @@
 'use client';
 
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getAuthToken, clearAuthToken } from '../../lib/clientAuth';
 import { useCart } from './CartContext';
+
 
 export default function Header() {
   const { count } = useCart();
@@ -14,9 +16,11 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
+
   useEffect(() => {
     setIsAdmin(Boolean(getAuthToken()));
   }, []);
+
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,23 +31,34 @@ export default function Header() {
     }
   };
 
+
   const handleLogout = () => {
     clearAuthToken();
     setIsAdmin(false);
     window.location.href = '/';
   };
 
+
   return (
     <header className="sticky top-0 z-50 bg-gradient-to-r from-blue-600 to-blue-500 shadow-lg border-b-4 border-blue-700">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center font-bold text-blue-600 text-xl shadow-lg">
-              🛍️
-            </div>
-            <span className="text-2xl font-black text-white hidden sm:inline-block">MyDimz</span>
-          </Link>
+        {/* Logo */}
+<Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+  <div className="w-12 h-12 bg-white rounded-full overflow-hidden flex items-center justify-center shadow-lg relative">
+    <Image 
+      src="/warung.png" 
+      alt="MyDimz" 
+      width={48}
+      height={48}
+      className="object-cover"
+      priority
+    />
+  </div>
+  <span className="text-2xl font-black text-white hidden sm:inline-block">MyDimz</span>
+</Link>
+
+
 
           {/* Search Bar - Hidden on Mobile */}
           <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-sm mx-6">
@@ -64,22 +79,25 @@ export default function Header() {
             </div>
           </form>
 
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/products" className="text-white font-semibold hover:text-blue-100 transition-colors">
-              📦 Produk
+               Produk
             </Link>
+
 
             {isAdmin && (
               <>
                 <Link href="/admin" className="text-white font-semibold hover:text-blue-100 transition-colors">
-                  ⚙️ Admin
+                  Admin
                 </Link>
                 <Link href="/sales" className="text-white font-semibold hover:text-blue-100 transition-colors">
-                  📊 Penjualan
+                  Penjualan
                 </Link>
               </>
             )}
+
 
             {/* Cart Button */}
             <Link href="/cart" className="relative group">
@@ -90,6 +108,7 @@ export default function Header() {
                 </span>
               )}
             </Link>
+
 
             {/* Auth Buttons */}
             {isAdmin ? (
@@ -109,6 +128,7 @@ export default function Header() {
             )}
           </nav>
 
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -117,6 +137,7 @@ export default function Header() {
             {mobileMenuOpen ? '✕' : '☰'}
           </button>
         </div>
+
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
@@ -137,6 +158,7 @@ export default function Header() {
               </div>
             </form>
 
+
             {/* Mobile Links */}
             <div className="space-y-2">
               <Link
@@ -144,8 +166,9 @@ export default function Header() {
                 className="block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold text-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                📦 Produk
+                Produk
               </Link>
+
 
               <Link
                 href="/cart"
@@ -155,6 +178,7 @@ export default function Header() {
                 🛒 Keranjang {count > 0 && <span className="ml-2 bg-red-500 px-2 rounded-full">{count}</span>}
               </Link>
 
+
               {isAdmin && (
                 <>
                   <Link
@@ -162,17 +186,18 @@ export default function Header() {
                     className="block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold text-center"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    ⚙️ Admin
+                     Admin
                   </Link>
                   <Link
                     href="/sales"
                     className="block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-semibold text-center"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    📊 Penjualan
+                     Penjualan
                   </Link>
                 </>
               )}
+
 
               {isAdmin ? (
                 <button
