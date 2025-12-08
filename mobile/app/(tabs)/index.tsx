@@ -15,6 +15,7 @@ import { useRouter } from 'expo-router';
 import { fetchPublicProducts, getToken } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import MobileHeader from '@/components/Header';
 
 const { width } = Dimensions.get('window');
 
@@ -29,19 +30,19 @@ export default function HomeScreen() {
   
   // Web-inspired color scheme (Blue)
   const primary = '#2563eb';
-  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f8fafc';
-  const textDark = colorScheme === 'dark' ? '#f1f5f9' : '#0f172a';
+  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f0f4f8';
+  const textDark = colorScheme === 'dark' ? '#f1f5f9' : '#1e3a8a';
   const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
   const textSecondary = colorScheme === 'dark' ? '#cbd5e1' : '#64748b';
 
-  // Slider images
+  // Slider images - menggunakan real images dari public folder
   const backgroundImages = [
-    'https://via.placeholder.com/400x240?text=Warung+Ibuk+Iyos+1',
-    'https://via.placeholder.com/400x240?text=Warung+Ibuk+Iyos+2',
-    'https://via.placeholder.com/400x240?text=Warung+Ibuk+Iyos+3',
+    '/slider/1.png',
+    '/slider/2.jpg',
+    '/slider/3.jpg',
   ];
 
-  // Auto slider
+  // Auto slider dengan transisi
   useEffect(() => {
     const interval = setInterval(() => {
       setBgIndex((prev) => (prev + 1) % backgroundImages.length);
@@ -56,7 +57,7 @@ export default function HomeScreen() {
       const token = await getToken();
       setIsAdmin(!!token);
 
-      const data = await fetchPublicProducts({ page: 1, limit: 8 });
+      const data = await fetchPublicProducts(1, 8);
       if (!data) {
         setProducts([]);
         setError('Tidak dapat terhubung ke server');
@@ -80,14 +81,27 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
+      <MobileHeader />
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 20 }}>
-        {/* HERO SECTION dengan SLIDER */}
+        {/* HERO SECTION dengan SLIDER dan GRADIENT BACKGROUND */}
         <View style={[styles.heroSection, { backgroundColor: primary }]}>
-          <Image
-            source={{ uri: backgroundImages[bgIndex] }}
-            style={styles.heroImage}
-            contentFit="cover"
-          />
+          {/* Background Images with Fade transition */}
+          <View style={styles.heroImageContainer}>
+            {backgroundImages.map((img, idx) => (
+              <Image
+                key={idx}
+                source={{ uri: img }}
+                style={[
+                  styles.heroImage,
+                  {
+                    opacity: idx === bgIndex ? 1 : 0,
+                    position: 'absolute',
+                  },
+                ]}
+                contentFit="cover"
+              />
+            ))}
+          </View>
           
           {/* Dark Overlay */}
           <View style={styles.heroOverlay} />
@@ -103,8 +117,9 @@ export default function HomeScreen() {
           {/* Slider Indicators */}
           <View style={styles.sliderIndicators}>
             {backgroundImages.map((_, idx) => (
-              <View
+              <TouchableOpacity
                 key={idx}
+                onPress={() => setBgIndex(idx)}
                 style={[
                   styles.indicatorDot,
                   {
@@ -255,6 +270,12 @@ const styles = StyleSheet.create({
     position: 'relative',
     overflow: 'hidden',
     marginBottom: 8,
+  },
+  heroImageContainer: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    overflow: 'hidden',
   },
   heroImage: {
     width: '100%',

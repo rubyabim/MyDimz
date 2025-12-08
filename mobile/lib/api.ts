@@ -103,3 +103,17 @@ export async function fetchProductById(id: number) {
     return null;
   }
 }
+
+export async function fetchProductCategories() {
+  try {
+    const res = await fetch(`${API_BASE}/public/products/categories`);
+    if (!res.ok) return null;
+    try {
+      return await res.json();
+    } catch (e) {
+      return null;
+    }
+  } catch (err) {
+    return null;
+  }
+}

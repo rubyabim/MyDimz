@@ -19,6 +19,7 @@ import {
 } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import MobileHeader from '@/components/Header';
 
 export default function ProductsScreen() {
   const router = useRouter();
@@ -35,9 +36,9 @@ export default function ProductsScreen() {
   const colorScheme = useColorScheme();
   // Blue theme matching web
   const primary = '#2563eb';
-  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f8fafc';
+  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f0f4f8';
   const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
-  const textColor = colorScheme === 'dark' ? '#f1f5f9' : '#0f172a';
+  const textColor = colorScheme === 'dark' ? '#f1f5f9' : '#1e3a8a';
   const textSecondary = colorScheme === 'dark' ? '#cbd5e1' : '#64748b';
   const inputBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
   const inputBorder = colorScheme === 'dark' ? '#334155' : '#e2e8f0';
@@ -50,8 +51,8 @@ export default function ProductsScreen() {
       
       // Gunakan public API jika tidak ada token, protected API jika ada token
       const data = token
-        ? await fetchProducts({ category: category !== 'all' ? category : undefined, search: searchTerm }, token)
-        : await fetchPublicProducts({ page: pageNum, search: searchTerm, category: category !== 'all' ? category : undefined });
+        ? await fetchProducts({ page: pageNum, limit: 12, category: category !== 'all' ? category : undefined, search: searchTerm }, token)
+        : await fetchPublicProducts(pageNum, 12, searchTerm, category !== 'all' ? category : undefined);
       
       if (!data) {
         setError('Tidak dapat terhubung ke server');
@@ -104,6 +105,7 @@ export default function ProductsScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
+      <MobileHeader />
       <FlatList
         data={products}
         numColumns={2}
@@ -307,11 +309,6 @@ export default function ProductsScreen() {
             )
           ) : null
         }
-        ListEmptyComponentStyle={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

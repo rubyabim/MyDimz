@@ -16,14 +16,7 @@ export const unstable_settings = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
-  // HAPUS SEMUA BAGIAN INI:
-  // if (Platform.OS === 'web') {
-  //   try {
-  //     require('../dist/tailwind.css');
-  //   } catch {
-  //     require('../tailwind.css');
-  //   }
-  // }
+
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
