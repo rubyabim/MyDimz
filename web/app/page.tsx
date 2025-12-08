@@ -213,38 +213,57 @@ export default function Home() {
               </ul>
 
               <div className="mt-6">
-                <h4 className="font-semibold mb-3">Ikuti Kami</h4>
-                <div className="flex gap-3">
-                  {/* Facebook */}
-                  <a 
-                    href="#" 
-                    className="w-12 h-12 rounded-full flex items-center justify-center transition hover:scale-110"
-                    aria-label="Facebook"
-                  >
-                    <img 
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/2048px-2023_Facebook_icon.svg.png"
-                      alt="Facebook"
-                      className="w-10 h-10 object-contain"
-                    />
-                  </a>
+                 <h3 className="text-white font-semibold mb-3">Ikuti Kami</h3>
 
-                  {/* Instagram */}
-                  <a 
-                    href="#" 
-                    className="w-12 h-12 rounded-full flex items-center justify-center transition hover:scale-110"
-                    aria-label="Instagram"
-                  >
-                    <img 
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png"
-                      alt="Instagram"
-                      className="w-10 h-10 object-contain"
-                    />
-                  </a>
+  <div className="flex items-center gap-4">
+    {/* Facebook */}
+    <a
+      href="https://facebook.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition"
+      aria-label="Facebook"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/2048px-2023_Facebook_icon.svg.png"
+        alt="Facebook"
+        className="w-7 h-7 object-contain"
+      />
+    </a>
 
+    {/* Instagram */}
+    <a
+      href="https://instagram.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition"
+      aria-label="Instagram"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png"
+        alt="Instagram"
+        className="w-7 h-7 object-contain"
+      />
+    </a>
+
+    {/* WhatsApp */}
+    <a
+      href="https://wa.me/6281234567890"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition"
+      aria-label="WhatsApp"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2048px-WhatsApp.svg.png"
+        alt="WhatsApp"
+        className="w-7 h-7 object-contain"
+      />
+    </a>
+  </div>
+</div>
 
                  
-                </div>
-              </div>
             </div>
 
             {/* GOOGLE MAPS */}
