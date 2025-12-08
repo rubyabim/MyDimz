@@ -9,17 +9,15 @@ import {
   RefreshControl,
   SafeAreaView,
 } from 'react-native';
-import { useRouter, Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
   fetchProducts,
   fetchPublicProducts,
-  getToken,
   fetchProductCategories,
 } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import MobileHeader from '@/components/Header';
 
 export default function ProductsScreen() {
   const router = useRouter();
@@ -104,8 +102,7 @@ export default function ProductsScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
-      <MobileHeader />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <FlatList
         data={products}
         numColumns={2}

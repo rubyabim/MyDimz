@@ -1,6 +1,6 @@
 import { View, Text, Button, TextInput, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
-import { loginApi, setToken } from '@/lib/api';
+import { loginApi, setToken, API_BASE } from '@/lib/api';
 import { useRouter } from 'expo-router';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import MobileHeader from '@/components/Header';
@@ -20,6 +20,21 @@ export default function LoginScreen() {
   const borderColor = colorScheme === 'dark' ? '#334155' : '#bfdbfe';
   const primary = '#1e40af';
 
+  const initializeBackend = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/init`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await res.json();
+      console.log('Backend initialization:', data);
+      return res.ok;
+    } catch (e) {
+      console.error('Init error:', e);
+      return false;
+    }
+  };
+
   const handleLogin = async () => {
     if (!username || !password) {
       setError('Username dan password harus diisi');
@@ -30,21 +45,36 @@ export default function LoginScreen() {
     setLoading(true);
     
     try {
-      const res = await loginApi(username, password);
+      // First attempt login
+      let res = await loginApi(username, password);
+      
       if (!res) {
-        setError('Tidak dapat terhubung ke server');
+        setError('Tidak dapat terhubung ke server. Pastikan backend running di port 5000');
         setLoading(false);
         return;
       }
-      if (!res.ok) {
-        const b = await res.json().catch(() => null);
+      
+      // If login fails with 401, try initializing backend first
+      if (!res.ok && res.status === 401) {
+        console.log('User tidak ditemukan, mencoba initialize backend...');
+        await initializeBackend();
+        
+        // Retry login after initialization
+        res = await loginApi(username, password);
+      }
+      
+      if (!res || !res.ok) {
+        const b = await res?.json().catch(() => null);
         setError(b?.error || 'Username atau password salah');
         setLoading(false);
         return;
       }
+      
+      // Login successful
       const data = await res.json();
       await setToken(data.token);
       setLoading(false);
+      
       Alert.alert('Sukses', 'Login berhasil!', [
         {
           text: 'OK',
@@ -224,6 +254,24 @@ export default function LoginScreen() {
           >
             Demo: admin / admin123
           </Text>
+
+          {/* Debug: Manual init button */}
+          <TouchableOpacity
+            onPress={initializeBackend}
+            style={{
+              marginTop: 16,
+              paddingVertical: 8,
+              paddingHorizontal: 12,
+              backgroundColor: '#f0f4f8',
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: '#dbeafe',
+            }}
+          >
+            <Text style={{ fontSize: 11, color: '#0f172a', textAlign: 'center', fontWeight: '500' }}>
+              🔧 Initialize Backend
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>

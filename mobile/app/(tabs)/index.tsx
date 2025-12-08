@@ -15,7 +15,6 @@ import { useRouter } from 'expo-router';
 import { fetchPublicProducts, getToken } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import MobileHeader from '@/components/Header';
 
 const { width } = Dimensions.get('window');
 
@@ -35,11 +34,11 @@ export default function HomeScreen() {
   const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
   const textSecondary = colorScheme === 'dark' ? '#cbd5e1' : '#64748b';
 
-  // Slider images - menggunakan real images dari public folder
+  // Slider images - menggunakan placeholder images
   const backgroundImages = [
-    '/slider/1.png',
-    '/slider/2.jpg',
-    '/slider/3.jpg',
+    'https://images.unsplash.com/photo-1552591190-3ac9ddb1ae3e?w=800&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1542224566-6e85f2e6772f?w=800&h=300&fit=crop&q=80',
   ];
 
   // Auto slider dengan transisi
@@ -80,27 +79,20 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
-      <MobileHeader />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 20 }}>
         {/* HERO SECTION dengan SLIDER dan GRADIENT BACKGROUND */}
-        <View style={[styles.heroSection, { backgroundColor: primary }]}>
+        <View style={[styles.heroSection, { backgroundColor: '#2563eb' }]}>
           {/* Background Images with Fade transition */}
           <View style={styles.heroImageContainer}>
-            {backgroundImages.map((img, idx) => (
+            {backgroundImages[bgIndex] && (
               <Image
-                key={idx}
-                source={{ uri: img }}
-                style={[
-                  styles.heroImage,
-                  {
-                    opacity: idx === bgIndex ? 1 : 0,
-                    position: 'absolute',
-                  },
-                ]}
+                source={{ uri: backgroundImages[bgIndex] }}
+                style={styles.heroImage}
                 contentFit="cover"
+                cachePolicy="memory-disk"
               />
-            ))}
+            )}
           </View>
           
           {/* Dark Overlay */}
@@ -276,11 +268,11 @@ const styles = StyleSheet.create({
     height: '100%',
     position: 'absolute',
     overflow: 'hidden',
+    backgroundColor: '#1e40af',
   },
   heroImage: {
     width: '100%',
     height: '100%',
-    position: 'absolute',
   },
   heroOverlay: {
     position: 'absolute',
