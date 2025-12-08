@@ -252,7 +252,7 @@ export default function LoginScreen() {
               marginTop: 12,
             }}
           >
-            Demo: admin / admin123
+          
           </Text>
 
           {/* Debug: Manual init button */}
@@ -269,7 +269,7 @@ export default function LoginScreen() {
             }}
           >
             <Text style={{ fontSize: 11, color: '#0f172a', textAlign: 'center', fontWeight: '500' }}>
-              🔧 Initialize Backend
+          
             </Text>
           </TouchableOpacity>
         </View>
