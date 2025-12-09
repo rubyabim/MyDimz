@@ -291,6 +291,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
                                             <Marker
                                              coordinate={{
+                                               latitude: -5.364333,
 
 
 const styles = StyleSheet.create({
