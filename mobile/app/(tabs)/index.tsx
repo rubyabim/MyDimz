@@ -283,6 +283,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
                                latitude: -5.364333,
                                 longitude: 105.247748,
+                                 latitudeDelta: 0.02,
 
 const styles = StyleSheet.create({
   heroSection: {
