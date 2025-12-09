@@ -1,3 +1,5 @@
+import MapView, { Marker } from 'react-native-maps';
+import { Linking } from 'react-native';
 import { useEffect, useState } from 'react';
 import {
   StyleSheet,
@@ -30,7 +32,7 @@ export default function HomeScreen() {
   
  // Tema warna dominan Putih & Biru
 const primary = '#1D4ED8';           // Biru utama (lebih elegan)
-const textDark = colorScheme === 'dark' ? '#E2E8F0' : '#0F172A';      
+// const textDark = colorScheme === 'dark' ? '#E2E8F0' : '#0F172A';      
 const cardBg = colorScheme === 'dark' ? '#1E293B' : '#F8FAFC';        
 const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';  
 
@@ -243,19 +245,28 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
           ))}
         </View>
 
-        {/* CALL TO ACTION */}
-        <View style={{ paddingHorizontal: 16, paddingVertical: 12 }}>
-          <TouchableOpacity
-            style={[styles.ctaButton, { backgroundColor: primary }]}
-            onPress={() => router.push('/(tabs)/products')}
-          >
-            <Text style={styles.ctaButtonText}>🛍️ Mulai Belanja Sekarang</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+      {/* CALL TO ACTION */}
+<View style={{ paddingHorizontal: 16, paddingVertical: 12 }}>
+  <TouchableOpacity
+    style={[styles.ctaButton, { backgroundColor: primary }]}
+    onPress={() => router.push('/(tabs)/products')}
+  >
+    <Text style={styles.ctaButtonText}>🛍️ Mulai Belanja Sekarang</Text>
+  </TouchableOpacity>
+</View>
+
+{/* HEADER DI BAWAH CTA */}
+<View style={{ paddingHorizontal: 16, paddingVertical: 10 }}>
+  <Text style={{ fontSize: 20, fontWeight: '700', color: '#000' }}>
+    Header Baru Kamu
+  </Text>
+</View>
+
+</ScrollView>
+</SafeAreaView>
+);
 }
+
 
 const styles = StyleSheet.create({
   heroSection: {
