@@ -37,7 +37,7 @@ export default function HomeScreen() {
   // Slider images - menggunakan placeholder images
   const backgroundImages = [
     'https://www.mokapos.com/blog/_next/image?url=https%3A%2F%2Fwp.mokapos.com%2Fwp-content%2Fuploads%2F2023%2F02%2Fusaha-sembako-di-rumah-tips-sukses-usaha-toko-kelontong.jpg&w=3840&q=75',
-    'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&h=300&fit=crop&q=80',
+    'https://asset.kompas.com/crops/OK92tO95Kty0YiiTe35Y7aCT9iE=/0x0:780x520/1200x800/data/photo/2019/12/04/5de7435eb2d44.jpg',
     'https://images.unsplash.com/photo-1542224566-6e85f2e6772f?w=800&h=300&fit=crop&q=80',
   ];
 
