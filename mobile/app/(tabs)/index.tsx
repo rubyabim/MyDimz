@@ -153,7 +153,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
         {/* FEATURED PRODUCTS SECTION */}
         <View style={{ paddingHorizontal: 16, paddingVertical: 12 }}>
           <View style={styles.sectionHeader}>
-            <Text style={[styles.sectionTitle, { color: '#1e3a8a' }]}>
+            <Text style={[styles.sectionTitle, { color: '#234189' }]}>
               ⭐ Produk Unggulan
             </Text>
             <TouchableOpacity onPress={() => router.push('/(tabs)/products')}>
