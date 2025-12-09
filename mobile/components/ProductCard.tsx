@@ -39,7 +39,6 @@ export default function ProductCard({
   // WARNA PUTIH - BIRU SOFT
   const primary = "#3B82F6";           // Biru soft
   const primaryDark = "#1E40AF";       // Biru Navy modern
-  const bgColor = colorScheme === "dark" ? "#0B1120" : "#FFFFFF";
   const cardBg = colorScheme === "dark" ? "#1E293B" : "#FFFFFF";
   const textColor = colorScheme === "dark" ? "#E2E8F0" : "#0F172A";
   const textSecondary = colorScheme === "dark" ? "#94A3B8" : "#475569";

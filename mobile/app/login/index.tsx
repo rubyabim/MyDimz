@@ -1,4 +1,4 @@
-import { View, Text, Button, TextInput, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
 import { loginApi, setToken, API_BASE } from '@/lib/api';
 import { useRouter } from 'expo-router';

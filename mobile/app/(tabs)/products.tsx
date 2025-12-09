@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   RefreshControl,
   SafeAreaView,
+  Dimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
-  fetchProducts,
   fetchPublicProducts,
   fetchProductCategories,
 } from '@/lib/api';
@@ -21,12 +21,14 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export default function ProductsScreen() {
   const router = useRouter();
+  const screenWidth = Dimensions.get('window').width;
+  const numColumns = screenWidth >= 1024 ? 4 : screenWidth >= 768 ? 3 : 2;
+  
   const [products, setProducts] = useState([] as any[]);
   const [categories, setCategories] = useState([] as any[]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState('');
@@ -45,12 +47,9 @@ export default function ProductsScreen() {
     try {
       setLoading(true);
       setError('');
-      const token = await getToken();
       
-      // Gunakan public API jika tidak ada token, protected API jika ada token
-      const data = token
-        ? await fetchProducts({ page: pageNum, limit: 12, category: category !== 'all' ? category : undefined, search: searchTerm }, token)
-        : await fetchPublicProducts(pageNum, 12, searchTerm, category !== 'all' ? category : undefined);
+      // Gunakan public API
+      const data = await fetchPublicProducts(pageNum, 12, searchTerm, category !== 'all' ? category : undefined);
       
       if (!data) {
         setError('Tidak dapat terhubung ke server');
@@ -87,14 +86,6 @@ export default function ProductsScreen() {
     loadProducts(1, search, selectedCategory);
   }, [search, selectedCategory]);
 
-  useEffect(() => {
-    const checkAdmin = async () => {
-      const token = await getToken();
-      setIsAdmin(!!token);
-    };
-    checkAdmin();
-  }, []);
-
   const handleRefresh = async () => {
     setRefreshing(true);
     await loadProducts(1, search, selectedCategory);
@@ -102,10 +93,10 @@ export default function ProductsScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#f0f4f8' }}>
       <FlatList
         data={products}
-        numColumns={2}
+        numColumns={numColumns}
         keyExtractor={(item) => String(item.id)}
         columnWrapperStyle={{
           justifyContent: 'space-between',
@@ -120,7 +111,7 @@ export default function ProductsScreen() {
                 style={{
                   fontSize: 28,
                   fontWeight: '800',
-                  color: textColor,
+                  color: '#1e3a8a',
                   marginBottom: 4,
                 }}
               >
@@ -129,43 +120,12 @@ export default function ProductsScreen() {
               <Text
                 style={{
                   fontSize: 14,
-                  color: textSecondary,
+                  color: '#475569',
                 }}
               >
                 {products.length} produk tersedia
               </Text>
             </View>
-
-            {/* Admin Button */}
-            {isAdmin && (
-              <Link href="/admin/new" asChild>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: primary,
-                    paddingVertical: 12,
-                    paddingHorizontal: 16,
-                    borderRadius: 10,
-                    marginBottom: 14,
-                    alignItems: 'center',
-                    elevation: 2,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 4,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: '#fff',
-                      fontWeight: '700',
-                      fontSize: 14,
-                    }}
-                  >
-                    + Tambah Produk Baru
-                  </Text>
-                </TouchableOpacity>
-              </Link>
-            )}
 
             {/* Search Input */}
             <View style={{ marginBottom: 14 }}>
@@ -173,14 +133,14 @@ export default function ProductsScreen() {
                 value={search}
                 onChangeText={setSearch}
                 placeholder="Cari produk..."
-                placeholderTextColor={textSecondary}
+                placeholderTextColor="#cbd5e1"
                 style={{
                   borderWidth: 1.5,
                   borderColor: primary + '40',
                   padding: 12,
                   borderRadius: 10,
-                  backgroundColor: inputBg,
-                  color: textColor,
+                  backgroundColor: '#ffffff',
+                  color: '#1e293b',
                   fontSize: 14,
                   fontWeight: '500',
                 }}

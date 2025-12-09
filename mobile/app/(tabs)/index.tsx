@@ -16,19 +16,20 @@ import { fetchPublicProducts, getToken } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
-const { width } = Dimensions.get('window');
-
 export default function HomeScreen() {
   const [products, setProducts] = useState([] as any[]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [bgIndex, setBgIndex] = useState(0);
-  const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
   const colorScheme = useColorScheme();
+  const screenWidth = Dimensions.get('window').width;
+  
+  // Tentukan jumlah kolom berdasarkan lebar layar
+  const numColumns = screenWidth >= 1024 ? 4 : screenWidth >= 768 ? 3 : 2;
+  
  // Tema warna dominan Putih & Biru
 const primary = '#1D4ED8';           // Biru utama (lebih elegan)
-const bgColor = colorScheme === 'dark' ? '#0B1120' : '#FFFFFF';      
 const textDark = colorScheme === 'dark' ? '#E2E8F0' : '#0F172A';      
 const cardBg = colorScheme === 'dark' ? '#1E293B' : '#F8FAFC';        
 const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';  
@@ -47,14 +48,13 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
       setBgIndex((prev) => (prev + 1) % backgroundImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [backgroundImages.length]);
 
   const loadProducts = async () => {
     try {
       setLoading(true);
       setError('');
-      const token = await getToken();
-      setIsAdmin(!!token);
+      await getToken();
 
       const data = await fetchPublicProducts(1, 8);
       if (!data) {
@@ -134,15 +134,15 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
             {[
               { name: 'Makanan', icon: '🍛' },
               { name: 'Minuman', icon: '🥤' },
-              { name: 'Bumbu', icon: '🧂' },
-              { name: 'Rumah', icon: '🏠' },
+              { name: 'Bumbu Dapur', icon: '🧂' },
+              { name: 'Kebutuhan Rumah', icon: '🏠' },
             ].map((item) => (
               <TouchableOpacity
                 key={item.name}
-                style={[styles.categoryCard, { backgroundColor: cardBg, borderColor: primary + '20' }]}
+                style={[styles.categoryCard, { backgroundColor: '#ffffff', borderColor: '#e2e8f0' }]}
               >
                 <Text style={styles.categoryIcon}>{item.icon}</Text>
-                <Text style={[styles.categoryName, { color: textDark }]}>
+                <Text style={[styles.categoryName, { color: '#1e293b' }]}>
                   {item.name}
                 </Text>
               </TouchableOpacity>
@@ -153,7 +153,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
         {/* FEATURED PRODUCTS SECTION */}
         <View style={{ paddingHorizontal: 16, paddingVertical: 12 }}>
           <View style={styles.sectionHeader}>
-            <Text style={[styles.sectionTitle, { color: textDark }]}>
+            <Text style={[styles.sectionTitle, { color: '#1e3a8a' }]}>
               ⭐ Produk Unggulan
             </Text>
             <TouchableOpacity onPress={() => router.push('/(tabs)/products')}>
@@ -186,7 +186,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
           ) : (
             <FlatList
               data={products}
-              numColumns={2}
+              numColumns={numColumns}
               scrollEnabled={false}
               keyExtractor={(item) => String(item.id)}
               columnWrapperStyle={styles.productRow}
