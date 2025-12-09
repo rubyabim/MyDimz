@@ -257,6 +257,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
 {/* GOOGLE MAPS SECTION */}
 <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}></View>
+ <Text style={{ }}></Text>
 
 const styles = StyleSheet.create({
   heroSection: {
