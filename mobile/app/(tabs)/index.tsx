@@ -232,7 +232,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
             >
               <Text style={styles.featureIcon}>{feature.icon}</Text>
               <View style={{ flex: 1 }}>
-                <Text style={[styles.featureTitle, { color: textDark }]}>
+               <Text style={[styles.featureTitle, { color: '#234189' }]}>
                   {feature.title}
                 </Text>
                 <Text style={[styles.featureDesc, { color: textSecondary }]}>
