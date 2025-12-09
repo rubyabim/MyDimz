@@ -204,7 +204,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
         {/* FITUR SECTION */}
         <View style={{ paddingHorizontal: 16, paddingVertical: 12 }}>
-          <Text style={[styles.sectionTitle, { color: textDark }]}>
+          <Text style={[styles.sectionTitle, { color: '#234189' }]}>
             Mengapa Memilih Kami?
           </Text>
 
