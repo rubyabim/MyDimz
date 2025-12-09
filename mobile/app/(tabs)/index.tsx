@@ -279,6 +279,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
                             <MapView
                             style={{ flex: 1 }}
+                             initialRegion={{
 
 const styles = StyleSheet.create({
   heroSection: {
