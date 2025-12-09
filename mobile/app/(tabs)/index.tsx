@@ -295,6 +295,10 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                                                longitude: 105.247748,
                                                 }}
 
+                                                 title="Warung Iyos"
+                                                 description="Lokasi Warung Ibuk Iyos"
+                                                     />
+
 
 const styles = StyleSheet.create({
   heroSection: {
