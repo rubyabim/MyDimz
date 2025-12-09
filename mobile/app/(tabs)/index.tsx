@@ -302,6 +302,8 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                                                      </MapView>
                                                       </View>
 
+                                                        {/* LINK GOOGLE MAPS */}
+
 
 const styles = StyleSheet.create({
   heroSection: {
