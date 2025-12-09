@@ -304,6 +304,8 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
                                                         {/* LINK GOOGLE MAPS */}
 
+                                                        <TouchableOpacity
+
 
 const styles = StyleSheet.create({
   heroSection: {
