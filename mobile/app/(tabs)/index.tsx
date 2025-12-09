@@ -305,6 +305,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                                                         {/* LINK GOOGLE MAPS */}
 
                                                         <TouchableOpacity
+                                                        onPress={() =>
 
 
 const styles = StyleSheet.create({
