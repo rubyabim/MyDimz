@@ -267,6 +267,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
            <View
              style={{
+               height: 250,
 
 const styles = StyleSheet.create({
   heroSection: {
