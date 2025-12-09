@@ -299,6 +299,8 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                                                  description="Lokasi Warung Ibuk Iyos"
                                                      />
 
+                                                     </MapView>
+
 
 const styles = StyleSheet.create({
   heroSection: {
