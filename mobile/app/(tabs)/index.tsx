@@ -266,6 +266,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
          {/* MAP BOX */}
 
            <View
+             style={{
 
 const styles = StyleSheet.create({
   heroSection: {
