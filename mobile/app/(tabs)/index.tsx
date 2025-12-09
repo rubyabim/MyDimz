@@ -270,6 +270,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                height: 250,
                  borderRadius: 12,
                   overflow: 'hidden',
+                   elevation: 4,
 
 const styles = StyleSheet.create({
   heroSection: {
