@@ -289,6 +289,8 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                                        }}
                                           >
 
+                                            <Marker
+
 
 const styles = StyleSheet.create({
   heroSection: {
