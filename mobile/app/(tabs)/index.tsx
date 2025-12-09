@@ -277,6 +277,8 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
                          ></View>
 
+                            <MapView
+
 const styles = StyleSheet.create({
   heroSection: {
     height: 260,
