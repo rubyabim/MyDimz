@@ -26,13 +26,13 @@ export default function HomeScreen() {
   const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
   const colorScheme = useColorScheme();
-  
-  // Web-inspired color scheme (Blue)
-  const primary = '#2563eb';
-  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f0f4f8';
-  const textDark = colorScheme === 'dark' ? '#f1f5f9' : '#1e3a8a';
-  const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
-  const textSecondary = colorScheme === 'dark' ? '#cbd5e1' : '#64748b';
+ // Tema warna dominan Putih & Biru
+const primary = '#1D4ED8';           // Biru utama (lebih elegan)
+const bgColor = colorScheme === 'dark' ? '#0B1120' : '#FFFFFF';      
+const textDark = colorScheme === 'dark' ? '#E2E8F0' : '#0F172A';      
+const cardBg = colorScheme === 'dark' ? '#1E293B' : '#F8FAFC';        
+const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';  
+
 
   // Slider images - menggunakan placeholder images
   const backgroundImages = [
