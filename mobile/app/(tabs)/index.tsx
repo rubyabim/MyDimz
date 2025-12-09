@@ -227,7 +227,8 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
           ].map((feature, idx) => (
             <View
               key={idx}
-              style={[styles.featureCard, { backgroundColor: cardBg, borderColor: primary + '15' }]}
+             style={[styles.featureCard, { backgroundColor: '#FFFFFF', borderColor: primary + '15' }]}
+
             >
               <Text style={styles.featureIcon}>{feature.icon}</Text>
               <View style={{ flex: 1 }}>
