@@ -281,6 +281,8 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                             style={{ flex: 1 }}
                              initialRegion={{
 
+                               latitude: -5.364333,
+
 const styles = StyleSheet.create({
   heroSection: {
     height: 260,
