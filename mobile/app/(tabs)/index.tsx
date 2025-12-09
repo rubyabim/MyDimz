@@ -310,7 +310,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                                                             }
 
                                                               ></TouchableOpacity>
-                                                               <Text style={{
+                                                               <Text style={{ marginTop: 10,
 
 
 const styles = StyleSheet.create({
