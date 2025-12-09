@@ -117,7 +117,7 @@ export default function LoginScreen() {
               marginBottom: 8,
             }}
           >
-            Masuk 👋
+            Masuk 
           </Text>
 
           <Text
