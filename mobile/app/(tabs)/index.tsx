@@ -313,6 +313,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                                                                <Text style={{ marginTop: 10, color: primary, fontSize: 14 }}></Text>
 
      📍 Lihat di Google Maps →
+      </Text>
 const styles = StyleSheet.create({
   heroSection: {
     height: 260,
