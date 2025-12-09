@@ -42,7 +42,7 @@ export default function MobileHeader() {
               paddingHorizontal: 10,
             }}
           >
-            🛍️ Produk
+             Produk
           </Text>
         </TouchableOpacity>
 
