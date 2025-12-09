@@ -56,7 +56,7 @@ export default function MobileHeader() {
               paddingHorizontal: 10,
             }}
           >
-            🔑 Login
+             Login
           </Text>
         </TouchableOpacity>
       </View>
