@@ -273,6 +273,8 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                    elevation: 4,
                     backgroundColor: '#ddd',
 
+                        }}
+
 const styles = StyleSheet.create({
   heroSection: {
     height: 260,
