@@ -282,6 +282,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                              initialRegion={{
 
                                latitude: -5.364333,
+                                longitude: 105.247748,
 
 const styles = StyleSheet.create({
   heroSection: {
