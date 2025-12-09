@@ -255,17 +255,6 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
   </TouchableOpacity>
 </View>
 
-{/* HEADER DI BAWAH CTA */}
-<View style={{ paddingHorizontal: 16, paddingVertical: 10 }}>
-  <Text style={{ fontSize: 20, fontWeight: '700', color: '#000' }}>
-    Header Baru Kamu
-  </Text>
-</View>
-
-</ScrollView>
-</SafeAreaView>
-);
-}
 
 
 const styles = StyleSheet.create({
