@@ -307,6 +307,9 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                                                         <TouchableOpacity
                                                         onPress={() =>
                                                            Linking.openURL("https://maps.app.goo.gl/UkLV19W9JJu7XT2i6")
+                                                            }
+
+                                                              ></TouchableOpacity>
 
 
 const styles = StyleSheet.create({
