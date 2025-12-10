@@ -186,6 +186,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
             </View>
           ) : (
             <FlatList
+              key={`products-${numColumns}`}
               data={products}
               numColumns={numColumns}
               scrollEnabled={false}

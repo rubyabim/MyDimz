@@ -14,10 +14,8 @@ export default function LoginScreen() {
   const router = useRouter();
   const colorScheme = useColorScheme();
 
-  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f0f4f8';
-  const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
+  const bgColor = '#ffffff';
   const textColor = colorScheme === 'dark' ? '#f1f5f9' : '#1e3a8a';
-  const borderColor = colorScheme === 'dark' ? '#334155' : '#bfdbfe';
   const primary = '#1e40af';
 
   const initializeBackend = async () => {
@@ -64,26 +62,36 @@ export default function LoginScreen() {
       }
       
       if (!res || !res.ok) {
-        const b = await res?.json().catch(() => null);
-        setError(b?.error || 'Username atau password salah');
+        try {
+          const errorData = await res?.json();
+          setError(errorData?.error || errorData?.message || 'Username atau password salah');
+        } catch {
+          setError('Username atau password salah');
+        }
         setLoading(false);
         return;
       }
       
       // Login successful
       const data = await res.json();
+      if (!data.token) {
+        setError('Token tidak diterima dari server');
+        setLoading(false);
+        return;
+      }
+      
       await setToken(data.token);
       setLoading(false);
       
       Alert.alert('Sukses', 'Login berhasil!', [
         {
           text: 'OK',
-          onPress: () => router.replace('/'),
+          onPress: () => router.replace('/(tabs)'),
         },
       ]);
     } catch (err) {
       console.error('Login error:', err);
-      setError('Terjadi kesalahan,');
+      setError('Terjadi kesalahan saat login');
       setLoading(false);
     }
   };
@@ -95,7 +103,7 @@ export default function LoginScreen() {
         {/* Login Card */}
         <View
           style={{
-            backgroundColor: cardBg,
+            backgroundColor: '#ffffff',
             borderRadius: 16,
             padding: 24,
             elevation: 4,
@@ -104,7 +112,7 @@ export default function LoginScreen() {
             shadowOpacity: 0.1,
             shadowRadius: 8,
             borderWidth: 1,
-            borderColor: borderColor,
+            borderColor: '#e2e8f0',
           }}
         >
           {/* Title */}
@@ -169,12 +177,12 @@ export default function LoginScreen() {
               editable={!loading}
               style={{
                 borderWidth: 1.5,
-                borderColor: borderColor,
+                borderColor: '#e2e8f0',
                 padding: 12,
                 borderRadius: 10,
                 fontSize: 14,
                 color: textColor,
-                backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc',
+                backgroundColor: '#f8fafc',
               }}
             />
           </View>
@@ -201,13 +209,13 @@ export default function LoginScreen() {
                 editable={!loading}
                 style={{
                   borderWidth: 1.5,
-                  borderColor: borderColor,
+                  borderColor: '#e2e8f0',
                   padding: 12,
                   paddingRight: 40,
                   borderRadius: 10,
                   fontSize: 14,
                   color: textColor,
-                  backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc',
+                  backgroundColor: '#f8fafc',
                 }}
               />
               <TouchableOpacity

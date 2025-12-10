@@ -97,6 +97,7 @@ export default function ProductsScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f0f4f8' }}>
       <FlatList
+        key={`products-${numColumns}`}
         data={products}
         numColumns={numColumns}
         keyExtractor={(item) => String(item.id)}
