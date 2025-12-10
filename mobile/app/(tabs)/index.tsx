@@ -319,6 +319,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
        </View>
 
        </ScrollView>
+       </SafeAreaView>
 const styles = StyleSheet.create({
   heroSection: {
     height: 260,
