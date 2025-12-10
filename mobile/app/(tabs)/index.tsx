@@ -315,6 +315,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
      📍 Lihat di Google Maps →
       </Text>
       </View>
+       </TouchableOpacity>
 const styles = StyleSheet.create({
   heroSection: {
     height: 260,
