@@ -23,6 +23,8 @@ export default function ProductsScreen() {
   const router = useRouter();
   const screenWidth = Dimensions.get('window').width;
   const numColumns = screenWidth >= 1024 ? 4 : screenWidth >= 768 ? 3 : 2;
+  const paddingHorizontal = screenWidth >= 768 ? 24 : 12;
+  const gap = screenWidth >= 768 ? 12 : 8;
   
   const [products, setProducts] = useState([] as any[]);
   const [categories, setCategories] = useState([] as any[]);
@@ -100,11 +102,11 @@ export default function ProductsScreen() {
         keyExtractor={(item) => String(item.id)}
         columnWrapperStyle={{
           justifyContent: 'space-between',
-          paddingHorizontal: 12,
-          marginBottom: 8,
+          paddingHorizontal: gap,
+          marginBottom: gap,
         }}
         ListHeaderComponent={
-          <View style={{ width: '100%', paddingHorizontal: 12, paddingVertical: 16 }}>
+          <View style={{ width: '100%', paddingHorizontal: paddingHorizontal, paddingVertical: 16 }}>
             {/* Header */}
             <View style={{ marginBottom: 16 }}>
               <Text
