@@ -3,7 +3,7 @@ import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '@/lib/api';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+// useColorScheme removed: mobile forced to light theme
 
 export default function ProductDetailScreen() {
   const params = useLocalSearchParams();
@@ -11,14 +11,13 @@ export default function ProductDetailScreen() {
   const id = params.id ? Number(params.id) : undefined;
   const [product, setProduct] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
-  const colorScheme = useColorScheme();
   
   // Blue theme matching web
   const primary = '#2563eb';
-  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f8fafc';
-  const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
-  const textColor = colorScheme === 'dark' ? '#f1f5f9' : '#0f172a';
-  const textSecondary = colorScheme === 'dark' ? '#cbd5e1' : '#64748b';
+  const bgColor = '#ffffff';
+  const cardBg = '#FFFFFF';
+  const textColor = '#0f172a';
+  const textSecondary = '#64748b';
 
   useEffect(() => {
     if (!id) return;

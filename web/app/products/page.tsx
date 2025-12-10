@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import { fetchPublicProducts } from "../../lib/api";
+import { getUserProfile, isAdmin as checkIsAdmin } from "../../lib/clientAuth";
 
 interface Product {
   id: number;
@@ -13,7 +14,7 @@ interface Product {
   category: string;
   image: string;
   stock: number;
-  discount?: number;
+  description?: string;
 }
 
 interface Category {
@@ -29,6 +30,7 @@ export default function Products() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [sortBy, setSortBy] = useState("latest");
+  const [isAdmin, setIsAdmin] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -48,6 +50,24 @@ export default function Products() {
   // Load categories
   useEffect(() => {
     loadCategories();
+  }, []);
+
+  // Check user role
+  const checkUserRole = async () => {
+    try {
+      const user = await getUserProfile();
+      console.log('User profile:', user);
+      const adminStatus = user ? checkIsAdmin(user) : false;
+      console.log('Is admin:', adminStatus);
+      setIsAdmin(adminStatus);
+    } catch (error) {
+      console.error('Error checking user role:', error);
+      setIsAdmin(false);
+    }
+  };
+
+  useEffect(() => {
+    checkUserRole();
   }, []);
 
   const loadCategories = async () => {
@@ -209,7 +229,7 @@ export default function Products() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 animate-fadeIn">
             {products.map((product) => (
               <div key={product.id} className="h-full transform transition-transform hover:scale-105">
-                <ProductCard product={product} />
+                <ProductCard product={product} isAdmin={isAdmin} />
               </div>
             ))}
           </div>

@@ -17,10 +17,10 @@ export default function AdminNew() {
   const [loading, setLoading] = useState(false);
   const colorScheme = useColorScheme();
 
-  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f0f4f8';
-  const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
-  const textColor = colorScheme === 'dark' ? '#f1f5f9' : '#1e3a8a';
-  const borderColor = colorScheme === 'dark' ? '#334155' : '#bfdbfe';
+  const bgColor = '#ffffff';
+  const cardBg = '#FFFFFF';
+  const textColor = '#1e3a8a';
+  const borderColor = '#e2e8f0';
   const primary = '#1e40af';
 
   const handleCreate = async () => {

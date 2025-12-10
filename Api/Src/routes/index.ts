@@ -16,6 +16,7 @@ import {
 } from '../controllers/productController';
 import { createSale, getSales, getDailySales, getMonthlySales, getSalesStats, getSale, updateSale, deleteSale } from '../controllers/salesController';
 import { authenticateToken, requireAdmin } from '../middleware/auth';
+import { prisma } from '../utils/database';
 import {
   generateDailyReport,
   generateMonthlyReport,
@@ -84,6 +85,21 @@ router.get('/openapi.json', (req, res) => {
 // ========= AUTH =========
 router.post('/auth/login', login);
 router.post('/init', initializeAdmin);
+router.get('/auth/me', authenticateToken, async (req: any, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      select: { id: true, username: true, role: true, createdAt: true, updatedAt: true }
+    });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error('Get user error:', error);
+    res.status(500).json({ error: 'Failed to fetch user' });
+  }
+});
 
 // ========= PUBLIC PRODUCTS =========
 // Specific routes BEFORE parameterized routes

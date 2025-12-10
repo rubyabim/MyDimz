@@ -14,13 +14,26 @@ interface ProductCardProps {
     category: string;
     image: string;
     stock: number;
+    description?: string;
   };
+  isAdmin?: boolean;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, isAdmin = false }: ProductCardProps) {
   const { addToCart } = useCart();
   const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
+
+  // Debug logging
+  if (product.id === 1) {
+    console.log('ProductCard Debug:', {
+      productId: product.id,
+      productName: product.name,
+      isAdmin,
+      hasDescription: !!product.description,
+      description: product.description,
+    });
+  }
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("id-ID", {
@@ -69,6 +82,13 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.name}
         </h3>
 
+        {/* DESCRIPTION - Only show for non-admin users */}
+        {!isAdmin && product.description && (
+          <p className="text-sm text-gray-600 line-clamp-2 mt-2 mb-2">
+            {product.description}
+          </p>
+        )}
+
         {/* RATING */}
         <div className="flex items-center gap-1 mt-1 mb-3">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -112,28 +132,30 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.stock > 0 ? `Stok: ${product.stock}` : "Stok Habis"}
         </p>
 
-        {/* ADD TO CART BUTTON */}
-        <button
-          disabled={product.stock === 0}
-          onClick={() =>
-            addToCart({
-              id: product.id,
-              name: product.name,
-              price: product.discountPrice || product.price,
-              image: product.image,
-              stock: product.stock,
-            })
-          }
-          className={`w-full py-2 rounded-xl font-semibold transition-all shadow
-            ${
-              product.stock > 0
-                ? "bg-blue-600 text-white hover:bg-blue-700 active:scale-95"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+        {/* ADD TO CART BUTTON - Only for admin */}
+        {isAdmin && (
+          <button
+            disabled={product.stock === 0}
+            onClick={() =>
+              addToCart({
+                id: product.id,
+                name: product.name,
+                price: product.discountPrice || product.price,
+                image: product.image,
+                stock: product.stock,
+              })
             }
-          `}
-        >
-          Tambah ke Keranjang
-        </button>
+            className={`w-full py-2 rounded-xl font-semibold transition-all shadow
+              ${
+                product.stock > 0
+                  ? "bg-blue-600 text-white hover:bg-blue-700 active:scale-95"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }
+            `}
+          >
+            🛒 Tambah ke Keranjang
+          </button>
+        )}
       </div>
     </div>
   );

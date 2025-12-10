@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import { fetchPublicProducts } from '../lib/api';
+import { getUserProfile, isAdmin as checkIsAdmin } from '../lib/clientAuth';
 
 interface Product {
   id: number;
@@ -12,6 +13,7 @@ interface Product {
   category: string;
   image: string;
   stock: number;
+  description?: string;
 }
 
 export default function Home() {
@@ -19,6 +21,7 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [bgIndex, setBgIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const backgroundImages = ["/slider/1.png", "/slider/2.jpg", "/slider/3.jpg"];
 
@@ -52,6 +55,23 @@ export default function Home() {
   // Load products
   useEffect(() => {
     void loadProducts();
+  }, []);
+
+  const checkUserRole = async () => {
+    try {
+      const user = await getUserProfile();
+      console.log('User profile:', user);
+      const adminStatus = user ? checkIsAdmin(user) : false;
+      console.log('Is admin:', adminStatus);
+      setIsAdmin(adminStatus);
+    } catch (error) {
+      console.error('Error checking user role:', error);
+      setIsAdmin(false);
+    }
+  };
+
+  useEffect(() => {
+    checkUserRole();
   }, []);
 
   const loadProducts = async () => {
@@ -169,7 +189,7 @@ export default function Home() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} isAdmin={isAdmin} />
             ))}
           </div>
         )}

@@ -12,16 +12,19 @@ type Product = {
   stock: number;
   category?: string;
   image?: string;
+  description?: string;
 };
 
 export default function ProductCard({
   product,
   onPress,
   onAdd,
+  isAdmin = false,
 }: {
   product: Product;
   onPress?: () => void;
   onAdd?: () => void;
+  isAdmin?: boolean;
 }) {
   const formatPrice = (price: number) => {
     try {
@@ -34,14 +37,12 @@ export default function ProductCard({
     }
   };
 
-  const colorScheme = useColorScheme();
-
   // WARNA PUTIH - BIRU SOFT
   const primary = "#3B82F6";           // Biru soft
   const primaryDark = "#1E40AF";       // Biru Navy modern
-  const cardBg = colorScheme === "dark" ? "#1E293B" : "#FFFFFF";
-  const textColor = colorScheme === "dark" ? "#E2E8F0" : "#0F172A";
-  const textSecondary = colorScheme === "dark" ? "#94A3B8" : "#475569";
+  const cardBg = "#FFFFFF";
+  const textColor = "#0F172A";
+  const textSecondary = "#475569";
 
   const discountPct = product.discountPrice
     ? Math.round(
@@ -92,6 +93,16 @@ export default function ProductCard({
           {product.name}
         </Text>
 
+        {/* DESCRIPTION */}
+        {product.description && !isAdmin && (
+          <Text
+            style={[styles.description, { color: textSecondary }]}
+            numberOfLines={2}
+          >
+            {product.description}
+          </Text>
+        )}
+
         {/* RATING */}
         {product.rating && (
           <View style={styles.ratingContainer}>
@@ -131,29 +142,31 @@ export default function ProductCard({
           {product.stock > 0 ? `Stok: ${product.stock}` : "Stok Habis"}
         </Text>
 
-        {/* BUTTON */}
-        <TouchableOpacity
-          style={[
-            styles.addBtn,
-            { backgroundColor: product.stock > 0 ? primary : "#E5E7EB" },
-          ]}
-          onPress={() => {
-            if (onAdd) onAdd();
-            else if (product.stock > 0)
-              Alert.alert("✓ Ditambahkan", `${product.name} ke keranjang`);
-          }}
-          disabled={product.stock === 0}
-          activeOpacity={0.8}
-        >
-          <Text
+        {/* BUTTON - Only show for admin */}
+        {isAdmin && (
+          <TouchableOpacity
             style={[
-              styles.addBtnText,
-              { color: product.stock > 0 ? "#fff" : "#9CA3AF" },
+              styles.addBtn,
+              { backgroundColor: product.stock > 0 ? primary : "#E5E7EB" },
             ]}
+            onPress={() => {
+              if (onAdd) onAdd();
+              else if (product.stock > 0)
+                Alert.alert("✓ Ditambahkan", `${product.name} ke keranjang`);
+            }}
+            disabled={product.stock === 0}
+            activeOpacity={0.8}
           >
-            🛒 {product.stock > 0 ? "Tambah ke Keranjang" : "Stok Habis"}
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.addBtnText,
+                { color: product.stock > 0 ? "#fff" : "#9CA3AF" },
+              ]}
+            >
+              🛒 {product.stock > 0 ? "Tambah ke Keranjang" : "Stok Habis"}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -220,6 +233,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 16,
     marginBottom: 8,
+  },
+
+  description: {
+    fontSize: 13,
+    fontWeight: "400",
+    marginBottom: 8,
+    lineHeight: 18,
   },
 
   ratingContainer: {

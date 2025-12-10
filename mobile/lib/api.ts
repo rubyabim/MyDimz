@@ -117,3 +117,17 @@ export async function fetchProductCategories() {
     return null;
   }
 }
+
+export async function fetchUserProfile() {
+  try {
+    const res = await authFetchMobile(`/auth/me`);
+    if (!res || !res.ok) return null;
+    try {
+      return await res.json();
+    } catch (e) {
+      return null;
+    }
+  } catch (err) {
+    return null;
+  }
+}

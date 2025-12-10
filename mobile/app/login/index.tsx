@@ -270,10 +270,10 @@ export default function LoginScreen() {
               marginTop: 16,
               paddingVertical: 8,
               paddingHorizontal: 12,
-              backgroundColor: '#f0f4f8',
+              backgroundColor: '#ffffff',
               borderRadius: 8,
               borderWidth: 1,
-              borderColor: '#dbeafe',
+              borderColor: '#e2e8f0',
             }}
           >
             <Text style={{ fontSize: 11, color: '#0f172a', textAlign: 'center', fontWeight: '500' }}>

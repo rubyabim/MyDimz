@@ -15,6 +15,8 @@ import { useEffect, useState } from 'react';
 import {
   fetchPublicProducts,
   fetchProductCategories,
+  fetchUserProfile,
+  getToken,
 } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -34,12 +36,13 @@ export default function ProductsScreen() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   
   const colorScheme = useColorScheme();
   // Blue theme matching web
   const primary = '#2563eb';
-  const bgColor = colorScheme === 'dark' ? '#0f172a' : '#f0f4f8';
-  const cardBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
+  const bgColor = '#ffffff';
+  const cardBg = '#FFFFFF';
   const textColor = colorScheme === 'dark' ? '#f1f5f9' : '#1e3a8a';
   const textSecondary = colorScheme === 'dark' ? '#cbd5e1' : '#64748b';
   const inputBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
@@ -79,7 +82,23 @@ export default function ProductsScreen() {
     }
   };
 
+  const checkUserRole = async () => {
+    try {
+      const token = await getToken();
+      if (!token) {
+        setIsAdmin(false);
+        return;
+      }
+      const user = await fetchUserProfile();
+      setIsAdmin(user?.role === 'admin' || user?.role === 'seller');
+    } catch (err) {
+      console.error('Error checking user role:', err);
+      setIsAdmin(false);
+    }
+  };
+
   useEffect(() => {
+    checkUserRole();
     loadCategories();
     loadProducts(1, search, selectedCategory);
   }, []);
@@ -95,7 +114,7 @@ export default function ProductsScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#f0f4f8' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <FlatList
         key={`products-${numColumns}`}
         data={products}
@@ -215,6 +234,7 @@ export default function ProductsScreen() {
           <View style={{ flex: 1, marginHorizontal: 4 }}>
             <ProductCard
               product={item}
+              isAdmin={isAdmin}
               onPress={() => router.push(`/products/${item.id}`)}
               onAdd={() => {
                 Alert.alert(

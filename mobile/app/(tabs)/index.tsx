@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
-import { fetchPublicProducts, getToken } from '@/lib/api';
+import { fetchPublicProducts, getToken, fetchUserProfile } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -21,6 +21,7 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [bgIndex, setBgIndex] = useState(0);
+  const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
   const colorScheme = useColorScheme();
   const screenWidth = Dimensions.get('window').width;
@@ -32,7 +33,7 @@ export default function HomeScreen() {
   
  // Tema warna dominan Putih & Biru
 const primary = '#1D4ED8';           // Biru utama (lebih elegan)
-const cardBg = colorScheme === 'dark' ? '#1E293B' : '#F8FAFC';        
+const cardBg = '#FFFFFF';
 const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
 
@@ -75,7 +76,23 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
     }
   };
 
+  const checkUserRole = async () => {
+    try {
+      const token = await getToken();
+      if (!token) {
+        setIsAdmin(false);
+        return;
+      }
+      const user = await fetchUserProfile();
+      setIsAdmin(user?.role === 'admin' || user?.role === 'seller');
+    } catch (err) {
+      console.error('Error checking user role:', err);
+      setIsAdmin(false);
+    }
+  };
+
   useEffect(() => {
+    checkUserRole();
     loadProducts();
   }, []);
 
@@ -196,6 +213,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
                 <View style={{ flex: 1, marginHorizontal: 4 }}>
                   <ProductCard
                     product={item}
+                    isAdmin={isAdmin}
                     onPress={() => router.push(`/products/${item.id}`)}
                   />
                 </View>
