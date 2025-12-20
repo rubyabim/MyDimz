@@ -401,4 +401,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
   },
+    emptyText: {
+    fontSize: 16,
+  },
 });
