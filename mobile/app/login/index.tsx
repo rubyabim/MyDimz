@@ -299,6 +299,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 16,
     padding: 24,
+    elevation: 4,
   },
 });
 
