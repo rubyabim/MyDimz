@@ -352,5 +352,6 @@ const styles = StyleSheet.create({
     searchInput: {
     borderWidth: 1.5,
     padding: 12,
+    borderRadius: 10,
   },
 });
