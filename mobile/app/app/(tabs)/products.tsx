@@ -326,4 +326,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
+    columnWrapper: {
+    justifyContent: 'space-between',
+  },
 });
