@@ -381,4 +381,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 4,
   },
+    emptyContainer: {
+    flex: 1,
+  },
 });
