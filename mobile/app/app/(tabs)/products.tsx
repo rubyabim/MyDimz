@@ -333,4 +333,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 16,
   },
+  headerSection: {
+    marginBottom: 16,
+  },
 });
