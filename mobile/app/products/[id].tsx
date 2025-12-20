@@ -503,4 +503,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
   },
+    shareButtonText: {
+    fontWeight: '700',
+    fontSize: 14,
+  },
 });
