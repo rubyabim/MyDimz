@@ -450,5 +450,6 @@ const styles = StyleSheet.create({
   },
     notFoundText: {
     fontSize: 16,
+    marginBottom: 12,
   },
 });
