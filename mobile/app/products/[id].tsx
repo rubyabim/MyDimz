@@ -344,4 +344,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
+    backButtonText: {
+    color: '#fff',
+    fontWeight: '600',
+  },
 });
