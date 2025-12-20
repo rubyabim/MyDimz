@@ -361,4 +361,7 @@ const styles = StyleSheet.create({
     categoryContainer: {
     marginBottom: 16,
   },
+    categoryButton: {
+    paddingHorizontal: 14,
+  },
 });
