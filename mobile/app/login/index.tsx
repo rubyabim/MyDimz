@@ -317,6 +317,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#64748b',
     textAlign: 'center',
+    marginBottom: 24,
   },
 });
 
