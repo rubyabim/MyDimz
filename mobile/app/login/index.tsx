@@ -97,76 +97,32 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
+    <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
       <MobileHeader />
-      <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 20 }}>
+      <View style={styles.content}>
         {/* Login Card */}
-        <View
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: 16,
-            padding: 24,
-            elevation: 4,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.1,
-            shadowRadius: 8,
-            borderWidth: 1,
-            borderColor: '#e2e8f0',
-          }}
-        >
+        <View style={styles.loginCard}>
           {/* Title */}
-          <Text
-            style={{
-              fontSize: 28,
-              fontWeight: '800',
-              color: primary,
-              textAlign: 'center',
-              marginBottom: 8,
-            }}
-          >
+          <Text style={[styles.title, { color: primary }]}>
             Masuk 
           </Text>
 
-          <Text
-            style={{
-              fontSize: 14,
-              color: '#64748b',
-              textAlign: 'center',
-              marginBottom: 24,
-            }}
-          >
+          <Text style={styles.subtitle}>
             Silakan login untuk melanjutkan
           </Text>
 
           {/* Error Message */}
           {error ? (
-            <View
-              style={{
-                backgroundColor: '#fee2e2',
-                borderWidth: 1,
-                borderColor: '#fca5a5',
-                borderRadius: 10,
-                padding: 12,
-                marginBottom: 16,
-              }}
-            >
-              <Text style={{ color: '#dc2626', fontSize: 13, fontWeight: '500' }}>
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>
                 {error}
               </Text>
             </View>
           ) : null}
 
           {/* Username Input */}
-          <View style={{ marginBottom: 16 }}>
-            <Text
-              style={{
-                fontSize: 13,
-                fontWeight: '600',
-                color: primary,
-                marginBottom: 6,
-              }}
-            >
+          <View style={styles.inputContainer}>
+            <Text style={[styles.inputLabel, { color: primary }]}>
               Username
             </Text>
             <TextInput
@@ -175,31 +131,16 @@ export default function LoginScreen() {
               placeholder="Masukkan username"
               placeholderTextColor="#cbd5e1"
               editable={!loading}
-              style={{
-                borderWidth: 1.5,
-                borderColor: '#e2e8f0',
-                padding: 12,
-                borderRadius: 10,
-                fontSize: 14,
-                color: textColor,
-                backgroundColor: '#f8fafc',
-              }}
+              style={[styles.input, { color: textColor }]}
             />
           </View>
 
           {/* Password Input */}
-          <View style={{ marginBottom: 20 }}>
-            <Text
-              style={{
-                fontSize: 13,
-                fontWeight: '600',
-                color: primary,
-                marginBottom: 6,
-              }}
-            >
+          <View style={styles.passwordContainer}>
+            <Text style={[styles.inputLabel, { color: primary }]}>
               Password
             </Text>
-            <View style={{ position: 'relative' }}>
+            <View style={styles.passwordInputWrapper}>
               <TextInput
                 value={password}
                 onChangeText={setPassword}
@@ -207,22 +148,13 @@ export default function LoginScreen() {
                 placeholderTextColor="#cbd5e1"
                 secureTextEntry={!showPassword}
                 editable={!loading}
-                style={{
-                  borderWidth: 1.5,
-                  borderColor: '#e2e8f0',
-                  padding: 12,
-                  paddingRight: 40,
-                  borderRadius: 10,
-                  fontSize: 14,
-                  color: textColor,
-                  backgroundColor: '#f8fafc',
-                }}
+                style={[styles.passwordInput, { color: textColor }]}
               />
               <TouchableOpacity
                 onPress={() => setShowPassword(!showPassword)}
-                style={{ position: 'absolute', right: 12, top: 14 }}
+                style={styles.passwordToggle}
               >
-                <Text style={{ fontSize: 18 }}>{showPassword ? '👁️' : '👁️‍🗨️'}</Text>
+                <Text style={styles.passwordToggleIcon}>{showPassword ? '👁️' : '👁️‍🗨️'}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -231,52 +163,27 @@ export default function LoginScreen() {
           <TouchableOpacity
             onPress={handleLogin}
             disabled={loading}
-            style={{
-              backgroundColor: primary,
-              paddingVertical: 13,
-              borderRadius: 10,
-              alignItems: 'center',
-              marginBottom: 12,
-              opacity: loading ? 0.6 : 1,
-            }}
+            style={[
+              styles.loginButton,
+              { backgroundColor: primary, opacity: loading ? 0.6 : 1 }
+            ]}
           >
-            <Text
-              style={{
-                color: '#fff',
-                fontWeight: '700',
-                fontSize: 15,
-              }}
-            >
+            <Text style={styles.loginButtonText}>
               {loading ? '⏳ Logging in...' : 'Login'}
             </Text>
           </TouchableOpacity>
 
           {/* Demo Credentials Note */}
-          <Text
-            style={{
-              fontSize: 12,
-              color: '#64748b',
-              textAlign: 'center',
-              marginTop: 12,
-            }}
-          >
+          <Text style={styles.noteText}>
           
           </Text>
 
           {/* Debug: Manual init button */}
           <TouchableOpacity
             onPress={initializeBackend}
-            style={{
-              marginTop: 16,
-              paddingVertical: 8,
-              paddingHorizontal: 12,
-              backgroundColor: '#ffffff',
-              borderRadius: 8,
-              borderWidth: 1,
-              borderColor: '#e2e8f0',
-            }}
+            style={styles.debugButton}
           >
-            <Text style={{ fontSize: 11, color: '#0f172a', textAlign: 'center', fontWeight: '500' }}>
+            <Text style={styles.debugButtonText}>
           
             </Text>
           </TouchableOpacity>
