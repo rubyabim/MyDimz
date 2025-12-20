@@ -348,5 +348,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     backgroundColor: '#f8fafc',
   },
+    passwordContainer: {
+    marginBottom: 20,
+  },
 });
 
