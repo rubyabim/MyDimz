@@ -368,5 +368,6 @@ const styles = StyleSheet.create({
     marginRight: 8,
     borderWidth: 1.5,
     elevation: 1,
+    shadowColor: '#000',
   },
 });
