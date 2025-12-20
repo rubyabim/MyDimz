@@ -321,6 +321,7 @@ const styles = StyleSheet.create({
   },
     errorContainer: {
     backgroundColor: '#fee2e2',
+    borderWidth: 1,
   },
 });
 
