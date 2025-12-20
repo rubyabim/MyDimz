@@ -418,4 +418,9 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     elevation: 1,
   },
+    categoryText: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: '600',
+  },
 });
