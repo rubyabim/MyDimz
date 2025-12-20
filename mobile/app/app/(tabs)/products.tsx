@@ -340,5 +340,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '800',
     color: '#1e3a8a',
+    marginBottom: 4,
   },
 });
