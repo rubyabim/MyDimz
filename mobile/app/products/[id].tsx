@@ -405,4 +405,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 12,
   },
+    infoContainer: {
+    paddingHorizontal: 16,
+  },
 });
