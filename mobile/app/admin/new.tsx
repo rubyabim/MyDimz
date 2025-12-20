@@ -331,5 +331,6 @@ const styles = StyleSheet.create({
     textArea: {
     borderWidth: 1.5,
     padding: 12,
+    borderRadius: 10,
   },
 });
