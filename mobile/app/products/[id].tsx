@@ -348,4 +348,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
   },
+    notFoundText: {
+    fontSize: 16,
+    marginBottom: 12,
+  },
 });
