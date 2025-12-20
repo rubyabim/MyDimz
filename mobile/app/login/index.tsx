@@ -338,6 +338,7 @@ const styles = StyleSheet.create({
     inputLabel: {
     fontSize: 13,
     fontWeight: '600',
+    marginBottom: 6,
   },
 });
 
