@@ -368,5 +368,8 @@ const styles = StyleSheet.create({
     right: 12,
     top: 14,
   },
+    passwordToggleIcon: {
+    fontSize: 18,
+  },
 });
 
