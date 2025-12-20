@@ -392,4 +392,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 12,
   },
+    retryButton: {
+    paddingVertical: 10,
+  },
 });
