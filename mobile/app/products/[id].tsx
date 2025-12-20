@@ -434,4 +434,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
   },
+    productPrice: {
+    fontSize: 28,
+    fontWeight: '800',
+  },
 });
