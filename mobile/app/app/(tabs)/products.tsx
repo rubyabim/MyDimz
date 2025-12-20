@@ -413,5 +413,6 @@ const styles = StyleSheet.create({
     top: '50%',
     left: '50%',
     marginLeft: -25,
+    marginTop: -25,
   },
 });
