@@ -329,4 +329,7 @@ const styles = StyleSheet.create({
     columnWrapper: {
     justifyContent: 'space-between',
   },
+    headerContainer: {
+    width: '100%',
+  },
 });
