@@ -333,4 +333,7 @@ const styles = StyleSheet.create({
     color: '#dc2626',
     fontSize: 16,
   },
+    backButton: {
+    marginTop: 12,
+  },
 });
