@@ -454,5 +454,6 @@ const styles = StyleSheet.create({
   },
     backButton: {
     paddingVertical: 10,
+    paddingHorizontal: 20,
   },
 });
