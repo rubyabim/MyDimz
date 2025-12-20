@@ -452,4 +452,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 12,
   },
+    backButton: {
+    paddingVertical: 10,
+  },
 });
