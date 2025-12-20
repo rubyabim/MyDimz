@@ -411,5 +411,6 @@ const styles = StyleSheet.create({
     loadingOverlay: {
     position: 'absolute',
     top: '50%',
+    left: '50%',
   },
 });
