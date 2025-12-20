@@ -379,5 +379,6 @@ const styles = StyleSheet.create({
   },
     productItem: {
     flex: 1,
+    marginHorizontal: 4,
   },
 });
