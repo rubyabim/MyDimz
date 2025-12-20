@@ -376,4 +376,14 @@ const styles = StyleSheet.create({
     headerSpacer: {
     width: 32,
   },
+    imageContainer: {
+    width: '100%',
+    height: 320,
+    marginBottom: 20,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
 });
