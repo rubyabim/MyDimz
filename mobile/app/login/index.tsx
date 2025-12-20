@@ -319,5 +319,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 24,
   },
+    errorContainer: {
+    backgroundColor: '#fee2e2',
+  },
 });
 
