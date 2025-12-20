@@ -406,5 +406,6 @@ const styles = StyleSheet.create({
   },
     contentContainer: {
     paddingBottom: 16,
+    flexGrow: 1,
   },
 });
