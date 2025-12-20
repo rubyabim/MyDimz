@@ -327,5 +327,8 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 16,
   },
+    errorText: {
+    color: '#dc2626',
+  },
 });
 
