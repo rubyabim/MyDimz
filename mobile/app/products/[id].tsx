@@ -363,4 +363,8 @@ const styles = StyleSheet.create({
     backIconButton: {
     padding: 8,
   },
+    backIcon: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
 });
