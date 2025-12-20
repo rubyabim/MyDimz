@@ -404,4 +404,7 @@ const styles = StyleSheet.create({
     emptyText: {
     fontSize: 16,
   },
+    contentContainer: {
+    paddingBottom: 16,
+  },
 });
