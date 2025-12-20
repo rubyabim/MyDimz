@@ -450,4 +450,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 4,
   },
+    descriptionText: {
+    fontSize: 14,
+    lineHeight: 22,
+  },
 });
