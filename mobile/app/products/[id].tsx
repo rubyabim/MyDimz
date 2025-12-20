@@ -428,4 +428,10 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginBottom: 8,
   },
+    priceSection: {
+    marginBottom: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
 });
