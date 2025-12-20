@@ -315,6 +315,7 @@ const styles = StyleSheet.create({
   },
     subtitle: {
     fontSize: 14,
+    color: '#64748b',
   },
 });
 
