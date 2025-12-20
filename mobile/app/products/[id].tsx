@@ -352,4 +352,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 12,
   },
+    header: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+  },
 });
