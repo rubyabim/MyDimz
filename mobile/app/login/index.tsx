@@ -377,5 +377,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
   },
+    loginButtonText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 15,
+  },
 });
 
