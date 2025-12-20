@@ -335,5 +335,7 @@ const styles = StyleSheet.create({
     inputContainer: {
     marginBottom: 16,
   },
+    inputLabel: {
+    fontSize: 13,
 });
 
