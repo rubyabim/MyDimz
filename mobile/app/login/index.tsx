@@ -397,5 +397,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e2e8f0',
   },
+    debugButtonText: {
+    fontSize: 11,
+    color: '#0f172a',
+    textAlign: 'center',
+    fontWeight: '500',
+  },
 });
 
