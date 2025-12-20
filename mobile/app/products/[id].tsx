@@ -400,4 +400,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 3,
   },
+    discountText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 12,
+  },
 });
