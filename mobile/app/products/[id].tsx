@@ -496,4 +496,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 16,
   },
+    shareButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 1.5,
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
 });
