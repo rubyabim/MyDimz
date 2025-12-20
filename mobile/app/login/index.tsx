@@ -382,5 +382,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 15,
   },
+    noteText: {
+    fontSize: 12,
+    color: '#64748b',
+    textAlign: 'center',
+    marginTop: 12,
+  },
 });
 
