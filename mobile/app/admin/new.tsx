@@ -286,4 +286,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
   },
+    formCard: {
+    backgroundColor: '#FFFFFF',
+  },
 });
