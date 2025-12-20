@@ -383,5 +383,6 @@ const styles = StyleSheet.create({
   },
     emptyContainer: {
     flex: 1,
+    justifyContent: 'center',
   },
 });
