@@ -346,4 +346,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#475569',
   },
+    searchContainer: {
+    marginBottom: 14,
+  },
 });
