@@ -461,4 +461,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
   },
+    scrollView: {
+    flex: 1,
+  },
 });
