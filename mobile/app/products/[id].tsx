@@ -1,4 +1,4 @@
-import { View, Text, Alert, SafeAreaView, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, Alert, SafeAreaView, TouchableOpacity, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
 import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '@/lib/api';
@@ -313,3 +313,9 @@ export default function ProductDetailScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
