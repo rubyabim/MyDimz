@@ -342,4 +342,7 @@ const styles = StyleSheet.create({
     color: '#1e3a8a',
     marginBottom: 4,
   },
+    headerSubtitle: {
+    fontSize: 14,
+  },
 });
