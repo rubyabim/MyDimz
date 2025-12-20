@@ -423,4 +423,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
   },
+    productName: {
+    fontSize: 24,
+    fontWeight: '800',
+    marginBottom: 8,
+  },
 });
