@@ -303,5 +303,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fca5a5',
     borderRadius: 10,
+    padding: 12,
   },
 });
