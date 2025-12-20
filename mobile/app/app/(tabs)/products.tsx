@@ -394,5 +394,6 @@ const styles = StyleSheet.create({
   },
     retryButton: {
     paddingVertical: 10,
+    paddingHorizontal: 20,
   },
 });
