@@ -337,5 +337,6 @@ const styles = StyleSheet.create({
   },
     createButton: {
     paddingVertical: 13,
+    borderRadius: 10,
   },
 });
