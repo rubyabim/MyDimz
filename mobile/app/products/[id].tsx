@@ -460,4 +460,9 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 20,
   },
+    stockSection: {
+    marginBottom: 16,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+  },
 });
