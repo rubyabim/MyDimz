@@ -373,4 +373,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
   },
+    headerSpacer: {
+    width: 32,
+  },
 });
