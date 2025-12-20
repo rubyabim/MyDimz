@@ -1,7 +1,7 @@
 WARUNG IBUK IYOS - Sistem Manajemen Toko Kelontong
 
 Sistem lengkap untuk mengelola toko kelontong dengan fitur:
-- Backend API dengan Node.js & TypeScript
+- Backend API dengan Next.js & TypeScript
 - Web Admin Dashboard dengan Next.js
 - Website Public untuk customer
 - Database SQLite dengan Prisma ORM
