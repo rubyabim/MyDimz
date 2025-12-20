@@ -442,4 +442,10 @@ const styles = StyleSheet.create({
     loadingText: {
     fontSize: 16,
   },
+    notFoundContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
 });
