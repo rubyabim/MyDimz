@@ -331,5 +331,6 @@ const styles = StyleSheet.create({
   },
     headerContainer: {
     width: '100%',
+    
   },
 });
