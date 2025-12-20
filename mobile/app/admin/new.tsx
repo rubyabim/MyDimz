@@ -65,51 +65,26 @@ export default function AdminNew() {
     }
   };
 
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
+    return (
+    <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
       <MobileHeader />
-      <ScrollView style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 16 }}>
-        <View
-          style={{
-            backgroundColor: cardBg,
-            borderRadius: 16,
-            padding: 20,
-            marginBottom: 20,
-            borderWidth: 1,
-            borderColor: borderColor,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 24,
-              fontWeight: '800',
-              color: primary,
-              marginBottom: 20,
-            }}
-          >
+      <ScrollView style={styles.scrollView}>
+        <View style={[styles.formCard, { borderColor: borderColor }]}>
+          <Text style={[styles.title, { color: primary }]}>
             Tambah Produk Baru
           </Text>
 
           {error ? (
-            <View
-              style={{
-                backgroundColor: '#fee2e2',
-                borderWidth: 1,
-                borderColor: '#fca5a5',
-                borderRadius: 10,
-                padding: 12,
-                marginBottom: 16,
-              }}
-            >
-              <Text style={{ color: '#dc2626', fontSize: 13, fontWeight: '500' }}>
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>
                 {error}
               </Text>
             </View>
           ) : null}
 
           {/* Name */}
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ fontSize: 13, fontWeight: '600', color: primary, marginBottom: 6 }}>
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: primary }]}>
               Nama Produk
             </Text>
             <TextInput
@@ -118,21 +93,13 @@ export default function AdminNew() {
               placeholder="Masukkan nama produk"
               placeholderTextColor="#cbd5e1"
               editable={!loading}
-              style={{
-                borderWidth: 1.5,
-                borderColor: borderColor,
-                padding: 12,
-                borderRadius: 10,
-                fontSize: 14,
-                color: textColor,
-                backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc',
-              }}
+              style={[styles.input, { borderColor: borderColor, color: textColor, backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc' }]}
             />
           </View>
 
           {/* Price */}
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ fontSize: 13, fontWeight: '600', color: primary, marginBottom: 6 }}>
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: primary }]}>
               Harga
             </Text>
             <TextInput
@@ -142,21 +109,13 @@ export default function AdminNew() {
               placeholderTextColor="#cbd5e1"
               keyboardType="numeric"
               editable={!loading}
-              style={{
-                borderWidth: 1.5,
-                borderColor: borderColor,
-                padding: 12,
-                borderRadius: 10,
-                fontSize: 14,
-                color: textColor,
-                backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc',
-              }}
+              style={[styles.input, { borderColor: borderColor, color: textColor, backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc' }]}
             />
           </View>
 
           {/* Stock */}
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ fontSize: 13, fontWeight: '600', color: primary, marginBottom: 6 }}>
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: primary }]}>
               Stok
             </Text>
             <TextInput
@@ -166,21 +125,13 @@ export default function AdminNew() {
               placeholderTextColor="#cbd5e1"
               keyboardType="numeric"
               editable={!loading}
-              style={{
-                borderWidth: 1.5,
-                borderColor: borderColor,
-                padding: 12,
-                borderRadius: 10,
-                fontSize: 14,
-                color: textColor,
-                backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc',
-              }}
+              style={[styles.input, { borderColor: borderColor, color: textColor, backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc' }]}
             />
           </View>
 
           {/* Category */}
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ fontSize: 13, fontWeight: '600', color: primary, marginBottom: 6 }}>
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: primary }]}>
               Kategori
             </Text>
             <TextInput
@@ -189,21 +140,13 @@ export default function AdminNew() {
               placeholder="general"
               placeholderTextColor="#cbd5e1"
               editable={!loading}
-              style={{
-                borderWidth: 1.5,
-                borderColor: borderColor,
-                padding: 12,
-                borderRadius: 10,
-                fontSize: 14,
-                color: textColor,
-                backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc',
-              }}
+              style={[styles.input, { borderColor: borderColor, color: textColor, backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc' }]}
             />
           </View>
 
           {/* Image URL */}
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ fontSize: 13, fontWeight: '600', color: primary, marginBottom: 6 }}>
+          <View style={styles.inputGroup}>
+            <Text style={[styles.label, { color: primary }]}>
               URL Gambar (Opsional)
             </Text>
             <TextInput
@@ -212,21 +155,13 @@ export default function AdminNew() {
               placeholder="https://example.com/image.jpg"
               placeholderTextColor="#cbd5e1"
               editable={!loading}
-              style={{
-                borderWidth: 1.5,
-                borderColor: borderColor,
-                padding: 12,
-                borderRadius: 10,
-                fontSize: 14,
-                color: textColor,
-                backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc',
-              }}
+              style={[styles.input, { borderColor: borderColor, color: textColor, backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc' }]}
             />
           </View>
 
           {/* Description */}
-          <View style={{ marginBottom: 20 }}>
-            <Text style={{ fontSize: 13, fontWeight: '600', color: primary, marginBottom: 6 }}>
+          <View style={styles.descriptionGroup}>
+            <Text style={[styles.label, { color: primary }]}>
               Deskripsi (Opsional)
             </Text>
             <TextInput
@@ -237,16 +172,7 @@ export default function AdminNew() {
               multiline
               numberOfLines={4}
               editable={!loading}
-              style={{
-                borderWidth: 1.5,
-                borderColor: borderColor,
-                padding: 12,
-                borderRadius: 10,
-                fontSize: 14,
-                color: textColor,
-                backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc',
-                textAlignVertical: 'top',
-              }}
+              style={[styles.textArea, { borderColor: borderColor, color: textColor, backgroundColor: colorScheme === 'dark' ? '#0f172a' : '#f8fafc' }]}
             />
           </View>
 
@@ -254,21 +180,12 @@ export default function AdminNew() {
           <TouchableOpacity
             onPress={handleCreate}
             disabled={loading}
-            style={{
-              backgroundColor: primary,
-              paddingVertical: 13,
-              borderRadius: 10,
-              alignItems: 'center',
-              opacity: loading ? 0.6 : 1,
-            }}
+            style={[
+              styles.createButton,
+              { backgroundColor: primary, opacity: loading ? 0.6 : 1 }
+            ]}
           >
-            <Text
-              style={{
-                color: '#fff',
-                fontWeight: '700',
-                fontSize: 15,
-              }}
-            >
+            <Text style={styles.createButtonText}>
               {loading ? '⏳ Membuat...' : '✨ Buat Produk'}
             </Text>
           </TouchableOpacity>
