@@ -345,6 +345,7 @@ const styles = StyleSheet.create({
     borderColor: '#e2e8f0',
     padding: 12,
     borderRadius: 10,
+    fontSize: 14,
   },
 });
 
