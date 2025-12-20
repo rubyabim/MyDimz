@@ -354,5 +354,14 @@ const styles = StyleSheet.create({
     passwordInputWrapper: {
     position: 'relative',
   },
+    passwordInput: {
+    borderWidth: 1.5,
+    borderColor: '#e2e8f0',
+    padding: 12,
+    paddingRight: 40,
+    borderRadius: 10,
+    fontSize: 14,
+    backgroundColor: '#f8fafc',
+  },
 });
 
