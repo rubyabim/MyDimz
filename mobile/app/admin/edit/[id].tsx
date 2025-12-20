@@ -473,4 +473,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderWidth: 1,
   },
+    title: {
+    fontSize: 24,
+    fontWeight: '800',
+    marginBottom: 20,
+  },
 });
