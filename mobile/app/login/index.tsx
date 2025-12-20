@@ -363,5 +363,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     backgroundColor: '#f8fafc',
   },
+    passwordToggle: {
+    position: 'absolute',
+    right: 12,
+    top: 14,
+  },
 });
 
