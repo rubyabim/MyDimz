@@ -471,4 +471,8 @@ const styles = StyleSheet.create({
     color: '#64748b',
     marginBottom: 4,
   },
+    stockValue: {
+    fontSize: 18,
+    fontWeight: '700',
+  },
 });
