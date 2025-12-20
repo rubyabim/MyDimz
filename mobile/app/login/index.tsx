@@ -325,6 +325,7 @@ const styles = StyleSheet.create({
     borderColor: '#fca5a5',
     borderRadius: 10,
     padding: 12,
+    marginBottom: 16,
   },
 });
 
