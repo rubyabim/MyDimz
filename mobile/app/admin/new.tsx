@@ -314,4 +314,7 @@ const styles = StyleSheet.create({
     inputGroup: {
     marginBottom: 16,
   },
+    label: {
+    fontSize: 13,
+  },
 });
