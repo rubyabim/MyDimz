@@ -339,5 +339,6 @@ const styles = StyleSheet.create({
     headerTitle: {
     fontSize: 28,
     fontWeight: '800',
+    color: '#1e3a8a',
   },
 });
