@@ -349,4 +349,7 @@ const styles = StyleSheet.create({
     searchContainer: {
     marginBottom: 14,
   },
+    searchInput: {
+    borderWidth: 1.5,
+  },
 });
