@@ -127,10 +127,4 @@ npx prisma studio  # GUI untuk melihat data
 
 Aplikasi mobile untuk POS (Point of Sale) akan dikembangkan menggunakan React Native.
 
-🤝 KONTRIBUSI
 
-1. Fork repository
-2. Buat feature branch
-3. Commit changes
-4. Push ke branch
-5. Buat Pull Request
