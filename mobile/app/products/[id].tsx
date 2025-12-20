@@ -480,4 +480,15 @@ const styles = StyleSheet.create({
     fontFamily: 'monospace',
     fontWeight: '500',
   },
+    addToCartButton: {
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 12,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+  },
 });
