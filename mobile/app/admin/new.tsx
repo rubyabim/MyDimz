@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, SafeAreaView, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Button, SafeAreaView, ScrollView, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import { authFetchMobile } from '@/lib/api';
 import { useRouter } from 'expo-router';
@@ -277,3 +277,8 @@ export default function AdminNew() {
     </SafeAreaView>
   );
 }
+const styles = StyleSheet.create({
+    container: {
+    flex: 1,
+  },
+});
