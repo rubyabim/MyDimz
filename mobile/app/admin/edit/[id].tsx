@@ -448,4 +448,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
   },
+    notFoundText: {
+    fontSize: 16,
+  },
 });
