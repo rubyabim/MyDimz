@@ -331,5 +331,6 @@ const styles = StyleSheet.create({
   },
     errorMessage: {
     color: '#dc2626',
+    fontSize: 16,
   },
 });
