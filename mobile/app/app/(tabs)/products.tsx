@@ -336,4 +336,7 @@ const styles = StyleSheet.create({
   headerSection: {
     marginBottom: 16,
   },
+    headerTitle: {
+    fontSize: 28,
+  },
 });
