@@ -445,4 +445,9 @@ const styles = StyleSheet.create({
     descriptionSection: {
     marginBottom: 16,
   },
+    descriptionLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
 });
