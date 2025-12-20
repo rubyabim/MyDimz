@@ -491,4 +491,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 4,
   },
+    addToCartText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 16,
+  },
 });
