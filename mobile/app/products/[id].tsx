@@ -438,4 +438,8 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '800',
   },
+    originalPrice: {
+    fontSize: 16,
+    textDecorationLine: 'line-through',
+  },
 });
