@@ -321,5 +321,6 @@ const styles = StyleSheet.create({
   },
     input: {
     borderWidth: 1.5,
+    padding: 12,
   },
 });
