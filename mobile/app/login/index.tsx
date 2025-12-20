@@ -323,6 +323,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fee2e2',
     borderWidth: 1,
     borderColor: '#fca5a5',
+    borderRadius: 10,
   },
 });
 
