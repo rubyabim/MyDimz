@@ -344,5 +344,6 @@ const styles = StyleSheet.create({
   },
     headerSubtitle: {
     fontSize: 14,
+    color: '#475569',
   },
 });
