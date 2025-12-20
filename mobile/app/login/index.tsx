@@ -340,5 +340,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 6,
   },
+    input: {
+    borderWidth: 1.5,
+  },
 });
 
