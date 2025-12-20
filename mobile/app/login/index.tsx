@@ -371,5 +371,11 @@ const styles = StyleSheet.create({
     passwordToggleIcon: {
     fontSize: 18,
   },
+    loginButton: {
+    paddingVertical: 13,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
 });
 
