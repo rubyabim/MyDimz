@@ -298,4 +298,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginBottom: 20,
   },
+    errorContainer: {
+    backgroundColor: '#fee2e2',
+  },
 });
