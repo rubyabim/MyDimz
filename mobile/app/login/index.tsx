@@ -351,5 +351,8 @@ const styles = StyleSheet.create({
     passwordContainer: {
     marginBottom: 20,
   },
+    passwordInputWrapper: {
+    position: 'relative',
+  },
 });
 
