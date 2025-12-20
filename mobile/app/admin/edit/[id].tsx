@@ -439,4 +439,7 @@ const styles = StyleSheet.create({
     color: '#dc2626',
     fontSize: 16,
   },
+    loadingText: {
+    fontSize: 16,
+  },
 });
