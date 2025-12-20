@@ -387,4 +387,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 40,
   },
+    errorText: {
+    color: '#dc2626',
+  },
 });
