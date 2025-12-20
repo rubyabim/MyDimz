@@ -390,4 +390,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+    discountBadge: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+    backgroundColor: '#dc2626',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+    elevation: 3,
+  },
 });
