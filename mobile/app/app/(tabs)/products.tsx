@@ -358,4 +358,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
   },
+    categoryContainer: {
+    marginBottom: 16,
+  },
 });
