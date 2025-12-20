@@ -369,5 +369,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     elevation: 1,
     shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
   },
 });
