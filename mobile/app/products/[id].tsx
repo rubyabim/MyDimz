@@ -360,4 +360,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomWidth: 1,
   },
+    backIconButton: {
+    padding: 8,
+  },
 });
