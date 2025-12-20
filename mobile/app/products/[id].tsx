@@ -411,4 +411,11 @@ const styles = StyleSheet.create({
     categorySection: {
     marginBottom: 12,
   },
+    categoryBadge: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    alignSelf: 'flex-start',
+    elevation: 1,
+  },
 });
