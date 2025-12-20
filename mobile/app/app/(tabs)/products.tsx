@@ -355,5 +355,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#ffffff',
     color: '#1e293b',
+    fontSize: 14,
   },
 });
