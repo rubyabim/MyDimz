@@ -309,5 +309,6 @@ const styles = StyleSheet.create({
     errorText: {
     color: '#dc2626',
     fontSize: 13,
+    fontWeight: '500',
   },
 });
