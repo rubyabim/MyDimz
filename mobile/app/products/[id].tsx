@@ -43,25 +43,14 @@ export default function ProductDetailScreen() {
 
   if (!id) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{ color: '#dc2626', fontSize: 16 }}>ID produk tidak valid</Text>
+      <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
+        <View style={styles.centerContent}>
+          <Text style={styles.errorMessage}>ID produk tidak valid</Text>
           <TouchableOpacity
-            style={{
-              marginTop: 12,
-              backgroundColor: primary,
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-              borderRadius: 8,
-              elevation: 2,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.1,
-              shadowRadius: 4,
-            }}
+            style={[styles.backButton, { backgroundColor: primary }]}
             onPress={() => router.back()}
           >
-            <Text style={{ color: '#fff', fontWeight: '600' }}>Kembali</Text>
+            <Text style={styles.backButtonText}>Kembali</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -70,8 +59,8 @@ export default function ProductDetailScreen() {
 
   if (loading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
+        <View style={styles.centerContent}>
           <ActivityIndicator size="large" color={primary} />
         </View>
       </SafeAreaView>
@@ -80,24 +69,14 @@ export default function ProductDetailScreen() {
 
   if (!product) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{ color: textColor, fontSize: 16, marginBottom: 12 }}>Produk tidak ditemukan</Text>
+      <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
+        <View style={styles.centerContent}>
+          <Text style={[styles.notFoundText, { color: textColor }]}>Produk tidak ditemukan</Text>
           <TouchableOpacity
-            style={{
-              backgroundColor: primary,
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-              borderRadius: 8,
-              elevation: 2,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.1,
-              shadowRadius: 4,
-            }}
+            style={[styles.backButton, { backgroundColor: primary }]}
             onPress={() => router.back()}
           >
-            <Text style={{ color: '#fff', fontWeight: '600' }}>Kembali</Text>
+            <Text style={styles.backButtonText}>Kembali</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -113,56 +92,29 @@ export default function ProductDetailScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bgColor }}>
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 20 }}>
+    <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Header with Back Button */}
-        <View style={{
-          paddingHorizontal: 16,
-          paddingVertical: 12,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderBottomWidth: 1,
-          borderBottomColor: primary + '20',
-        }}>
-          <TouchableOpacity onPress={() => router.back()} style={{ padding: 8 }}>
-            <Text style={{ color: primary, fontSize: 18, fontWeight: '600' }}>←</Text>
+        <View style={[styles.header, { borderBottomColor: primary + '20' }]}>
+          <TouchableOpacity onPress={() => router.back()} style={styles.backIconButton}>
+            <Text style={[styles.backIcon, { color: primary }]}>←</Text>
           </TouchableOpacity>
-          <Text style={{ color: textColor, fontSize: 16, fontWeight: '700', flex: 1, textAlign: 'center' }}>
+          <Text style={[styles.headerTitle, { color: textColor }]}>
             Detail Produk
           </Text>
-          <View style={{ width: 32 }} />
+          <View style={styles.headerSpacer} />
         </View>
 
         {/* Product Image */}
-        <View style={{
-          width: '100%',
-          height: 320,
-          backgroundColor: cardBg,
-          marginBottom: 20,
-          elevation: 2,
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-        }}>
+        <View style={[styles.imageContainer, { backgroundColor: cardBg }]}>
           <Image
             source={product.image ? { uri: product.image } : require('@/assets/images/react-logo.png')}
-            style={{ width: '100%', height: '100%' }}
+            style={styles.productImage}
             contentFit="cover"
           />
           {product.discount && product.discount > 0 && (
-            <View style={{
-              position: 'absolute',
-              top: 12,
-              right: 12,
-              backgroundColor: '#dc2626',
-              paddingHorizontal: 12,
-              paddingVertical: 6,
-              borderRadius: 8,
-              elevation: 3,
-            }}>
-              <Text style={{ color: '#fff', fontWeight: '700', fontSize: 12 }}>
+            <View style={styles.discountBadge}>
+              <Text style={styles.discountText}>
                 -{product.discount}%
               </Text>
             </View>
@@ -170,41 +122,28 @@ export default function ProductDetailScreen() {
         </View>
 
         {/* Product Info */}
-        <View style={{ paddingHorizontal: 16 }}>
+        <View style={styles.infoContainer}>
           {/* Category Badge */}
           {product.category && (
-            <View style={{ marginBottom: 12 }}>
-              <View
-                style={{
-                  backgroundColor: primary,
-                  paddingHorizontal: 12,
-                  paddingVertical: 6,
-                  borderRadius: 20,
-                  alignSelf: 'flex-start',
-                  elevation: 1,
-                }}
-              >
-                <Text style={{ color: '#fff', fontSize: 12, fontWeight: '600' }}>{product.category}</Text>
+            <View style={styles.categorySection}>
+              <View style={[styles.categoryBadge, { backgroundColor: primary }]}>
+                <Text style={styles.categoryText}>{product.category}</Text>
               </View>
             </View>
           )}
 
           {/* Product Name */}
-          <Text style={{ fontSize: 24, fontWeight: '800', color: textColor, marginBottom: 8 }}>
+          <Text style={[styles.productName, { color: textColor }]}>
             {product.name}
           </Text>
 
           {/* Price */}
-          <View style={{ marginBottom: 16, flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-            <Text style={{ fontSize: 28, fontWeight: '800', color: primary }}>
+          <View style={styles.priceSection}>
+            <Text style={[styles.productPrice, { color: primary }]}>
               {formatPrice(product.price)}
             </Text>
             {product.originalPrice && product.originalPrice > product.price && (
-              <Text style={{
-                fontSize: 16,
-                color: textSecondary,
-                textDecorationLine: 'line-through',
-              }}>
+              <Text style={[styles.originalPrice, { color: textSecondary }]}>
                 {formatPrice(product.originalPrice)}
               </Text>
             )}
@@ -212,44 +151,34 @@ export default function ProductDetailScreen() {
 
           {/* Description */}
           {product.description && (
-            <View style={{ marginBottom: 16 }}>
-              <Text style={{ fontSize: 12, fontWeight: '600', color: primary, marginBottom: 4 }}>
+            <View style={styles.descriptionSection}>
+              <Text style={[styles.descriptionLabel, { color: primary }]}>
                 Deskripsi
               </Text>
-              <Text style={{ fontSize: 14, color: textColor, lineHeight: 22 }}>{product.description}</Text>
+              <Text style={[styles.descriptionText, { color: textColor }]}>{product.description}</Text>
             </View>
           )}
 
           {/* Product Details */}
-          <View
-            style={{
-              backgroundColor: cardBg,
-              borderWidth: 1,
-              borderColor: primary + '20',
-              borderRadius: 12,
-              padding: 16,
-              marginBottom: 20,
-            }}
-          >
-            <View style={{ marginBottom: 16, paddingBottom: 16, borderBottomWidth: 1, borderBottomColor: primary + '20' }}>
-              <Text style={{ fontSize: 12, fontWeight: '600', color: textSecondary, marginBottom: 4 }}>
+          <View style={[styles.detailsCard, { backgroundColor: cardBg, borderColor: primary + '20' }]}>
+            <View style={[styles.stockSection, { borderBottomColor: primary + '20' }]}>
+              <Text style={styles.detailLabel}>
                 Stok Tersedia
               </Text>
-              <Text style={{
-                fontSize: 18,
-                fontWeight: '700',
-                color: product.stock > 0 ? primary : '#dc2626',
-              }}>
+              <Text style={[
+                styles.stockValue,
+                { color: product.stock > 0 ? primary : '#dc2626' }
+              ]}>
                 {product.stock > 0 ? `${product.stock} unit` : 'Stok Habis'}
               </Text>
             </View>
 
             {product.barcode && (
               <View>
-                <Text style={{ fontSize: 12, fontWeight: '600', color: textSecondary, marginBottom: 4 }}>
+                <Text style={styles.detailLabel}>
                   Barcode
                 </Text>
-                <Text style={{ fontSize: 14, color: textColor, fontFamily: 'monospace', fontWeight: '500' }}>
+                <Text style={[styles.barcodeText, { color: textColor }]}>
                   {product.barcode}
                 </Text>
               </View>
@@ -258,18 +187,10 @@ export default function ProductDetailScreen() {
 
           {/* Add to Cart Button */}
           <TouchableOpacity
-            style={{
-              backgroundColor: product.stock > 0 ? primary : '#9ca3af',
-              paddingVertical: 14,
-              borderRadius: 10,
-              alignItems: 'center',
-              marginBottom: 12,
-              elevation: 3,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.15,
-              shadowRadius: 4,
-            }}
+            style={[
+              styles.addToCartButton,
+              { backgroundColor: product.stock > 0 ? primary : '#9ca3af' }
+            ]}
             onPress={() => {
               if (product.stock > 0) {
                 Alert.alert(
@@ -281,32 +202,19 @@ export default function ProductDetailScreen() {
             }}
             disabled={product.stock === 0}
           >
-            <Text
-              style={{
-                color: '#fff',
-                fontWeight: '700',
-                fontSize: 16,
-              }}
-            >
+            <Text style={styles.addToCartText}>
               {product.stock > 0 ? '🛒 Tambah ke Keranjang' : 'Stok Habis'}
             </Text>
           </TouchableOpacity>
 
           {/* Share Button */}
           <TouchableOpacity
-            style={{
-              backgroundColor: 'transparent',
-              borderWidth: 1.5,
-              borderColor: primary,
-              paddingVertical: 12,
-              borderRadius: 10,
-              alignItems: 'center',
-            }}
+            style={[styles.shareButton, { borderColor: primary }]}
             onPress={() => {
               Alert.alert('Bagikan', `Share ${product.name}\n\nFitur berbagi akan datang segera`, [{ text: 'OK' }]);
             }}
           >
-            <Text style={{ color: primary, fontWeight: '700', fontSize: 14 }}>📤 Bagikan Produk</Text>
+            <Text style={[styles.shareButtonText, { color: primary }]}>📤 Bagikan Produk</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
