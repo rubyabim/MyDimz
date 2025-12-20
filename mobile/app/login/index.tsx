@@ -313,5 +313,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 8,
   },
+    subtitle: {
+    fontSize: 14,
+  },
 });
 
