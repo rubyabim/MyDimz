@@ -339,5 +339,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 8,
     elevation: 2,
+    shadowColor: '#000',
   },
 });
