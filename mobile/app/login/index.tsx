@@ -310,6 +310,7 @@ const styles = StyleSheet.create({
     title: {
     fontSize: 28,
     fontWeight: '800',
+    textAlign: 'center',
   },
 });
 
