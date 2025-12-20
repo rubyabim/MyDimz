@@ -325,4 +325,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 14,
   },
+    descriptionGroup: {
+    marginBottom: 20,
+  },
 });
