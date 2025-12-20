@@ -435,4 +435,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+    errorMessage: {
+    color: '#dc2626',
+  },
 });
