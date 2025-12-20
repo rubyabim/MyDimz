@@ -442,4 +442,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textDecorationLine: 'line-through',
   },
+    descriptionSection: {
+    marginBottom: 16,
+  },
 });
