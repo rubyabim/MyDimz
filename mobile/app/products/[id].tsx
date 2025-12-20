@@ -454,4 +454,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 22,
   },
+    detailsCard: {
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 20,
+  },
 });
