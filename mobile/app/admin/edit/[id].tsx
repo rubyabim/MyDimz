@@ -478,4 +478,64 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginBottom: 20,
   },
+    errorContainer: {
+    backgroundColor: '#fee2e2',
+    borderWidth: 1,
+    borderColor: '#fca5a5',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 16,
+  },
+  errorText: {
+    color: '#dc2626',
+    fontSize: 13,
+    fontWeight: '500',
+  },
+  inputGroup: {
+    marginBottom: 16,
+  },
+  label: {
+    fontSize: 13,
+    fontWeight: '600',
+    marginBottom: 6,
+  },
+  input: {
+    borderWidth: 1.5,
+    padding: 12,
+    borderRadius: 10,
+    fontSize: 14,
+  },
+  textArea: {
+    borderWidth: 1.5,
+    padding: 12,
+    borderRadius: 10,
+    fontSize: 14,
+    textAlignVertical: 'top',
+  },
+  barcodeGroup: {
+    marginBottom: 20,
+  },
+  updateButton: {
+    paddingVertical: 13,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  updateButtonText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 15,
+  },
+  deleteButton: {
+    backgroundColor: '#dc2626',
+    paddingVertical: 13,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  deleteButtonText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 15,
+  },
+
 });
