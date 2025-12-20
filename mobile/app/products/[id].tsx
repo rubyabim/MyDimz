@@ -408,4 +408,7 @@ const styles = StyleSheet.create({
     infoContainer: {
     paddingHorizontal: 16,
   },
+    categorySection: {
+    marginBottom: 12,
+  },
 });
