@@ -343,6 +343,7 @@ const styles = StyleSheet.create({
     input: {
     borderWidth: 1.5,
     borderColor: '#e2e8f0',
+    padding: 12,
   },
 });
 
