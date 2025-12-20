@@ -346,6 +346,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 10,
     fontSize: 14,
+    backgroundColor: '#f8fafc',
   },
 });
 
