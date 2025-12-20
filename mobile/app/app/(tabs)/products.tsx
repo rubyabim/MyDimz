@@ -408,4 +408,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     flexGrow: 1,
   },
+    loadingOverlay: {
+    position: 'absolute',
+  },
 });
