@@ -356,5 +356,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     color: '#1e293b',
     fontSize: 14,
+    fontWeight: '500',
   },
 });
