@@ -16,6 +16,7 @@ import { fetchPublicProducts, getToken, fetchUserProfile } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
+
 export default function HomeScreen() {
   const [products, setProducts] = useState([] as any[]);
   const [loading, setLoading] = useState(true);
