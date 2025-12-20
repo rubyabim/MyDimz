@@ -364,5 +364,6 @@ const styles = StyleSheet.create({
     categoryButton: {
     paddingHorizontal: 14,
     paddingVertical: 8,
+    borderRadius: 20,
   },
 });
