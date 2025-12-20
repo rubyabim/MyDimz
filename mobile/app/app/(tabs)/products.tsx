@@ -114,117 +114,68 @@ export default function ProductsScreen() {
     setRefreshing(false);
   };
 
-  return (
+return (
     <SafeAreaView style={styles.container}>
       <FlatList
         key={`products-${numColumns}`}
         data={products}
         numColumns={numColumns}
         keyExtractor={(item) => String(item.id)}
-        columnWrapperStyle={{
-          justifyContent: 'space-between',
-          paddingHorizontal: gap,
-          marginBottom: gap,
-        }}
+        columnWrapperStyle={[
+          styles.columnWrapper,
+          { paddingHorizontal: gap, marginBottom: gap }
+        ]}
         ListHeaderComponent={
-          <View style={{ width: '100%', paddingHorizontal: paddingHorizontal, paddingVertical: 16 }}>
+          <View style={[styles.headerContainer, { paddingHorizontal: paddingHorizontal }]}>
             {/* Header */}
-            <View style={{ marginBottom: 16 }}>
-              <Text
-                style={{
-                  fontSize: 28,
-                  fontWeight: '800',
-                  color: '#1e3a8a',
-                  marginBottom: 4,
-                }}
-              >
+            <View style={styles.headerSection}>
+              <Text style={styles.headerTitle}>
                 Produk
               </Text>
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: '#475569',
-                }}
-              >
+              <Text style={styles.headerSubtitle}>
                 {products.length} produk tersedia
               </Text>
             </View>
 
             {/* Search Input */}
-            <View style={{ marginBottom: 14 }}>
+            <View style={styles.searchContainer}>
               <TextInput
                 value={search}
                 onChangeText={setSearch}
                 placeholder="Cari produk..."
                 placeholderTextColor="#cbd5e1"
-                style={{
-                  borderWidth: 1.5,
-                  borderColor: primary + '40',
-                  padding: 12,
-                  borderRadius: 10,
-                  backgroundColor: '#ffffff',
-                  color: '#1e293b',
-                  fontSize: 14,
-                  fontWeight: '500',
-                }}
+                style={[styles.searchInput, { borderColor: primary + '40' }]}
               />
             </View>
 
             {/* Category Filter */}
             {categories.length > 0 && (
-              <View style={{ marginBottom: 16 }}>
+              <View style={styles.categoryContainer}>
                 <FlatList
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   data={[{ name: 'Semua', count: 0 }, ...categories]}
                   keyExtractor={(item, idx) => `cat-${idx}`}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity
-                      onPress={() =>
-                        setSelectedCategory(
-                          item.name === 'Semua' ? 'all' : item.name
-                        )
-                      }
-                      style={{
-                        paddingHorizontal: 14,
-                        paddingVertical: 8,
-                        borderRadius: 20,
-                        marginRight: 8,
-                        backgroundColor:
-                          item.name === 'Semua'
-                            ? selectedCategory === 'all'
-                              ? primary
-                              : cardBg
-                            : selectedCategory === item.name
-                            ? primary
-                            : cardBg,
-                        borderWidth: 1.5,
-                        borderColor: primary + '30',
-                        elevation: 1,
-                        shadowColor: '#000',
-                        shadowOffset: { width: 0, height: 1 },
-                        shadowOpacity: 0.08,
-                        shadowRadius: 2,
-                      }}
-                    >
-                      <Text
-                        style={{
-                          color:
-                            item.name === 'Semua'
-                              ? selectedCategory === 'all'
-                                ? '#fff'
-                                : textColor
-                              : selectedCategory === item.name
-                              ? '#fff'
-                              : textColor,
-                          fontWeight: '600',
-                          fontSize: 12,
-                        }}
+                  renderItem={({ item }) => {
+                    const isActive = item.name === 'Semua' ? selectedCategory === 'all' : selectedCategory === item.name;
+                    return (
+                      <TouchableOpacity
+                        onPress={() =>
+                          setSelectedCategory(
+                            item.name === 'Semua' ? 'all' : item.name
+                          )
+                        }
+                        style={[
+                          styles.categoryButton,
+                          { borderColor: primary + '30', backgroundColor: isActive ? primary : cardBg }
+                        ]}
                       >
-                        {item.name}
-                      </Text>
-                    </TouchableOpacity>
-                  )}
+                        <Text style={[styles.categoryText, { color: isActive ? '#fff' : textColor }]}>
+                          {item.name}
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  }}
                   scrollEventThrottle={16}
                 />
               </View>
@@ -232,7 +183,7 @@ export default function ProductsScreen() {
           </View>
         }
         renderItem={({ item }) => (
-          <View style={{ flex: 1, marginHorizontal: 4 }}>
+          <View style={styles.productItem}>
             <ProductCard
               product={item}
               isAdmin={isAdmin}
@@ -250,40 +201,22 @@ export default function ProductsScreen() {
         ListEmptyComponent={
           !loading ? (
             error ? (
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 40 }}>
-                <Text
-                  style={{
-                    color: '#dc2626',
-                    fontSize: 16,
-                    marginBottom: 12,
-                  }}
-                >
+              <View style={styles.emptyContainer}>
+                <Text style={styles.errorText}>
                   {error}
                 </Text>
                 <TouchableOpacity
-                  style={{
-                    backgroundColor: primary,
-                    paddingVertical: 10,
-                    paddingHorizontal: 20,
-                    borderRadius: 8,
-                  }}
+                  style={[styles.retryButton, { backgroundColor: primary }]}
                   onPress={() => loadProducts(1, search, selectedCategory)}
                 >
-                  <Text style={{ color: '#fff', fontWeight: '600' }}>
+                  <Text style={styles.retryButtonText}>
                     Coba Lagi
                   </Text>
                 </TouchableOpacity>
               </View>
             ) : (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingVertical: 40,
-                }}
-              >
-                <Text style={{ color: textColor, fontSize: 16 }}>
+              <View style={styles.emptyContainer}>
+                <Text style={[styles.emptyText, { color: textColor }]}>
                   Tidak ada produk ditemukan
                 </Text>
               </View>
@@ -297,23 +230,12 @@ export default function ProductsScreen() {
             tintColor={primary}
           />
         }
-        contentContainerStyle={{
-          paddingBottom: 16,
-          flexGrow: 1,
-        }}
+        contentContainerStyle={styles.contentContainer}
         onEndReachedThreshold={0.5}
       />
 
       {loading && (
-        <View
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            marginLeft: -25,
-            marginTop: -25,
-          }}
-        >
+        <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color={primary} />
         </View>
       )}
