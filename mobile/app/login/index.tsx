@@ -301,6 +301,7 @@ const styles = StyleSheet.create({
     padding: 24,
     elevation: 4,
     shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
   },
 });
 
