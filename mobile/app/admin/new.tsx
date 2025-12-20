@@ -328,4 +328,7 @@ const styles = StyleSheet.create({
     descriptionGroup: {
     marginBottom: 20,
   },
+    textArea: {
+    borderWidth: 1.5,
+  },
 });
