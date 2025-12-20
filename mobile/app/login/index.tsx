@@ -305,6 +305,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     borderWidth: 1,
+    borderColor: '#e2e8f0',
   },
 });
 
