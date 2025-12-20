@@ -297,6 +297,7 @@ const styles = StyleSheet.create({
   },
     loginCard: {
     backgroundColor: '#ffffff',
+    borderRadius: 16,
   },
 });
 
