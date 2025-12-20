@@ -388,5 +388,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 12,
   },
+    debugButton: {
+    marginTop: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+  },
 });
 
