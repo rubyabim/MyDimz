@@ -8,55 +8,55 @@ Sistem lengkap untuk mengelola toko kelontong dengan fitur:
 - Laporan PDF otomatis
 
 1. Setup Backend
-```powershell
+powershell
 cd Api
 npm install --legacy-peer-deps
 npx prisma generate --schema prisma/schema.prisma
 npx prisma db push --schema prisma/schema.prisma
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 npm run dev
-```
+
 
 
 2. Setup Web
-```powershell
+powershell
 cd web
 npm install --legacy-peer-deps
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 npm run dev
-```
+
 
 
 3. Inisialisasi Admin
-```powershell
+powershell
 Invoke-WebRequest -Method POST http://localhost:5000/api/init -UseBasicParsing | Select-Object -ExpandProperty Content
-```
+
 
 4. Setup Mobile (Expo)
-```powershell
+powershell
 cd mobile
 npm install --legacy-peer-deps
 expo start
-```
 
 
- 📋 FITUR UTAMA
+
+ FITUR UTAMA
 
  Backend API (Port 5000)
-✅ Authentication JWT
-✅ CRUD Produk
-✅ Manajemen Penjualan
-✅ Laporan PDF
-✅ Public API untuk produk
+ Authentication JWT
+ CRUD Produk
+ Manajemen Penjualan
+ Laporan PDF
+ Public API untuk produk
 
 Web Application (Port 3000)
-✅ Website public untuk customer
-✅ Admin dashboard
-✅ Manajemen produk
-✅ Edit harga & stok real-time
-✅ Generate laporan
+ Website public untuk customer
+ Admin dashboard
+ Manajemen produk
+ Edit harga & stok real-time
+ Generate laporan
 
-🔧 API ENDPOINTS
+ API ENDPOINTS
 
  Public Routes
 - GET /api/public/products- List produk
@@ -74,7 +74,7 @@ Web Application (Port 3000)
 - GET /api/reports/daily - Laporan harian PDF
 - GET /api/reports/monthly - Laporan bulanan PDF
 
-👤 LOGIN 
+ LOGIN 
 
 Admin Panel:
 - URL: http://localhost:3000/dashboard
@@ -82,7 +82,7 @@ Website Public:
 - URL: http://localhost:3000
 - URL Produk: http://localhost:3000/products
 
-🗃️ DATABASE
+DATABASE
 
 Menggunakan SQLite dengan Prisma ORM. File database: backend/dev.db
 
@@ -92,7 +92,7 @@ Tabel:
 - sales - Data penjualan
 - sale_items - Item dalam penjualan
 
- 📊 FITUR LAPORAN
+ FITUR LAPORAN
 
 Laporan Harian
 - Ringkasan penjualan harian
@@ -104,7 +104,7 @@ Laporan Bulanan
 - Penjualan per hari
 - Rata-rata transaksi
 
-🛠️ DEVELOPMENT
+ DEVELOPMENT
 
 Backend Development
 bash
