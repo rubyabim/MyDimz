@@ -41,7 +41,7 @@ export const generateDailyReport = async (req: Request, res: Response) => {
 
     const sales = (await prisma.sale.findMany({
       where: {
-        date: {
+        createdAt: {
           gte: startDate,
           lt: endDate,
         },
@@ -81,7 +81,7 @@ export const generateDailyReport = async (req: Request, res: Response) => {
     y += 30;
 
     const totalSales = sales.reduce(
-      (sum: number, sale: Sale) => sum + sale.total,
+      (sum: number, sale: Sale) => sum + sale.totalAmount,
       0
     );
     const totalItems = sales.reduce(
@@ -104,8 +104,8 @@ export const generateDailyReport = async (req: Request, res: Response) => {
     // Generate hourly sales chart (00 - 23)
     const hourly: number[] = Array.from({ length: 24 }, () => 0);
     sales.forEach((s) => {
-      const hr = new Date(s.date).getHours();
-      hourly[hr] = (hourly[hr] || 0) + s.total;
+      const hr = new Date(s.createdAt).getHours();
+      hourly[hr] = (hourly[hr] || 0) + s.totalAmount;
     });
 
     const chartCallback = (ChartJS: any) => {
@@ -164,19 +164,19 @@ export const generateDailyReport = async (req: Request, res: Response) => {
         doc
           .fontSize(10)
           .text(
-            `Transaksi #${index + 1} - ${sale.date.toLocaleString('id-ID')}`,
+            `Transaksi #${index + 1} - ${sale.createdAt.toLocaleString('id-ID')}`,
             120,
             y
           );
         y += 15;
-        doc.text(`Kasir: ${sale.cashier}`, 120, y);
+        doc.text(`Kasir: ${sale.customerId}`, 120, y);
         y += 15;
-        doc.text(`Total: Rp ${sale.total.toLocaleString('id-ID')}`, 120, y);
+        doc.text(`Total: Rp ${sale.totalAmount.toLocaleString('id-ID')}`, 120, y);
         y += 10;
 
         sale.items.forEach((item) => {
           doc.text(
-            `  ${item.product.name} - ${item.quantity} x Rp ${item.price.toLocaleString(
+            `  ${item.product.name} - ${item.quantity} x Rp ${item.unitPrice.toLocaleString(
               'id-ID'
             )}`,
             140,
@@ -221,7 +221,7 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
 
     const sales = (await prisma.sale.findMany({
       where: {
-        date: {
+        createdAt: {
           gte: startDate,
           lte: endDate,
         },
@@ -270,18 +270,18 @@ export const generateMonthlyReport = async (req: Request, res: Response) => {
     y += 30;
 
     const totalSales = sales.reduce(
-      (sum: number, sale: Sale) => sum + sale.total,
+      (sum: number, sale: Sale) => sum + sale.totalAmount,
       0
     );
     const totalTransactions = sales.length;
     const dailySales: { [key: string]: number } = {};
 
     sales.forEach((sale: Sale) => {
-      const dateKey = sale.date.toISOString().split('T')[0];
+      const dateKey = sale.createdAt.toISOString().split('T')[0];
       if (!dailySales[dateKey]) {
         dailySales[dateKey] = 0;
       }
-      dailySales[dateKey] += sale.total;
+      dailySales[dateKey] += sale.totalAmount;
     });
 
     doc.text(`Total Penjualan: Rp ${totalSales.toLocaleString('id-ID')}`, 120, y);
@@ -354,7 +354,7 @@ export const getDailySalesJson = async (req: Request, res: Response) => {
     const endDate = new Date(date as string);
     endDate.setDate(endDate.getDate() + 1);
     const sales = await prisma.sale.findMany({
-      where: { date: { gte: startDate, lt: endDate } },
+      where: { createdAt: { gte: startDate, lt: endDate } },
       include: { items: { include: { product: true } } },
     });
     res.json({ date, sales });
@@ -371,14 +371,14 @@ export const getMonthlySalesJson = async (req: Request, res: Response) => {
     const startDate = new Date(parseInt(year as string, 10), parseInt(month as string, 10) - 1, 1);
     const endDate = new Date(parseInt(year as string, 10), parseInt(month as string, 10), 0);
     const sales = await prisma.sale.findMany({
-      where: { date: { gte: startDate, lte: endDate } },
+      where: { createdAt: { gte: startDate, lte: endDate } },
       include: { items: { include: { product: true } } },
     });
     // Create daily summary
     const dailySummary: { [dateKey: string]: number } = {};
     for (const s of sales) {
-      const dateKey = s.date.toISOString().split('T')[0];
-      dailySummary[dateKey] = (dailySummary[dateKey] || 0) + s.total;
+      const dateKey = s.createdAt.toISOString().split('T')[0];
+      dailySummary[dateKey] = (dailySummary[dateKey] || 0) + s.totalAmount;
     }
     res.json({ year: parseInt(year as string, 10), month: parseInt(month as string, 10), sales, dailySummary });
   } catch (err) {
@@ -396,12 +396,12 @@ export const generateYearlyReport = async (req: Request, res: Response) => {
     const startDate = new Date(yNum, 0, 1);
     const endDate = new Date(yNum, 11, 31, 23, 59, 59);
 
-    const sales = (await prisma.sale.findMany({ where: { date: { gte: startDate, lte: endDate } }, include: { items: { include: { product: true } } } })) as unknown as Sale[];
+    const sales = (await prisma.sale.findMany({ where: { createdAt: { gte: startDate, lte: endDate } }, include: { items: { include: { product: true } } } })) as unknown as Sale[];
 
     const monthlyTotals: number[] = Array.from({ length: 12 }, () => 0);
     sales.forEach((s) => {
-      const m = new Date(s.date).getMonth();
-      monthlyTotals[m] = (monthlyTotals[m] || 0) + s.total;
+      const m = new Date(s.createdAt).getMonth();
+      monthlyTotals[m] = (monthlyTotals[m] || 0) + s.totalAmount;
     });
 
     const doc = new PDFDocument();
@@ -450,12 +450,12 @@ export const getYearlySalesJson = async (req: Request, res: Response) => {
     const yNum = parseInt(year as string, 10);
     const startDate = new Date(yNum, 0, 1);
     const endDate = new Date(yNum, 11, 31, 23, 59, 59);
-    const sales = await prisma.sale.findMany({ where: { date: { gte: startDate, lte: endDate } }, include: { items: { include: { product: true } } } });
+    const sales = await prisma.sale.findMany({ where: { createdAt: { gte: startDate, lte: endDate } }, include: { items: { include: { product: true } } } });
     const monthlyTotals: { [month: string]: number } = {};
     sales.forEach((s) => {
-      const m = new Date(s.date).getMonth() + 1;
+      const m = new Date(s.createdAt).getMonth() + 1;
       const key = String(m).padStart(2, '0');
-      monthlyTotals[key] = (monthlyTotals[key] || 0) + s.total;
+      monthlyTotals[key] = (monthlyTotals[key] || 0) + s.totalAmount;
     });
     res.json({ year: yNum, sales, monthlyTotals });
   } catch (err) {

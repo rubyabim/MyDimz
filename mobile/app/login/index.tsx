@@ -42,15 +42,21 @@ export default function LoginScreen() {
     setError('');
     setLoading(true);
     
+    console.log('🔐 Login attempt:', { username, API_BASE });
+    
     try {
       // First attempt login
       let res = await loginApi(username, password);
       
       if (!res) {
-        setError('Tidak dapat terhubung ke server. Pastikan backend running di port 5000');
+        const errorMsg = `Tidak dapat terhubung ke server.\nAPI Base: ${API_BASE}\nPastikan API running di port 3001`;
+        console.error(errorMsg);
+        setError(errorMsg);
         setLoading(false);
         return;
       }
+      
+      console.log('Login response status:', res.status);
       
       // If login fails with 401, try initializing backend first
       if (!res.ok && res.status === 401) {
@@ -63,8 +69,10 @@ export default function LoginScreen() {
       
       if (!res || !res.ok) {
         try {
-          const errorData = await res?.json();
-          setError(errorData?.error || errorData?.message || 'Username atau password salah');
+          const errorData = await res?.json().catch(() => null);
+          const errorMsg = errorData?.error || errorData?.message || `Login gagal (Status: ${res?.status})`;
+          console.error('Login error response:', errorMsg);
+          setError(errorMsg);
         } catch {
           setError('Username atau password salah');
         }
@@ -74,6 +82,8 @@ export default function LoginScreen() {
       
       // Login successful
       const data = await res.json();
+      console.log('Login successful, token received');
+      
       if (!data.token) {
         setError('Token tidak diterima dari server');
         setLoading(false);

@@ -44,15 +44,15 @@ export default function ProductCard({ product, isAdmin = false }: ProductCardPro
   return (
     <div
       className={`
-        rounded-2xl backdrop-blur-md bg-white/70 border border-blue-200
+        rounded-2xl bg-white border-2 border-gray-200
         overflow-hidden transition-all 
-        ${isHovered ? "shadow-2xl -translate-y-2" : "shadow-lg"}
+        ${isHovered ? "shadow-2xl -translate-y-2 border-blue-400" : "shadow-md"}
       `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* IMAGE */}
-      <div className="relative h-52 bg-blue-100 overflow-hidden">
+      <div className="relative h-52 bg-gray-200 overflow-hidden">
         <img
           src={product.image || "/default-product.svg"}
           alt={product.name}
@@ -78,13 +78,13 @@ export default function ProductCard({ product, isAdmin = false }: ProductCardPro
 
       {/* CONTENT */}
       <div className="p-5">
-        <h3 className="font-semibold text-blue-900 text-lg truncate">
+        <h3 className="font-bold text-gray-900 text-lg mb-2 leading-tight">
           {product.name}
         </h3>
 
         {/* DESCRIPTION - Only show for non-admin users */}
         {!isAdmin && product.description && (
-          <p className="text-sm text-gray-600 line-clamp-2 mt-2 mb-2">
+          <p className="text-sm text-gray-700 line-clamp-2 mb-3 leading-relaxed">
             {product.description}
           </p>
         )}
@@ -125,8 +125,8 @@ export default function ProductCard({ product, isAdmin = false }: ProductCardPro
 
         {/* STOCK */}
         <p
-          className={`text-sm mb-3 ${
-            product.stock > 0 ? "text-blue-600" : "text-red-600"
+          className={`text-sm font-semibold mb-3 ${
+            product.stock > 0 ? "text-green-600" : "text-red-600"
           }`}
         >
           {product.stock > 0 ? `Stok: ${product.stock}` : "Stok Habis"}

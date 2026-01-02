@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body className="min-h-screen font-poppins bg-[var(--color-bg)]">
+      <body className="min-h-screen font-poppins bg-[var(--color-bg)] overflow-y-auto overflow-x-hidden">
         <CartProvider>
           {children}
         </CartProvider>

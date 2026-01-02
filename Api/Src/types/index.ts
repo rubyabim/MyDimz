@@ -27,15 +27,19 @@ export interface SaleItem {
   saleId: number;
   productId: number;
   quantity: number;
-  price: number;
+  unitPrice: number;
+  subtotal: number;
   product: Product;
+  createdAt: Date;
 }
 
 export interface Sale {
   id: number;
-  date: Date;
-  total: number;
-  cashier: string;
+  customerId: number;
+  totalAmount: number;
+  paymentMethod: string;
+  status: string;
+  notes?: string;
   items: SaleItem[];
   createdAt: Date;
   updatedAt: Date;

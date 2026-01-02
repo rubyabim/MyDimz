@@ -226,20 +226,22 @@ const styles = StyleSheet.create({
   },
 
   body: {
-    padding: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
   },
 
   title: {
-    fontWeight: "600",
-    fontSize: 16,
-    marginBottom: 8,
+    fontWeight: "700",
+    fontSize: 17,
+    marginBottom: 6,
+    lineHeight: 22,
   },
 
   description: {
     fontSize: 13,
     fontWeight: "400",
-    marginBottom: 8,
-    lineHeight: 18,
+    marginBottom: 10,
+    lineHeight: 19,
   },
 
   ratingContainer: {
@@ -252,21 +254,21 @@ const styles = StyleSheet.create({
   },
 
   priceSection: {
-    marginBottom: 8,
+    marginBottom: 6,
   },
   price: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "700",
   },
   originalPrice: {
-    fontSize: 12,
+    fontSize: 13,
     textDecorationLine: "line-through",
   },
 
   stock: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: "600",
-    marginBottom: 12,
+    marginBottom: 10,
   },
 
   addBtn: {
@@ -276,6 +278,6 @@ const styles = StyleSheet.create({
   },
   addBtnText: {
     fontWeight: "700",
-    fontSize: 14,
+    fontSize: 15,
   },
 });

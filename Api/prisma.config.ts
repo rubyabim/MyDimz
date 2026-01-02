@@ -5,7 +5,7 @@ export default defineConfig({
   migrations: { path: 'prisma/migrations' },
   engine: 'classic',
   datasource: {
-    provider: 'sqlite',
+    provider: 'postgresql',
     url: env('DATABASE_URL'),
   },
 });

@@ -19,8 +19,12 @@ export const createSale = async (req: Request, res: Response) => {
     }
 
     let total = 0;
-    const saleItems: { productId: number; quantity: number; price: number }[] =
-      [];
+    const saleItems: { 
+      productId: number; 
+      quantity: number; 
+      unitPrice: number;
+      subtotal: number;
+    }[] = [];
 
     for (const item of items) {
       if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
@@ -48,7 +52,8 @@ export const createSale = async (req: Request, res: Response) => {
       saleItems.push({
         productId: item.productId,
         quantity: item.quantity,
-        price: product.price,
+        unitPrice: product.price,
+        subtotal: itemTotal,
       });
 
       await prisma.product.update({
@@ -61,8 +66,10 @@ export const createSale = async (req: Request, res: Response) => {
 
     const sale = (await prisma.sale.create({
       data: {
-        total,
-        cashier,
+        totalAmount: total,
+        customerId: 0,
+        paymentMethod: 'cash',
+        status: 'completed',
         items: {
           create: saleItems,
         },
@@ -94,7 +101,7 @@ export const getSales = async (req: Request, res: Response) => {
       if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
         return res.status(400).json({ error: 'Invalid startDate or endDate' });
       }
-      where.date = {
+      where.createdAt = {
         gte: start,
         lte: end,
       };
@@ -109,7 +116,7 @@ export const getSales = async (req: Request, res: Response) => {
           },
         },
       },
-      orderBy: { date: 'desc' },
+      orderBy: { createdAt: 'desc' },
     })) as unknown as Sale[];
 
     res.json(sales);

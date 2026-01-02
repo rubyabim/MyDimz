@@ -57,16 +57,21 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
     try {
       setLoading(true);
       setError('');
+      
+      console.log('📦 Loading products...');
       await getToken();
 
       const data = await fetchPublicProducts(1, 8);
+      
       if (!data) {
+        console.error('❌ No data received from API');
         setProducts([]);
-        setError('Tidak dapat terhubung ke server');
+        setError('Tidak dapat terhubung ke server. Pastikan API running di http://localhost:3001');
         setLoading(false);
         return;
       }
 
+      console.log('✅ Products loaded:', data);
       setProducts(data.products || data);
       setLoading(false);
     } catch (err) {

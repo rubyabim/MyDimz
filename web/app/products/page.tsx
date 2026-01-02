@@ -29,6 +29,7 @@ export default function Products() {
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState("latest");
   const [isAdmin, setIsAdmin] = useState(false);
   const searchParams = useSearchParams();
@@ -89,12 +90,14 @@ export default function Products() {
       setCategories(cats);
     } catch (error) {
       console.error("Error loading categories:", error);
+      setCategories([]);
     }
   };
 
   const loadProducts = async () => {
     try {
       setLoading(true);
+      setError(null);
       const searchFilter = filter === "all" ? undefined : filter;
       const data = await fetchPublicProducts({
         category: searchFilter,
@@ -115,6 +118,7 @@ export default function Products() {
       setProducts(productList);
     } catch (error) {
       console.error("Error loading products:", error);
+      setError("Tidak dapat terhubung ke server. Silakan coba lagi nanti.");
       setProducts([]);
     } finally {
       setLoading(false);
@@ -218,6 +222,17 @@ export default function Products() {
           <div className="text-center py-12">
             <div className="inline-block animate-spin h-12 w-12 border-4 border-blue-600 border-t-transparent rounded-full"></div>
             <p className="mt-4 text-blue-600 font-semibold">Memuat produk...</p>
+          </div>
+        ) : error ? (
+          <div className="bg-red-50 rounded-xl shadow-lg p-12 text-center border-2 border-red-300">
+            <div className="text-6xl mb-4">⚠️</div>
+            <p className="text-xl text-red-600 font-semibold mb-2">{error}</p>
+            <button
+              onClick={() => loadProducts()}
+              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Coba Lagi
+            </button>
           </div>
         ) : products.length === 0 ? (
           <div className="bg-white rounded-xl shadow-lg p-12 text-center">

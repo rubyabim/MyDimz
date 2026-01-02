@@ -1,5 +1,7 @@
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
+  process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
+
+const DEFAULT_HEADERS = { 'Content-Type': 'application/json' };
 
 type FetchProductsParams = {
   publicOnly?: boolean;
@@ -39,13 +41,17 @@ export async function fetchAdminProducts(token?: string, params?: { search?: str
 export async function loginApi(username: string, password: string) {
   const url = `${API_BASE}/auth/login`;
 
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username, password }),
-  });
+  try {
+    return await fetch(url, {
+      method: "POST",
+      headers: DEFAULT_HEADERS,
+      body: JSON.stringify({ username, password }),
+    });
+  } catch (err: any) {
+    const message = `Login failed: ${err?.message || String(err)}`;
+    console.error(message);
+    throw new Error(message);
+  }
 }
 
 export async function fetchProductById(id: string) {
