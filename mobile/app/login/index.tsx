@@ -49,7 +49,7 @@ export default function LoginScreen() {
       let res = await loginApi(username, password);
       
       if (!res) {
-        const errorMsg = `Tidak dapat terhubung ke server.\nAPI Base: ${API_BASE}\nPastikan API running di port 3001`;
+        const errorMsg = `Tidak dapat terhubung ke server.\nAPI Base: ${API_BASE}\nPastikan API running di port 500`;
         console.error(errorMsg);
         setError(errorMsg);
         setLoading(false);

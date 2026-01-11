@@ -23,7 +23,7 @@ export async function getUserProfile() {
     if (!token) return null;
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/auth/me`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:500/api"}/auth/me`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

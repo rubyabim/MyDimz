@@ -6,7 +6,7 @@ import routes from './routes';
 import './types';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = Number(process.env.PORT) || 500;
 
 // Middleware
 // Allow Authorization header so frontend requests with token pass CORS preflight

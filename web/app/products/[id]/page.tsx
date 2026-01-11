@@ -151,7 +151,7 @@ export default function EditProductPage() {
           width={220}
           height={120}
           className="rounded-md transition hover:scale-105"
-          // If image is stored at a dev backend (localhost:5000), we allow
+          // If image is stored at a dev backend (localhost:500), we allow
           // Next to use it but skip the image optimizer in dev to avoid issues
           // with optimization service and ports. Remove `unoptimized` in prod
           // when a proper CDN or allowed domains are added.

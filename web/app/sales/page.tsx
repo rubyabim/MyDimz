@@ -239,7 +239,7 @@ export default function SalesHistory() {
 
       if (tab === 'daily') {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/sales/daily?date=${selectedDate}`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:500/api'}/sales/daily?date=${selectedDate}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();
@@ -247,14 +247,14 @@ export default function SalesHistory() {
       } else if (tab === 'monthly') {
         const [year, month] = selectedMonth.split('-');
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/sales/monthly?year=${year}&month=${month}`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:500/api'}/sales/monthly?year=${year}&month=${month}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();
         setMonthlyData(data);
       } else {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/sales`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:500/api'}/sales`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();

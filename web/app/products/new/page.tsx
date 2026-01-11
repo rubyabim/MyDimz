@@ -53,7 +53,7 @@ export default function NewProductPage() {
           res.status === 0
             ? `Unable to reach API at ${
                 process.env.NEXT_PUBLIC_API_BASE_URL ||
-                "http://localhost:5000/api"
+                "http://localhost:500/api"
               }`
             : b?.error || "Failed to create product";
         setError(message);

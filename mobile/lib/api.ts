@@ -1,25 +1,44 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
+import { Platform } from 'react-native';
 
 // Detect API base depending on environment (web / android emulator / override via env)
 export const API_BASE = (() => {
-  // For development: hardcode localhost:3001
-  // This works for:
-  // - Expo Web running in browser (localhost:8081 -> localhost:3001)
-  // - Native/Emulator can be overridden via env variable
-  
-  const isDevelopment = process.env.NODE_ENV !== 'production';
-  
-  // First check if env variable is explicitly set
-  if (process.env.EXPO_PUBLIC_API_BASE_URL && process.env.EXPO_PUBLIC_API_BASE_URL !== 'http://localhost:3001/api') {
-    console.log('✅ Using API_BASE from env:', process.env.EXPO_PUBLIC_API_BASE_URL);
-    return process.env.EXPO_PUBLIC_API_BASE_URL;
+  const API_PORT = Number(process.env.EXPO_PUBLIC_API_PORT || 500);
+  const API_PATH = '/api';
+
+  const normalize = (baseUrl: string) => baseUrl.replace(/\/+$/, '');
+
+  // Highest priority: explicit env variable
+  const envBase = process.env.EXPO_PUBLIC_API_BASE_URL;
+  if (envBase && envBase.trim().length > 0) {
+    const normalized = normalize(envBase.trim());
+    console.log('✅ Using API_BASE from env:', normalized);
+    return normalized;
   }
-  
-  // For development, default to localhost:3001
-  // This works in all scenarios (web, iOS, Android)
-  const devUrl = 'http://localhost:3001/api';
-  console.log('🔗 API_BASE (development):', devUrl);
-  return devUrl;
+
+  // Expo dev can expose the host machine LAN IP via hostUri (e.g. 192.168.1.10:8081).
+  // If present, use that hostname with the API port so physical devices can reach the API.
+  const hostUri =
+    (Constants as any)?.expoConfig?.hostUri ||
+    (Constants as any)?.manifest2?.extra?.expoClient?.hostUri ||
+    (Constants as any)?.manifest?.hostUri;
+  if (typeof hostUri === 'string' && hostUri.includes(':')) {
+    const host = hostUri.split(':')[0];
+    if (host && host !== 'localhost' && host !== '127.0.0.1') {
+      const inferred = `http://${host}:${API_PORT}${API_PATH}`;
+      console.log('✅ Using API_BASE inferred from hostUri:', inferred);
+      return inferred;
+    }
+  }
+
+  // Fallbacks
+  // - Android emulator cannot reach your PC via localhost; use 10.0.2.2
+  // - iOS simulator + web can use localhost
+  const fallbackHost = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
+  const fallback = `http://${fallbackHost}:${API_PORT}${API_PATH}`;
+  console.log('🔗 API_BASE (fallback):', fallback);
+  return fallback;
 })();
 
 console.log('🔗 API_BASE initialized as:', API_BASE);

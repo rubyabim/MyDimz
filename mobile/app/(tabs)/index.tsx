@@ -66,7 +66,9 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
       if (!data) {
         console.error('❌ No data received from API');
         setProducts([]);
-        setError('Tidak dapat terhubung ke server. Pastikan API running di http://localhost:3001');
+        setError(
+          'Tidak dapat terhubung ke server. Pastikan API running di port 500. Jika pakai Android Emulator gunakan 10.0.2.2:500, atau set EXPO_PUBLIC_API_BASE_URL ke IP komputer kamu (mis. http://192.168.x.x:500/api).'
+        );
         setLoading(false);
         return;
       }

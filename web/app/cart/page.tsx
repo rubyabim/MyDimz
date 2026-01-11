@@ -23,7 +23,7 @@ export default function CartPage() {
 
       // Simpan transaksi ke API
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"}/sales`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:500/api"}/sales`,
         {
           method: "POST",
           headers: {
