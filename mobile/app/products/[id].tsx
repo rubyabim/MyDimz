@@ -34,7 +34,9 @@ export default function ProductDetailScreen() {
       setLoading(true);
       // Panggil fungsi API
       const data = await fetchProductById(pid);
+
       if (!data) {
+        // Kalau data kosong (produk tidak ketemu), set produk jadi null
         setProduct(null);
       } else {
         setProduct(data);
