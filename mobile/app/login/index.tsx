@@ -77,6 +77,7 @@ export default function LoginScreen() {
         res = await loginApi(username, password);
       }
       
+      // Kalau respon dari server gagal (bukan 200 OK)
       if (!res || !res.ok) {
         try {
           const errorData = await res?.json().catch(() => null);
