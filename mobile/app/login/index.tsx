@@ -111,6 +111,7 @@ export default function LoginScreen() {
       await setToken(data.token);
       setLoading(false);
       
+      // Munculin pop-up sukses
       Alert.alert('Sukses', 'Login berhasil!', [
         {
           text: 'OK',
