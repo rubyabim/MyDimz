@@ -31,6 +31,7 @@ export default function AdminNew() {
       // Berhenti di sini, jangan lanjut kirim ke server
     }
 
+    // Reset pesan error dan nyalain animasi loading biar user tahu proses dimulai
     setError('');
     setLoading(true);
 
