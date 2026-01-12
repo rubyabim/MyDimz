@@ -58,6 +58,7 @@ export default function AdminNew() {
         return;
       }
 
+      // Munculin pop-up sukses dan pindah halaman pas tombol OK dipencet
       Alert.alert('Sukses', 'Produk berhasil dibuat!', [
         {
           text: 'OK',
