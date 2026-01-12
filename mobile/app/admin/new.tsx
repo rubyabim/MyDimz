@@ -49,6 +49,7 @@ export default function AdminNew() {
         }),
       });
 
+      // Kalau server ngasih kode error (misal: data nggak valid atau server sibuk)
       if (!res.ok) {
         const b = await res.json().catch(() => null);
         setError(b?.error || 'Gagal membuat produk');
