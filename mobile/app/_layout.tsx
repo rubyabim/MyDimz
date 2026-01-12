@@ -29,6 +29,7 @@ export default function RootLayout() {
           <Stack.Screen name="admin" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
         </Stack>
+        {/* Mengatur warna bar indikator baterai/jam di bagian atas */}
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       </SafeAreaProvider>
     </ThemeProvider>
