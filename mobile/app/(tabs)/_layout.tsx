@@ -8,9 +8,11 @@ import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import MobileHeader from '@/components/Header';
 
+// Layout khusus buat ngatur tampilan menu tab (menu bawah) supaya warnanya ngikutin mode HP.
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  // Struktur menu utama (tab bawah) yang isinya ada Home, Explore, dan Produk.
   return (
     <View style={styles.container}>
       <MobileHeader />
