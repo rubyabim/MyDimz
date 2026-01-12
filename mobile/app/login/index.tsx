@@ -122,6 +122,7 @@ export default function LoginScreen() {
     } catch (err) {
       // Catat detail error di konsol untuk keperluan perbaikan bug (debug)
       console.error('Login error:', err);
+      // Berikan pesan umum kepada user agar mereka tidak bingung
       setError('Terjadi kesalahan saat login');
       setLoading(false);
     }
