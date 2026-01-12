@@ -64,6 +64,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
       const data = await fetchPublicProducts(1, 8);
       
+      // Cek kalau datanya kosong atau server gak respon
       if (!data) {
         console.error('❌ No data received from API');
         setProducts([]);
