@@ -23,6 +23,7 @@ export default function AdminNew() {
   const borderColor = '#e2e8f0';
   const primary = '#1e40af';
 
+// Pastikan semua kolom penting sudah diisi sebelum simpan produk baru
   const handleCreate = async () => {
     if (!name || !price || !stock || !category) {
       setError('Nama, harga, stok, dan kategori harus diisi');
