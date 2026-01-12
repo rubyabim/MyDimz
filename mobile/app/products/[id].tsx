@@ -47,6 +47,7 @@ export default function ProductDetailScreen() {
       console.error('Error fetching product:', err);
       setProduct(null);
     } finally {
+      // Mau sukses atau gagal, matikan icon loading di akhir
       setLoading(false);
     }
   };
