@@ -248,6 +248,7 @@ return (
                 </Text>
               </View>
             )
+            // Kalau masih loading, biarin aja kosong (karena sudah ada spinner)
           ) : null
         }
         refreshControl={
