@@ -52,6 +52,7 @@ export default function ProductDetailScreen() {
     }
   };
 
+  // Jika ID produk tidak ditemukan di URL, tampilkan pesan error
   if (!id) {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
