@@ -97,6 +97,7 @@ export default function ProductsScreen() {
     }
   };
 
+  // Cek apakah yang login punya akses admin atau penjual
   const checkUserRole = async () => {
     try {
       const token = await getToken();
