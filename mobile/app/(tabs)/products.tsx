@@ -265,6 +265,7 @@ return (
         onEndReachedThreshold={0.5}
       />
 
+      {/* Tampilin animasi loading di tengah layar kalau data lagi proses diambil */}
       {loading && (
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color={primary} />
