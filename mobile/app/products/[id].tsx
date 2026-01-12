@@ -84,6 +84,7 @@ export default function ProductDetailScreen() {
     );
   }
 
+  // Jika data produk kosong setelah selesai loading, tampilkan pesan ini
   if (!product) {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
