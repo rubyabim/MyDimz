@@ -84,7 +84,8 @@ export default function LoginScreen() {
           const errorData = await res?.json().catch(() => null);
           const errorMsg = errorData?.error || errorData?.message || `Login gagal (Status: ${res?.status})`;
           console.error('Login error response:', errorMsg);
-          setError(errorMsg);
+          // Tampilkan pesan error dari server ke user
+          setError(errorMsg); 
         } catch {
           setError('Username atau password salah');
         }
