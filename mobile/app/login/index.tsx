@@ -87,6 +87,7 @@ export default function LoginScreen() {
           // Tampilkan pesan error dari server ke user
           setError(errorMsg); 
         } catch {
+          // Kalau server tidak kasih pesan apa-apa, pakai pesan standar
           setError('Username atau password salah');
         }
         setLoading(false);
