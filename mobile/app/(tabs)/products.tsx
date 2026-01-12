@@ -106,6 +106,7 @@ export default function ProductsScreen() {
         return;
       }
       const user = await fetchUserProfile();
+      // Kunci akses cuma dikasih kalau role-nya 'admin' atau 'seller'
       setIsAdmin(user?.role === 'admin' || user?.role === 'seller');
     } catch (err) {
       console.error('Error checking user role:', err);
