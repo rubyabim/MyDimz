@@ -16,6 +16,7 @@ export default function ModalScreen() {
   );
 }
 
+// Pengaturan tata letak biar tampilan rapi dan posisinya pas di tengah layar.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
