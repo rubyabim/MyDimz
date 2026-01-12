@@ -86,6 +86,7 @@ export default function ProductsScreen() {
     }
   };
 
+  // Ambil daftar kategori produk buat pengelompokan barang
   const loadCategories = async () => {
     try {
       const data = await fetchProductCategories();
