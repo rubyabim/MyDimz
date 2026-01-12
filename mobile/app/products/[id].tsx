@@ -19,6 +19,7 @@ export default function ProductDetailScreen() {
   const textColor = '#0f172a';
   const textSecondary = '#64748b';
 
+  // Jalankan kode di dalam setiap kali nilai 'id' berubah
   useEffect(() => {
     if (!id) return;
     fetchProduct(id);
