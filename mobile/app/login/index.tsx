@@ -21,6 +21,7 @@ export default function LoginScreen() {
   // Menyiapkan data atau koneksi di server saat aplikasi mulai jalan
   const initializeBackend = async () => {
     try {
+      // Menghubungi endpoint khusus untuk proses persiapan (init)
       const res = await fetch(`${API_BASE}/init`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
