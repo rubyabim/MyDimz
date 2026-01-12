@@ -261,6 +261,7 @@ return (
         }
         // Ngatur jarak aman (padding) di sekeliling daftar isi barang
         contentContainerStyle={styles.contentContainer}
+        // Jarak pemicu buat fitur "scroll sampai bawah" (biasanya buat tambah data)
         onEndReachedThreshold={0.5}
       />
 
