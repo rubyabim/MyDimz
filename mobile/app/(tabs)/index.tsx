@@ -90,6 +90,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
   const checkUserRole = async () => {
     try {
       const token = await getToken();
+      // Kalau nggak ada kunci akses (token), otomatis bukan admin
       if (!token) {
         setIsAdmin(false);
         return;
