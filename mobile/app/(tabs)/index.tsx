@@ -100,6 +100,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
       // Cek apakah jabatannya 'admin' atau 'seller'. Kalau iya, kasih akses masuk.
       setIsAdmin(user?.role === 'admin' || user?.role === 'seller');
     } catch (err) {
+      // Kalau ada error, amannya akses admin dimatikan saja
       console.error('Error checking user role:', err);
       setIsAdmin(false);
     }
