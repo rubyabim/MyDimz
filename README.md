@@ -4,7 +4,7 @@ Sistem lengkap untuk mengelola toko kelontong dengan fitur:
 - Backend API dengan Next.js & TypeScript
 - Web Admin Dashboard dengan Next.js
 - Website Public untuk customer
-- Database SQLite dengan Prisma ORM
+- Database psql
 - Laporan PDF otomatis
 
 1. Setup Backend
