@@ -28,6 +28,7 @@ export default function AdminNew() {
     if (!name || !price || !stock || !category) {
       setError('Nama, harga, stok, dan kategori harus diisi');
       return;
+      // Berhenti di sini, jangan lanjut kirim ke server
     }
 
     setError('');
