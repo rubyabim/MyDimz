@@ -114,6 +114,7 @@ export default function ProductsScreen() {
     }
   };
 
+  // Ambil semua data (role, kategori, dan produk) saat aplikasi pertama kali dimuat
   useEffect(() => {
     checkUserRole();
     loadCategories();
