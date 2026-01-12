@@ -32,6 +32,7 @@ export default function ProductDetailScreen() {
     try {
       // Mulai putar icon loading
       setLoading(true);
+      // Panggil fungsi API
       const data = await fetchProductById(pid);
       if (!data) {
         setProduct(null);
