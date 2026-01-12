@@ -259,6 +259,7 @@ return (
             tintColor={primary}
           />
         }
+        // Ngatur jarak aman (padding) di sekeliling daftar isi barang
         contentContainerStyle={styles.contentContainer}
         onEndReachedThreshold={0.5}
       />
