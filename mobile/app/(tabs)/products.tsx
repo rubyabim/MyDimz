@@ -81,6 +81,7 @@ export default function ProductsScreen() {
       setError('Gagal memuat produk. Coba lagi.');
       // Kosongin list produk biar gak nampilin data yang rusak/salah
       setProducts([]);
+      // Pastiin loading berhenti biar layar gak muter terus
       setLoading(false);
     }
   };
