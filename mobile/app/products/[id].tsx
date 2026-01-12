@@ -59,6 +59,8 @@ export default function ProductDetailScreen() {
         <View style={styles.centerContent}>
           {/* Pesan peringatan untuk user */}
           <Text style={styles.errorMessage}>ID produk tidak valid</Text>
+
+          {/* Tombol untuk pulang ke halaman sebelumnya */}
           <TouchableOpacity
             style={[styles.backButton, { backgroundColor: primary }]}
             onPress={() => router.back()}
