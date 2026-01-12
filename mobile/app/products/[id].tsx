@@ -57,6 +57,7 @@ export default function ProductDetailScreen() {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
         <View style={styles.centerContent}>
+          {/* Pesan peringatan untuk user */}
           <Text style={styles.errorMessage}>ID produk tidak valid</Text>
           <TouchableOpacity
             style={[styles.backButton, { backgroundColor: primary }]}
