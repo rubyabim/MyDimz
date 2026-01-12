@@ -17,12 +17,16 @@ export default function TabLayout() {
     <View style={styles.container}>
       {/* Header khusus buat tampilan mobile */}
       <MobileHeader />
+
+      {/* Settingan menu tab bawah: warna ikon, efek getar (haptic), dan sembunyiin judul atas */}
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
           headerShown: false,
           tabBarButton: HapticTab,
         }}>
+
+        {/* Menu Beranda */}
         <Tabs.Screen
           name="index"
           options={{
