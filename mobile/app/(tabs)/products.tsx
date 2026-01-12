@@ -241,6 +241,7 @@ return (
                 </TouchableOpacity>
               </View>
             ) : (
+              // Kalau nggak ada error tapi barang emang kosong: Tampilin pesan "Tidak ada produk"
               <View style={styles.emptyContainer}>
                 <Text style={[styles.emptyText, { color: textColor }]}>
                   Tidak ada produk ditemukan
