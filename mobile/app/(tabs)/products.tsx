@@ -144,6 +144,7 @@ return (
           styles.columnWrapper,
           { paddingHorizontal: gap, marginBottom: gap }
         ]}
+        // Bagian Atas: Berisi Judul, Kolom Pencarian, dan Tombol Kategori
         ListHeaderComponent={
           <View style={[styles.headerContainer, { paddingHorizontal: paddingHorizontal }]}>
             {/* Header */}
