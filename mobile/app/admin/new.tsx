@@ -62,6 +62,7 @@ export default function AdminNew() {
       Alert.alert('Sukses', 'Produk berhasil dibuat!', [
         {
           text: 'OK',
+          // Setelah klik OK, otomatis balik ke halaman daftar produk
           onPress: () => router.push('/(tabs)/products'),
         },
       ]);
