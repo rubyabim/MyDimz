@@ -53,6 +53,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
 
+  // Fungsi buat ambil daftar produk dari server sambil ngecek koneksi internet/API.
   const loadProducts = async () => {
     try {
       setLoading(true);
