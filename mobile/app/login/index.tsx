@@ -90,6 +90,7 @@ export default function LoginScreen() {
           // Kalau server tidak kasih pesan apa-apa, pakai pesan standar
           setError('Username atau password salah');
         }
+        // Matikan loading karena proses berhenti
         setLoading(false);
         return;
       }
