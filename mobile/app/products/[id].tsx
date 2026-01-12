@@ -77,6 +77,7 @@ export default function ProductDetailScreen() {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
         <View style={styles.centerContent}>
+          {/* Jika proses ambil data masih berjalan, tampilkan animasi muter-muter */}
           <ActivityIndicator size="large" color={primary} />
         </View>
       </SafeAreaView>
