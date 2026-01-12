@@ -72,6 +72,7 @@ export default function ProductDetailScreen() {
     );
   }
 
+  // Jika proses ambil data masih berjalan, tampilkan animasi muter-muter
   if (loading) {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
