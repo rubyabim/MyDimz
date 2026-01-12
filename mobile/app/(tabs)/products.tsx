@@ -79,6 +79,7 @@ export default function ProductsScreen() {
       console.error('Error loading products:', err);
       // Kasih tau user kalau ada yang gak beres biar mereka gak bingung
       setError('Gagal memuat produk. Coba lagi.');
+      // Kosongin list produk biar gak nampilin data yang rusak/salah
       setProducts([]);
       setLoading(false);
     }
