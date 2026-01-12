@@ -15,6 +15,7 @@ export const unstable_settings = {
   anchor: '(tabs)',
 };
 
+// Komponen utama yang mengatur struktur dasar dan tema aplikasi.
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
