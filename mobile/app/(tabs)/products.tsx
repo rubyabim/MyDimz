@@ -58,6 +58,7 @@ export default function ProductsScreen() {
       // Gunakan public API
       const data = await fetchPublicProducts(pageNum, 12, searchTerm, category !== 'all' ? category : undefined);
       
+      // Jaga-jaga kalau server mati, langsung kasih tau user dan matiin loading-nya.
       if (!data) {
         setError('Tidak dapat terhubung ke server');
         setProducts([]);
