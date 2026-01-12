@@ -202,6 +202,7 @@ return (
             )}
           </View>
         }
+        // Menampilkan kartu produk dan mengatur aksi saat diklik/ditambah ke keranjang
         renderItem={({ item }) => (
           <View style={styles.productItem}>
             <ProductCard
