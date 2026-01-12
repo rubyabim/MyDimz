@@ -223,6 +223,7 @@ return (
         )}
         // Tampilan alternatif kalau daftar produk kosong atau bermasalah
         ListEmptyComponent={
+          // Cek dulu, kalau sudah nggak loading baru tampilin ini
           !loading ? (
             error ? (
               <View style={styles.emptyContainer}>
