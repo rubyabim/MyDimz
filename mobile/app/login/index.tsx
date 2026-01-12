@@ -107,6 +107,7 @@ export default function LoginScreen() {
         return;
       }
       
+      // Simpan token login ke memori HP dan matikan loading
       await setToken(data.token);
       setLoading(false);
       
