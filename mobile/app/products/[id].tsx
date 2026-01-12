@@ -89,6 +89,7 @@ export default function ProductDetailScreen() {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
         <View style={styles.centerContent}>
+          {/* Memberi tahu user kalau barang yang dicari mungkin sudah dihapus atau tidak ada */}
           <Text style={[styles.notFoundText, { color: textColor }]}>Produk tidak ditemukan</Text>
           <TouchableOpacity
             style={[styles.backButton, { backgroundColor: primary }]}
