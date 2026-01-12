@@ -39,6 +39,7 @@ export default function ProductDetailScreen() {
         // Kalau data kosong (produk tidak ketemu), set produk jadi null
         setProduct(null);
       } else {
+        // Kalau ketemu, simpan datanya ke dalam state 'product'
         setProduct(data);
       }
     } catch (err) {
