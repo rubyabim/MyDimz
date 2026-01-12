@@ -210,6 +210,7 @@ return (
               isAdmin={isAdmin}
               // Pindah ke halaman detail produk sesuai ID-nya
               onPress={() => router.push(`/products/${item.id}`)}
+              // Munculin notif sukses pas user pencet tombol tambah ke keranjang
               onAdd={() => {
                 Alert.alert(
                   '✓ Berhasil Ditambahkan',
