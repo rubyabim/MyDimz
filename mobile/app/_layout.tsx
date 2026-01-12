@@ -10,6 +10,7 @@ import '../tailwind.css';
 // Mengambil status mode gelap atau terang dari pengaturan HP pengguna
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
+// Memastikan aplikasi selalu kembali ke menu utama (tabs) jika terjadi refresh atau error.
 export const unstable_settings = {
   anchor: '(tabs)',
 };
