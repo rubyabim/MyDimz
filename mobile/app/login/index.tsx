@@ -49,6 +49,7 @@ export default function LoginScreen() {
     setError('');
     setLoading(true);
     
+    // Catat ke log untuk cek apakah username dan alamat API sudah sesuai
     console.log('🔐 Login attempt:', { username, API_BASE });
     
     try {
