@@ -71,6 +71,7 @@ export default function AdminNew() {
       console.error('Create product error:', err);
       // Kasih tau user kalau ada yang nggak beres secara umum
       setError('Terjadi kesalahan');
+      // Pastiin status loading mati biar tombolnya bisa dipencet lagi
       setLoading(false);
     }
   };
