@@ -92,6 +92,7 @@ export default function ProductsScreen() {
       const data = await fetchProductCategories();
       setCategories(data || []);
     } catch (err) {
+      // Log error kalau gagal ambil data kategori
       console.error('Error loading categories:', err);
     }
   };
