@@ -43,6 +43,7 @@ export default function ProductDetailScreen() {
         setProduct(data);
       }
     } catch (err) {
+      // Kalau koneksi putus atau server error, catat errornya
       console.error('Error fetching product:', err);
       setProduct(null);
     } finally {
