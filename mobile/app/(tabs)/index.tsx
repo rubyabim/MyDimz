@@ -97,6 +97,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
       }
       // Ambil data profil dari server buat liat jabatannya apa
       const user = await fetchUserProfile();
+      // Cek apakah jabatannya 'admin' atau 'seller'. Kalau iya, kasih akses masuk.
       setIsAdmin(user?.role === 'admin' || user?.role === 'seller');
     } catch (err) {
       console.error('Error checking user role:', err);
