@@ -80,6 +80,7 @@ export default function LoginScreen() {
       // Kalau respon dari server gagal (bukan 200 OK)
       if (!res || !res.ok) {
         try {
+          // Coba ambil pesan error spesifik yang dikirim server
           const errorData = await res?.json().catch(() => null);
           const errorMsg = errorData?.error || errorData?.message || `Login gagal (Status: ${res?.status})`;
           console.error('Login error response:', errorMsg);
