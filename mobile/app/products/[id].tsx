@@ -107,6 +107,7 @@ export default function ProductDetailScreen() {
   // Mengubah angka (misal: 50000) jadi format Rupiah (Rp50.000,00)
   const formatPrice = (price: number) => {
     try {
+      // Menggunakan standar internasional untuk format angka Indonesia
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price);
     } catch {
       return `Rp ${price}`;
