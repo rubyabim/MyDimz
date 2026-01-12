@@ -38,6 +38,7 @@ export default function LoginScreen() {
   };
 
   const handleLogin = async () => {
+    // Cegah proses login kalau kolom username atau password masih kosong
     if (!username || !password) {
       setError('Username dan password harus diisi');
       return;
