@@ -18,6 +18,7 @@ export default function LoginScreen() {
   const textColor = colorScheme === 'dark' ? '#f1f5f9' : '#1e3a8a';
   const primary = '#1e40af';
 
+  // Menyiapkan data atau koneksi di server saat aplikasi mulai jalan
   const initializeBackend = async () => {
     try {
       const res = await fetch(`${API_BASE}/init`, {
