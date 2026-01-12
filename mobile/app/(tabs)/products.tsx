@@ -134,6 +134,7 @@ export default function ProductsScreen() {
 
 return (
     <SafeAreaView style={styles.container}>
+      {/* Daftar produk utama yang bisa di-scroll */}
       <FlatList
         key={`products-${numColumns}`}
         data={products}
