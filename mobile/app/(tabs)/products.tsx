@@ -221,6 +221,7 @@ return (
             />
           </View>
         )}
+        // Tampilan alternatif kalau daftar produk kosong atau bermasalah
         ListEmptyComponent={
           !loading ? (
             error ? (
