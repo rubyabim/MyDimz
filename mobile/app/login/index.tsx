@@ -41,6 +41,7 @@ export default function LoginScreen() {
     // Cegah proses login kalau kolom username atau password masih kosong
     if (!username || !password) {
       setError('Username dan password harus diisi');
+      // Berhenti di sini, jangan lanjut kirim data ke server
       return;
     }
 
