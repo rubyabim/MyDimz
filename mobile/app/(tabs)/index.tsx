@@ -95,6 +95,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
         setIsAdmin(false);
         return;
       }
+      // Ambil data profil dari server buat liat jabatannya apa
       const user = await fetchUserProfile();
       setIsAdmin(user?.role === 'admin' || user?.role === 'seller');
     } catch (err) {
