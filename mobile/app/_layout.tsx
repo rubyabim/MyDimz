@@ -7,6 +7,7 @@ import 'react-native-reanimated';
 // TAMBAHKAN INI - Import tailwind.css untuk NativeWind
 import '../tailwind.css';
 
+// Mengambil status mode gelap atau terang dari pengaturan HP pengguna
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export const unstable_settings = {
