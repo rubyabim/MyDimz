@@ -49,6 +49,7 @@ export default function ProductsScreen() {
   const inputBg = colorScheme === 'dark' ? '#1e293b' : '#ffffff';
   const inputBorder = colorScheme === 'dark' ? '#334155' : '#e2e8f0';
 
+  // Fungsi buat ambil data produk yang bisa difilter berdasarkan halaman, kata kunci, atau kategori
   const loadProducts = async (pageNum: number = 1, searchTerm: string = '', category: string = 'all') => {
     try {
       setLoading(true);
