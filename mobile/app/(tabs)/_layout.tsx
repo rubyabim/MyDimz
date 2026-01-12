@@ -57,6 +57,7 @@ export default function TabLayout() {
   );
 }
 
+// Ngatur background dasar aplikasi biar warnanya putih bersih dan menuhin layar.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
