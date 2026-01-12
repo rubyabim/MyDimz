@@ -45,6 +45,7 @@ export default function LoginScreen() {
       return;
     }
 
+    // Bersihkan pesan error lama dan mulai munculin loading spinner
     setError('');
     setLoading(true);
     
