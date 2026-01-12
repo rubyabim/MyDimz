@@ -124,6 +124,7 @@ export default function LoginScreen() {
       console.error('Login error:', err);
       // Berikan pesan umum kepada user agar mereka tidak bingung
       setError('Terjadi kesalahan saat login');
+      // Pastikan indikator loading berhenti agar tombol bisa ditekan kembali
       setLoading(false);
     }
   };
