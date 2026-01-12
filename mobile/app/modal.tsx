@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 
+// Layar pop-up yang muncul menyembul dari bawah layar utama
 export default function ModalScreen() {
   return (
     <ThemedView style={styles.container}>
