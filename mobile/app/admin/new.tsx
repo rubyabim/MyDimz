@@ -36,6 +36,7 @@ export default function AdminNew() {
     setLoading(true);
 
     try {
+      // Kirim data ke API pakai metode POST (untuk bikin data baru)
       const res = await authFetchMobile('/products', {
         method: 'POST',
         body: JSON.stringify({
