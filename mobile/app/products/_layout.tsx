@@ -8,6 +8,7 @@ export default function ProductsLayout() {
       <Stack.Screen 
         name="[id]" 
         options={{ 
+          // Menyembunyikan header bawaan supaya kita bisa pakai desain custom di halaman detail
           headerShown: false,
         }} 
       />
