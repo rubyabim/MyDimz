@@ -31,6 +31,7 @@ export default function LoginScreen() {
       // Mengirim laporan apakah persiapan berhasil atau tidak
       return res.ok;
     } catch (e) {
+      // Catat kalau ada masalah saat menyalakan mesin server
       console.error('Init error:', e);
       return false;
     }
