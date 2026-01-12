@@ -60,6 +60,7 @@ export default function ProductsScreen() {
       
       // Jaga-jaga kalau server mati, langsung kasih tau user dan matiin loading-nya.
       if (!data) {
+        // Kasih pesan error kalau datanya gak ada atau server gak jawab
         setError('Tidak dapat terhubung ke server');
         setProducts([]);
         setLoading(false);
