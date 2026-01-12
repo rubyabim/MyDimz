@@ -28,6 +28,7 @@ export default function LoginScreen() {
       });
       const data = await res.json();
       console.log('Backend initialization:', data);
+      // Mengirim laporan apakah persiapan berhasil atau tidak
       return res.ok;
     } catch (e) {
       console.error('Init error:', e);
