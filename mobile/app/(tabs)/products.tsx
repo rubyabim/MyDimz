@@ -66,6 +66,7 @@ export default function ProductsScreen() {
         setProducts([]);
         // Berhenti nampilin animasi loading (spinner)
         setLoading(false);
+        // Keluar dari fungsi, gak usah lanjut ke proses simpan data
         return;
       }
       
