@@ -125,6 +125,7 @@ export default function ProductsScreen() {
     loadProducts(1, search, selectedCategory);
   }, [search, selectedCategory]);
 
+  // Update daftar produk otomatis tiap kali user ngetik pencarian atau ganti kategori
   const handleRefresh = async () => {
     setRefreshing(true);
     await loadProducts(1, search, selectedCategory);
