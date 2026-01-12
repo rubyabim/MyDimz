@@ -56,6 +56,7 @@ export default function LoginScreen() {
       // First attempt login
       let res = await loginApi(username, password);
       
+      // Kalau tidak ada respon sama sekali (server mati atau alamat salah)
       if (!res) {
         const errorMsg = `Tidak dapat terhubung ke server.\nAPI Base: ${API_BASE}\nPastikan API running di port 500`;
         console.error(errorMsg);
