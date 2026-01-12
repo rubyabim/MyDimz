@@ -115,6 +115,7 @@ export default function LoginScreen() {
       Alert.alert('Sukses', 'Login berhasil!', [
         {
           text: 'OK',
+          // Ganti halaman ke menu utama (tabs) setelah klik OK
           onPress: () => router.replace('/(tabs)'),
         },
       ]);
