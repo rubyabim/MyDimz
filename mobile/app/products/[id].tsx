@@ -110,6 +110,7 @@ export default function ProductDetailScreen() {
       // Menggunakan standar internasional untuk format angka Indonesia
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price);
     } catch {
+      // Jika terjadi error (misal: di HP lama), gunakan format manual seadanya
       return `Rp ${price}`;
     }
   };
