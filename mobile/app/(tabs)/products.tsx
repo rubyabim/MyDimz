@@ -251,6 +251,7 @@ return (
             // Kalau masih loading, biarin aja kosong (karena sudah ada spinner)
           ) : null
         }
+        // Fitur tarik layar buat update data dan pengaturan area scroll
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
