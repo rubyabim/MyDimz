@@ -75,6 +75,7 @@ export default function ProductsScreen() {
       // Selesai, berhentiin putaran loading-nya
       setLoading(false);
     } catch (err) {
+      // Catat detail error-nya di konsol buat bahan perbaikan (debugging)
       console.error('Error loading products:', err);
       setError('Gagal memuat produk. Coba lagi.');
       setProducts([]);
