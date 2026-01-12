@@ -62,6 +62,7 @@ export default function ProductsScreen() {
       if (!data) {
         // Kasih pesan error kalau datanya gak ada atau server gak jawab
         setError('Tidak dapat terhubung ke server');
+        // Kosongin daftar produk biar gak nampilin data lama yang salah
         setProducts([]);
         setLoading(false);
         return;
