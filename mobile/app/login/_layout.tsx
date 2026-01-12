@@ -9,6 +9,7 @@ export default function LoginLayout() {
       <Stack.Screen 
         name="index" 
         options={{ 
+          // Menyembunyikan header bawaan biar kita bisa bikin desain login full screen
           headerShown: false,
         }} 
       />
