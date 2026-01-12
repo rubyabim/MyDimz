@@ -15,6 +15,7 @@ export default function TabLayout() {
   // Struktur menu utama (tab bawah) yang isinya ada Home, Explore, dan Produk.
   return (
     <View style={styles.container}>
+      {/* Header khusus buat tampilan mobile */}
       <MobileHeader />
       <Tabs
         screenOptions={{
