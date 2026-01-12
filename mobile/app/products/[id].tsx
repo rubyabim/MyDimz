@@ -91,7 +91,7 @@ export default function ProductDetailScreen() {
         <View style={styles.centerContent}>
           {/* Memberi tahu user kalau barang yang dicari mungkin sudah dihapus atau tidak ada */}
           <Text style={[styles.notFoundText, { color: textColor }]}>Produk tidak ditemukan</Text>
-          
+
           {/* Tombol penyelamat agar user tidak terjebak di layar ini */}
           <TouchableOpacity
             style={[styles.backButton, { backgroundColor: primary }]}
@@ -104,6 +104,7 @@ export default function ProductDetailScreen() {
     );
   }
 
+  // Mengubah angka (misal: 50000) jadi format Rupiah (Rp50.000,00)
   const formatPrice = (price: number) => {
     try {
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price);
