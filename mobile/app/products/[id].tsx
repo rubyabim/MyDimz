@@ -23,6 +23,7 @@ export default function ProductDetailScreen() {
   useEffect(() => {
     // Kalau ID belum siap atau kosong, jangan lakukan apa-apa
     if (!id) return;
+    // Panggil fungsi untuk mengambil data produk spesifik dari server
     fetchProduct(id);
   }, [id]);
 
