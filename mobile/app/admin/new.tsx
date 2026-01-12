@@ -69,6 +69,7 @@ export default function AdminNew() {
     } catch (err) {
       // Catat detail error di konsol buat kita cek kalau ada bug
       console.error('Create product error:', err);
+      // Kasih tau user kalau ada yang nggak beres secara umum
       setError('Terjadi kesalahan');
       setLoading(false);
     }
