@@ -72,6 +72,7 @@ export default function ProductsScreen() {
       
       // Masukin data hasil download tadi ke dalam list produk (biar muncul di layar)
       setProducts(data.products || data);
+      // Selesai, berhentiin putaran loading-nya
       setLoading(false);
     } catch (err) {
       console.error('Error loading products:', err);
