@@ -27,6 +27,7 @@ export default function ProductDetailScreen() {
     fetchProduct(id);
   }, [id]);
 
+  // Fungsi untuk mengambil detail produk berdasarkan ID (pid)
   const fetchProduct = async (pid: number) => {
     try {
       setLoading(true);
