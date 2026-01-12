@@ -86,6 +86,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
     }
   };
 
+  // Cek status user, kalau dia Admin atau Seller baru boleh buka fitur khusus.
   const checkUserRole = async () => {
     try {
       const token = await getToken();
