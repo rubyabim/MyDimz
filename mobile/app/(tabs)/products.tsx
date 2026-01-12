@@ -70,6 +70,7 @@ export default function ProductsScreen() {
         return;
       }
       
+      // Masukin data hasil download tadi ke dalam list produk (biar muncul di layar)
       setProducts(data.products || data);
       setLoading(false);
     } catch (err) {
