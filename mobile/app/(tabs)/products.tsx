@@ -226,6 +226,7 @@ return (
           // Cek dulu, kalau sudah nggak loading baru tampilin ini
           !loading ? (
             error ? (
+              // Kalau error: Kasih tau penyebabnya dan kasih tombol "Coba Lagi"
               <View style={styles.emptyContainer}>
                 <Text style={styles.errorText}>
                   {error}
