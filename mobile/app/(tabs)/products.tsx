@@ -64,6 +64,7 @@ export default function ProductsScreen() {
         setError('Tidak dapat terhubung ke server');
         // Kosongin daftar produk biar gak nampilin data lama yang salah
         setProducts([]);
+        // Berhenti nampilin animasi loading (spinner)
         setLoading(false);
         return;
       }
