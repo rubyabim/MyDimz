@@ -21,6 +21,7 @@ export default function ProductDetailScreen() {
 
   // Jalankan kode di dalam setiap kali nilai 'id' berubah
   useEffect(() => {
+    // Kalau ID belum siap atau kosong, jangan lakukan apa-apa
     if (!id) return;
     fetchProduct(id);
   }, [id]);
