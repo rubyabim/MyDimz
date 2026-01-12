@@ -208,6 +208,7 @@ return (
             <ProductCard
               product={item}
               isAdmin={isAdmin}
+              // Pindah ke halaman detail produk sesuai ID-nya
               onPress={() => router.push(`/products/${item.id}`)}
               onAdd={() => {
                 Alert.alert(
