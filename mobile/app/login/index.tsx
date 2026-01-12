@@ -99,6 +99,7 @@ export default function LoginScreen() {
       const data = await res.json();
       console.log('Login successful, token received');
       
+      // Cek apakah kunci masuk (token) ada dalam jawaban server
       if (!data.token) {
         setError('Token tidak diterima dari server');
         setLoading(false);
