@@ -101,6 +101,7 @@ export default function LoginScreen() {
       
       // Cek apakah kunci masuk (token) ada dalam jawaban server
       if (!data.token) {
+        // Kalau server lupa kasih token, anggap login belum sah
         setError('Token tidak diterima dari server');
         setLoading(false);
         return;
