@@ -1,5 +1,5 @@
 "use client";
-// Menandakan bahwa 
+// Menandakan bahwa file 
 const TOKEN_KEY = "wiibuk_token";
 
 export function setAuthToken(token: string) {
