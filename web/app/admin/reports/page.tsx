@@ -162,6 +162,7 @@ export default function ReportsPage() {
     if (mode === 'yearly') path = `/reports/yearly?year=${year}`;
     // Batalkan jika mode tidak dikenal atau kosong
     if (!path) return;
+    // Proteksi Terakhir: Pastikan admin sudah login sebelum server mulai membuat PDF
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk mendownload PDF laporan'); return; }
     try {
       const res = await authFetch(path, { method: 'GET' }, token || undefined);
