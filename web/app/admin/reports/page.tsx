@@ -256,6 +256,7 @@ export default function ReportsPage() {
         {mode === 'yearly' && (
           <div className="card p-4 mb-6">
             <label className="block mb-2">Tahun</label>
+            {/* Input Tahun: Mengatur tahun yang ingin dianalisa (misal: 2025, 2026) */}
             <input type="number" value={year} onChange={(e) => setYear(Number(e.target.value))} className="border rounded-md px-3 py-2" />
             <div className="mt-4 flex gap-2">
               <button className="btn-primary" onClick={loadYearly}>Load Chart</button>
