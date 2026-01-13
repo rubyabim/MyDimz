@@ -269,6 +269,7 @@ export default function ReportsPage() {
         )}
 
         <div className="card p-4">
+          {/* Kondisi Utama: Jika data grafik sudah tersedia */}
           {chartData ? (
             <div>
               <div className="mb-4 flex items-center justify-between">
