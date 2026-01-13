@@ -184,6 +184,7 @@ export default function ReportsPage() {
       const blob = await res.blob();
       // Buat "alamat palsu" (URL sementara) di memori browser untuk file tersebut
       const url = URL.createObjectURL(blob);
+      // Buka tab baru yang menampilkan file PDF tersebut
       window.open(url);
     } catch (err: any) {
       setErrorMessage(String(err?.message || err));
