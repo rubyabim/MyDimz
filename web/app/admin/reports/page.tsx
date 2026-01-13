@@ -55,6 +55,7 @@ export default function ReportsPage() {
         return;
       }
       data = await res.json();
+      // MEMBUAT GRAFIK PER JAM
       // Continue processing inside scope
     } catch (err: any) {
       setErrorMessage(String(err.message || err));
