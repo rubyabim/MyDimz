@@ -30,7 +30,7 @@ export async function getUserProfile() {
 
     // Jika token tidak ada, user dianggap belum login
     if (!token) return null;
-// Request 
+// Request ke 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:500/api"}/auth/me`,
       {
