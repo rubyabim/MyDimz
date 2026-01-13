@@ -35,6 +35,7 @@ export default function CartPage() {
         // Mengambil alamat server dari variabel lingkungan atau default ke localhost
         `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:500/api"}/sales`,
         {
+          // Menggunakan POST karena kita mengirim data baru untuk disimpan
           method: "POST",
           headers: {
             "Content-Type": "application/json",
