@@ -77,6 +77,7 @@ export default function ReportsPage() {
   const loadMonthly = async () => {
     // Ambil kunci akses (token) dari penyimpanan lokal
     const token = getAuthToken();
+    // Validasi: Jika token tidak ditemukan, hentikan proses dan beri peringatan
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk melihat laporan ini'); return; }
     let data: any;
     try {
