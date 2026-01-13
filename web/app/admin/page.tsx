@@ -113,6 +113,7 @@ export default function AdminDashboard() {
             {products.map((p) => (
               <div key={p.id} className="card p-4">
                 <div className="flex items-center gap-4">
+                  {/* Gambar produk: Pakai gambar cadangan kalau link aslinya rusak */}
                   <img src={p.image || '/default-product.svg'} alt={p.name} className="w-24 h-20 object-cover rounded" />
                   <div className="flex-1">
                     <div className="font-semibold">{p.name}</div>
