@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'Toko Kelontong MyDimz',   // Judul website
   description: 'Belanja kebutuhan sehari-hari dengan mudah', // Deskripsi website 
 };
-// RootLayout adalah 
+// RootLayout adalah  layout 
 export default function RootLayout({
   children,
 }: {
