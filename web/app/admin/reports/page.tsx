@@ -131,6 +131,7 @@ export default function ReportsPage() {
       data = await res.json();
     } catch (err: any) {
       // Tangkap error dan tampilkan pesan yang bisa dibaca admin
+      // Menggunakan String() untuk memastikan apa pun jenis errornya bisa tampil sebagai teks
       setErrorMessage(String(err.message || err));
       console.error('Yearly fetch error', err);
       return;
