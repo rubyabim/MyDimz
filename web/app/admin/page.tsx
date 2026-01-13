@@ -77,6 +77,7 @@ export default function AdminDashboard() {
         {/* Tetap tampilkan Header agar user bisa navigasi ke tempat lain */}
         <Header />
         <div className="container mx-auto px-4 py-12">
+          {/* Kotak pesan (Card) yang memberitahu bahwa akses ditolak */}
           <div className="card p-6">
             <h2 className="text-xl font-semibold mb-2">Admin dashboard</h2>
             <div className="text-sm text-gray-600">You must be logged in as admin to see this page. Please <Link href="/login" className="text-primary-600 underline">login</Link>.</div>
