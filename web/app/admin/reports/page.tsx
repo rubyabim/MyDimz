@@ -42,6 +42,7 @@ export default function ReportsPage() {
 
   const loadDaily = async () => {
     const token = getAuthToken();
+    // Keamanan: Cek apakah token ada sebelum memanggil server
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk melihat laporan ini'); return; }
     let data: any;
     try {
