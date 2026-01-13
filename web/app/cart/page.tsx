@@ -63,6 +63,7 @@ export default function CartPage() {
 
       // Clear cart dan redirect
       clearCart();
+      // Memberikan konfirmasi visual kepada pelanggan/kasir
       alert("Pembelian berhasil! Terima kasih telah berbelanja.");
       router.push("/");
     } catch (error) {
