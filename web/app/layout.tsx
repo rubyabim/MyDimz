@@ -1,6 +1,6 @@
 // Import tipe Metadata dari Next.js
 
-// 
+// Digunakan
 
 import type { Metadata } from 'next';
 import './globals.css';
