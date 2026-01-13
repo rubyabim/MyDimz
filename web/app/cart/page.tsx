@@ -48,6 +48,7 @@ export default function CartPage() {
               productId: item.id, // Hanya mengirimkan ID produk
               quantity: item.quantity, // Hanya mengirimkan ID produk
             })),
+            // Metode pembayaran yang dipilih 
             paymentMethod,
             notes: `Online order via web`,
           }),
