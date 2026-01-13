@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 // Biasanya berisi reset  CSS , font, dan variabel  warna
 import './globals.css';
 // Import CartProvider
-// Berfungsi  sebagai Context untuk state 
+// Berfungsi  sebagai Context untuk state keranjang 
 
 import { CartProvider } from './components/CartContext';
 
