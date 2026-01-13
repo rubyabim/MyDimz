@@ -274,6 +274,7 @@ export default function ReportsPage() {
             <div>
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-semibold">Grafik</h2>
+                {/* Menampilkan total uang dengan format Rupiah (menggunakan fungsi formatCurrency di awal tadi) */}
                 <div className="text-sm text-gray-500">Total: {summary ? formatCurrency(summary.totalSales) : '-'}</div>
               </div>
               <div className="w-full" style={{ maxHeight: 360 }}>
