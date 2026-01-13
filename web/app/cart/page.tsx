@@ -76,6 +76,7 @@ export default function CartPage() {
       alert("Gagal melakukan checkout. Silakan coba lagi.");
     } finally {
       // Mengembalikan status processing menjadi normal (false)
+      // Ini akan membuka kunci tombol "Bayar" di layar
       setProcessing(false);
     }
   };
