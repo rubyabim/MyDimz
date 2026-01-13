@@ -4,6 +4,7 @@
 
 import type { Metadata } from 'next';
 // Import global CSS
+// 
 import './globals.css';
 import { CartProvider } from './components/CartContext';
 
