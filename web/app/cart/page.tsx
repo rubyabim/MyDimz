@@ -13,6 +13,7 @@ export default function CartPage() {
   const [processing, setProcessing] = useState(false);
   // State untuk memilih cara bayar (default: tunai)
   const [paymentMethod, setPaymentMethod] = useState("cash");
+  // Alat untuk berpindah halaman (misal: ke halaman sukses setelah bayar)
   const router = useRouter();
 
   const handleCheckout = async () => {
