@@ -32,6 +32,7 @@ export default function AdminDashboard() {
 
   // Get token on client side only to avoid hydration mismatch
   useEffect(() => {
+    // Ambil "kunci" (token) yang tersimpan di memori HP/Browser
     const clientToken = getAuthToken();
     setToken(clientToken);
     setMounted(true);
