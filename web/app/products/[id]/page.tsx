@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 import { authFetch, fetchProductById } from "@/lib/api";
 import { getAuthToken } from "@/lib/clientAuth";
-
+// 
 type Product = {
   id: string;
   name: string;
