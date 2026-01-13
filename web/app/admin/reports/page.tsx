@@ -235,6 +235,7 @@ export default function ReportsPage() {
           <div className="card p-4 mb-6">
             <label className="block mb-2">Bulan, Tahun</label>
             <div className="flex gap-2">
+              {/* Pilihan Bulan: Membuat daftar angka 1 sampai 12 secara otomatis */}
               <select value={month} onChange={(e) => setMonth(Number(e.target.value))} className="border rounded-md px-3 py-2">
                 {Array.from({ length: 12 }, (_, idx) => <option key={idx} value={idx + 1}>{idx + 1}</option>)}
               </select>
