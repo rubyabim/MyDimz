@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 export default function CartPage() {
   // Mengambil fungsi & data keranjang dari "Context" global (useCart)
   const { items, updateQuantity, removeFromCart, clearCart, total } = useCart();
+  // State untuk mengontrol status loading saat proses bayar/checkout
   const [processing, setProcessing] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const router = useRouter();
