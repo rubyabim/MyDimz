@@ -165,6 +165,7 @@ export default function ReportsPage() {
     // Proteksi Terakhir: Pastikan admin sudah login sebelum server mulai membuat PDF
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk mendownload PDF laporan'); return; }
     try {
+      // Melakukan pemanggilan ke server (Request)
       const res = await authFetch(path, { method: 'GET' }, token || undefined);
       if (!res || !res.ok) {
         setErrorMessage('Failed to download PDF');
