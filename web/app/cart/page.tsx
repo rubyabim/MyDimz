@@ -19,6 +19,7 @@ export default function CartPage() {
   const handleCheckout = async () => {
     // Mengecek apakah ada barang di dalam keranjang
     if (items.length === 0) {
+      // Tampilkan peringatan instan kepada pengguna
       alert("Keranjang kosong!");
       return;
     }
