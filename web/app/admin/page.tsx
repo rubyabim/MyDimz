@@ -34,6 +34,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     // Ambil "kunci" (token) yang tersimpan di memori HP/Browser
     const clientToken = getAuthToken();
+    // Simpan token tersebut ke dalam state agar bisa dipakai komponen lain
     setToken(clientToken);
     setMounted(true);
   }, []);
