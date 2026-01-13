@@ -190,6 +190,7 @@ export default function ReportsPage() {
       // Ambil pesan kesalahan dan tampilkan ke layar (User Friendly)
       // Tanda ?. (optional chaining) memastikan kode tidak crash jika 'err' kosong
       setErrorMessage(String(err?.message || err));
+      // Catat detail kesalahan di sistem log untuk pemeriksaan teknis
       console.error('Download PDF error', err);
       return;
     }
