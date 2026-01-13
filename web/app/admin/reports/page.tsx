@@ -289,6 +289,7 @@ export default function ReportsPage() {
                 // Jika ada masalah (misal token habis atau server mati)
                 <div className="text-red-600">{errorMessage}</div>
               ) : (
+                // Tampilan default saat halaman baru dibuka
                 <div>Silakan pilih periode dan klik "Load Chart" untuk menampilkan grafik.</div>
               )}
             </div>
