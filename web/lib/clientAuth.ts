@@ -44,7 +44,7 @@ export async function getUserProfile() {
 // Jika response gagal (401 / 403 / dll)
     if (!response.ok) return null;
 
-    // Kembalikan data user dalam 
+    // Kembalikan data user dalam bentuk 
     return await response.json();
   } catch (error) {
     console.error("Error fetching user profile:", error);
