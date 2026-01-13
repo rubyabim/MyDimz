@@ -60,7 +60,6 @@ export default function ReportsPage() {
       console.error('Daily fetch error', err);
       return;
     }
-    // Create hourly summary
     // MEMBUAT GRAFIK PER JAM
     // Buat deret angka 0 sampai 23 (untuk 24 jam)
     const hours = Array.from({ length: 24 }, (_, i) => i);
