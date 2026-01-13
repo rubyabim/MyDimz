@@ -106,6 +106,7 @@ export default function ReportsPage() {
     const dayKeys = Object.keys(data.dailySummary).sort();
     // Buat label untuk sumbu X grafik (hanya mengambil angka tanggalnya saja, misal: 1, 2, 3...)
     const labels = dayKeys.map(d => new Date(d).toLocaleDateString('id-ID', { day: 'numeric' }));
+    // Ambil nilai uang (value) untuk setiap tanggal tersebut untuk mengisi tinggi batang grafik
     const vals = dayKeys.map(k => data.dailySummary[k]);
     setChartData({ labels, datasets: [{ label: `Penjualan ${month}/${year}`, data: vals, backgroundColor: 'rgba(31,122,235,0.6)' }] });
     setSummary({ totalSales: vals.reduce((a: number, b: number) => a + b, 0), transactions: (data.sales || []).length });
