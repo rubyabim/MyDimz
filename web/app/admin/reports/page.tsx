@@ -28,6 +28,7 @@ export default function ReportsPage() {
   const [summary, setSummary] = useState<any>(null);
   // Status keamanan untuk memastikan yang melihat adalah admin
   const [isAdmin, setIsAdmin] = useState(false);
+  // Menyimpan pesan jika terjadi kesalahan saat menarik data laporan
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
