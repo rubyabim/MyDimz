@@ -116,9 +116,16 @@ export default function Products() {
       }
 
       setProducts(productList);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error loading products:", error);
-      setError("Tidak dapat terhubung ke server. Silakan coba lagi nanti.");
+      console.error("Error details:", error?.message || error);
+      
+      // Show more helpful error message
+      const errorMsg = error?.message?.includes('fetch')
+        ? "Tidak dapat terhubung ke server. Pastikan API running di port 500."
+        : "Gagal memuat produk. Silakan coba lagi.";
+      
+      setError(errorMsg);
       setProducts([]);
     } finally {
       setLoading(false);

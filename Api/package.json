@@ -7,8 +7,9 @@
     ".": "./dist/index.js"
   },
   "scripts": {
+    "prestart": "npm run build",
     "start": "node dist/server.js",
-    "predev": "npx prisma generate --schema prisma/schema.prisma",
+    "predev": "npx prisma generate --schema prisma/schema.prisma || echo Prisma generate failed (often file lock on Windows); continuing...",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "db:generate": "npx prisma generate --schema prisma/schema.prisma",

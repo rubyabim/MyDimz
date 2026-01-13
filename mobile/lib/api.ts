@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 
 // Detect API base depending on environment (web / android emulator / override via env)
 export const API_BASE = (() => {
-  const API_PORT = Number(process.env.EXPO_PUBLIC_API_PORT || 500);
+  const API_PORT = Number(process.env.EXPO_PUBLIC_API_PORT || 5000);
   const API_PATH = '/api';
 
   const normalize = (baseUrl: string) => baseUrl.replace(/\/+$/, '');

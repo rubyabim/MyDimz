@@ -59,29 +59,46 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
       setLoading(true);
       setError('');
       
-      console.log('📦 Loading products...');
-      await getToken();
+      console.log('📦 Loading products from API...');
 
       const data = await fetchPublicProducts(1, 8);
       
+<<<<<<< Updated upstream
       // Cek kalau datanya kosong atau server gak respon
+=======
+      // Check if data exists and has valid structure
+>>>>>>> Stashed changes
       if (!data) {
-        console.error('❌ No data received from API');
+        console.error('❌ No response from API');
         setProducts([]);
         setError(
-          'Tidak dapat terhubung ke server. Pastikan API running di port 500. Jika pakai Android Emulator gunakan 10.0.2.2:500, atau set EXPO_PUBLIC_API_BASE_URL ke IP komputer kamu (mis. http://192.168.x.x:500/api).'
+          'Tidak dapat terhubung ke server. Pastikan API running di port 5000.'
         );
         setLoading(false);
         return;
       }
 
-      console.log('✅ Products loaded:', data);
-      setProducts(data.products || data);
+      console.log('✅ API Response:', JSON.stringify(data, null, 2));
+      
+      // Extract products array - handle different response formats
+      let productsArray = [];
+      if (data.products && Array.isArray(data.products)) {
+        productsArray = data.products;
+      } else if (Array.isArray(data)) {
+        productsArray = data;
+      }
+      
+      console.log('✅ Products extracted:', productsArray.length, 'items');
+      setProducts(productsArray);
       setLoading(false);
-    } catch (err) {
-      console.error('Error loading products:', err);
+      
+      if (productsArray.length === 0) {
+        console.log('⚠️ No products available in database');
+      }
+    } catch (err: any) {
+      console.error('❌ Error loading products:', err?.message || err);
       setProducts([]);
-      setError('Gagal memuat produk');
+      setError(`Gagal memuat produk: ${err?.message || 'Network error'}`);
       setLoading(false);
     }
   };

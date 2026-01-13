@@ -6,8 +6,8 @@ const destDir = path.resolve(__dirname, '../dist');
 const dest = path.resolve(destDir, 'openapi.yaml');
 
 if (!fs.existsSync(src)) {
-  console.error('openapi.yaml not found in project root');
-  process.exit(1);
+  console.warn('openapi.yaml not found in project root; skipping copy');
+  process.exit(0);
 }
 
 if (!fs.existsSync(destDir)) {

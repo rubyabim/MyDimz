@@ -6,8 +6,8 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import MobileHeader from '@/components/Header';
 
 export default function LoginScreen() {
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -58,8 +58,12 @@ export default function LoginScreen() {
       
       // Kalau tidak ada respon sama sekali (server mati atau alamat salah)
       if (!res) {
+<<<<<<< Updated upstream
         // Susun pesan error yang lengkap buat panduan perbaikan
         const errorMsg = `Tidak dapat terhubung ke server.\nAPI Base: ${API_BASE}\nPastikan API running di port 500`;
+=======
+        const errorMsg = `Tidak dapat terhubung ke server.\nAPI Base: ${API_BASE}\nPastikan API running di port 5000`;
+>>>>>>> Stashed changes
         console.error(errorMsg);
         setError(errorMsg);
         setLoading(false);
