@@ -140,6 +140,7 @@ export default function ReportsPage() {
       // Karena 'data' gagal diambil, kita tidak boleh lanjut ke bagian pembuatan grafik
       return;
     }
+    // Ambil semua kunci bulan (01, 02, dst) dari data server dan urutkan
     const monthKeys = Object.keys(data.monthlyTotals).sort();
     const labels = monthKeys.map(m => new Date(`${year}-${m}-01`).toLocaleString('id-ID', { month: 'short' }));
     const vals = monthKeys.map(k => data.monthlyTotals[k]);
