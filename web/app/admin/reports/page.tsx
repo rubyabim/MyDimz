@@ -63,6 +63,7 @@ export default function ReportsPage() {
     // MEMBUAT GRAFIK PER JAM
     // Buat deret angka 0 sampai 23 (untuk 24 jam)
     const hours = Array.from({ length: 24 }, (_, i) => i);
+    // Filter data transaksi: masukkan setiap transaksi ke "keranjang" jam yang sesuai
     const vals = hours.map((h) => {
       const total = (data.sales || []).filter((s: any) => new Date(s.date).getHours() === h).reduce((a: number, s: any) => a + s.total, 0);
       return total;
