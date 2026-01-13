@@ -214,6 +214,7 @@ export default function ReportsPage() {
           <button className={`btn ${mode === 'yearly' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('yearly')}>Tahunan</button>
         </div>
 
+        {/* Kondisi: Panel ini hanya muncul jika mode yang dipilih adalah 'daily' */}
         {mode === 'daily' && (
           <div className="card p-4 mb-6">
             <label className="block mb-2">Tanggal</label>
