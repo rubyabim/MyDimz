@@ -1,7 +1,7 @@
 "use client";
 // Menandakan bahwa file ini dijalankan di sisi client (browser)
 // Diperlukan karena menggunakan localStorage dan window
-// Key untuk menyimpan 
+// Key untuk menyimpan token 
 const TOKEN_KEY = "wiibuk_token";
 
 export function setAuthToken(token: string) {
