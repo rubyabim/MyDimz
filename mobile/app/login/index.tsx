@@ -58,12 +58,8 @@ export default function LoginScreen() {
       
       // Kalau tidak ada respon sama sekali (server mati atau alamat salah)
       if (!res) {
-<<<<<<< Updated upstream
         // Susun pesan error yang lengkap buat panduan perbaikan
-        const errorMsg = `Tidak dapat terhubung ke server.\nAPI Base: ${API_BASE}\nPastikan API running di port 500`;
-=======
         const errorMsg = `Tidak dapat terhubung ke server.\nAPI Base: ${API_BASE}\nPastikan API running di port 5000`;
->>>>>>> Stashed changes
         console.error(errorMsg);
         setError(errorMsg);
         setLoading(false);

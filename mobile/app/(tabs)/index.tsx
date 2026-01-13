@@ -63,11 +63,7 @@ const textSecondary = colorScheme === 'dark' ? '#94A3B8' : '#475569';
 
       const data = await fetchPublicProducts(1, 8);
       
-<<<<<<< Updated upstream
       // Cek kalau datanya kosong atau server gak respon
-=======
-      // Check if data exists and has valid structure
->>>>>>> Stashed changes
       if (!data) {
         console.error('❌ No response from API');
         setProducts([]);
