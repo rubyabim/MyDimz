@@ -6,6 +6,8 @@ import type { Metadata } from 'next';
 // Import global CSS
 // Biasanya berisi reset  CSS , font, dan variabel  warna
 import './globals.css';
+// 
+
 import { CartProvider } from './components/CartContext';
 
 export const metadata: Metadata = {
