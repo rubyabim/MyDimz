@@ -109,6 +109,7 @@ export default function AdminDashboard() {
         ) : (
           // Membuat tata letak kotak-kotak (grid) yang responsif
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Mengulang kode di bawah ini untuk setiap produk yang ada di data */}
             {products.map((p) => (
               <div key={p.id} className="card p-4">
                 <div className="flex items-center gap-4">
