@@ -89,6 +89,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Header utama aplikasi */}
       <Header />
       <div className="container mx-auto px-4 py-12">
         <div className="flex justify-between items-center mb-6">
