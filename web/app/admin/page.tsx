@@ -19,6 +19,7 @@ type Product = {
 export default function AdminDashboard() {
   // Menyimpan daftar barang yang ditarik dari database
   const [products, setProducts] = useState<Product[]>([]);
+  // Status loading untuk nampilin spinner saat ambil data
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [mounted, setMounted] = useState(false);
