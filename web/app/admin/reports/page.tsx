@@ -146,6 +146,7 @@ export default function ReportsPage() {
     const labels = monthKeys.map(m => new Date(`${year}-${m}-01`).toLocaleString('id-ID', { month: 'short' }));
     // Ambil total nilai penjualan untuk setiap bulan tersebut
     const vals = monthKeys.map(k => data.monthlyTotals[k]);
+    // Kirim data yang sudah rapi ke state grafik untuk ditampilkan di layar
     setChartData({ labels, datasets: [{ label: `Penjualan ${year}`, data: vals, backgroundColor: 'rgba(31,122,235,0.6)' }] });
     setSummary({ totalSales: vals.reduce((a: number, b: number) => a + b, 0), transactions: (data.sales || []).length });
   };
