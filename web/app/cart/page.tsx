@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function CartPage() {
+  // Mengambil fungsi & data keranjang dari "Context" global (useCart)
   const { items, updateQuantity, removeFromCart, clearCart, total } = useCart();
   const [processing, setProcessing] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("cash");
