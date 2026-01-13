@@ -24,6 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+       // Tag HTML utama
     <html lang="id">
       <body className="min-h-screen font-poppins bg-[var(--color-bg)] overflow-y-auto overflow-x-hidden">
         <CartProvider>
