@@ -160,6 +160,7 @@ export default function ReportsPage() {
     if (mode === 'daily') path = `/reports/daily?date=${encodeURIComponent(date)}`;
     if (mode === 'monthly') path = `/reports/monthly?year=${year}&month=${String(month)}`;
     if (mode === 'yearly') path = `/reports/yearly?year=${year}`;
+    // Batalkan jika mode tidak dikenal atau kosong
     if (!path) return;
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk mendownload PDF laporan'); return; }
     try {
