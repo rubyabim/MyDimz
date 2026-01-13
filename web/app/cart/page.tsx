@@ -68,6 +68,7 @@ export default function CartPage() {
       // Mengarahkan pengguna kembali ke halaman utama (Beranda)
       router.push("/");
     } catch (error) {
+      // Mencatat detail teknis di konsol browser
       console.error("Error:", error);
       alert("Gagal melakukan checkout. Silakan coba lagi.");
     } finally {
