@@ -19,6 +19,7 @@ type Product = {
 };
 
 export default function EditProductPage() {
+  // 
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const id = params?.id;
