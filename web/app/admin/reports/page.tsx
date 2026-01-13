@@ -79,6 +79,7 @@ export default function ReportsPage() {
     const token = getAuthToken();
     // Validasi: Jika token tidak ditemukan, hentikan proses dan beri peringatan
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk melihat laporan ini'); return; }
+    // Siapkan variabel kosong untuk menampung hasil dari server nanti
     let data: any;
     try {
       const res = await authFetch(`/reports/monthly/json?year=${year}&month=${String(month)}`, { method: 'GET' }, token || undefined);
