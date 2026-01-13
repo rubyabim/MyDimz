@@ -222,8 +222,8 @@ export default function ReportsPage() {
             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="border rounded-md px-3 py-2" />
             {/* Tombol Aksi: Untuk memuat data visual atau mengunduh dokumen fisik */}
             <div className="mt-4 flex gap-2">
-              <button className="btn-primary" onClick={loadDaily}>Load Chart</button>
               {/* Tombol 1: Memicu pembaruan visual di layar */}
+              <button className="btn-primary" onClick={loadDaily}>Load Chart</button>
               <button className="btn-ghost" onClick={downloadPdf}>Download PDF</button>
             </div>
           </div>
