@@ -204,6 +204,7 @@ export default function ReportsPage() {
       <Header />
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-2xl font-bold mb-4">Laporan Penjualan</h1>
+        {/* Kontainer Tombol Navigasi (Tabs) */}
         <div className="flex gap-2 mb-6">
           <button className={`btn ${mode === 'daily' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('daily')}>Harian</button>
           <button className={`btn ${mode === 'monthly' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('monthly')}>Bulanan</button>
