@@ -277,6 +277,7 @@ export default function ReportsPage() {
                 {/* Menampilkan total uang dengan format Rupiah (menggunakan fungsi formatCurrency di awal tadi) */}
                 <div className="text-sm text-gray-500">Total: {summary ? formatCurrency(summary.totalSales) : '-'}</div>
               </div>
+              {/* Komponen Grafik Bar: Tempat data divisualisasikan */}
               <div className="w-full" style={{ maxHeight: 360 }}>
                 <Bar data={chartData} />
               </div>
