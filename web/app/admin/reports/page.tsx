@@ -188,6 +188,7 @@ export default function ReportsPage() {
       window.open(url);
     } catch (err: any) {
       // Ambil pesan kesalahan dan tampilkan ke layar (User Friendly)
+      // Tanda ?. (optional chaining) memastikan kode tidak crash jika 'err' kosong
       setErrorMessage(String(err?.message || err));
       console.error('Download PDF error', err);
       return;
