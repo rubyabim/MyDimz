@@ -116,6 +116,7 @@ export default function ReportsPage() {
 
   const loadYearly = async () => {
     const token = getAuthToken();
+    // Keamanan: Pastikan hanya admin bertoken yang bisa menarik data keuangan tahunan
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk melihat laporan ini'); return; }
     let data: any;
     try {
