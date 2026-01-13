@@ -156,6 +156,7 @@ export default function ReportsPage() {
     // Ambil token keamanan
     const token = getAuthToken();
     let path = '';
+    // Pemilihan Jalur (Routing): Menentukan alamat API yang tepat
     if (mode === 'daily') path = `/reports/daily?date=${encodeURIComponent(date)}`;
     if (mode === 'monthly') path = `/reports/monthly?year=${year}&month=${String(month)}`;
     if (mode === 'yearly') path = `/reports/yearly?year=${year}`;
