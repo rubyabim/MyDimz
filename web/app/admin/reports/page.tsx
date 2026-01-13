@@ -97,6 +97,7 @@ export default function ReportsPage() {
     } catch (err: any) {
       // Tampilkan pesan kesalahan ke layar agar admin tahu ada masalah
       setErrorMessage(String(err.message || err));
+      // Catat detail teknis di konsol untuk keperluan perbaikan (debugging)
       console.error('Monthly fetch error', err);
       return;
     }
