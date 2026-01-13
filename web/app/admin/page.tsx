@@ -127,6 +127,7 @@ export default function AdminDashboard() {
                     <button
                       className="btn-ghost"
                       onClick={async () => {
+                        // Konfirmasi: Biar nggak sengaja kepencet hapus
                         if (!confirm(`Delete product ${p.name}?`)) return;
                         const res = await authFetch(`/products/${p.id}`, { method: 'DELETE' }, token || undefined);
                         if (!res || !res.ok) {
