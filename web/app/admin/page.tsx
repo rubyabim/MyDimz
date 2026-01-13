@@ -116,6 +116,7 @@ export default function AdminDashboard() {
                   {/* Gambar produk: Pakai gambar cadangan kalau link aslinya rusak */}
                   <img src={p.image || '/default-product.svg'} alt={p.name} className="w-24 h-20 object-cover rounded" />
                   <div className="flex-1">
+                    {/* Info Utama: Nama, Stok, dan Harga dalam format Rupiah */}
                     <div className="font-semibold">{p.name}</div>
                     <div className="text-sm text-slate-600">Stock: {p.stock}</div>
                     <div className="text-sm text-primary-600">{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(p.price)}</div>
