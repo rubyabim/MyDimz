@@ -136,6 +136,7 @@ export default function ReportsPage() {
       // Catat detail teknis di log developer
       // Ini membantu kamu melacak apakah errornya karena server mati atau format data salah
       console.error('Yearly fetch error', err);
+      // Hentikan sisa kode di bawahnya
       return;
     }
     const monthKeys = Object.keys(data.monthlyTotals).sort();
