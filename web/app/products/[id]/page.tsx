@@ -19,7 +19,8 @@ type Product = {
 };
 
 export default function EditProductPage() {
-  // 
+    // Router untuk navigasi & params untuk mengambil ID dari URL
+
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const id = params?.id;
