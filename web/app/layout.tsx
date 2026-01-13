@@ -1,6 +1,6 @@
 // Import tipe Metadata dari Next.js
 
-// Digunakan untuk mengatur SEO seperti
+// Digunakan untuk mengatur SEO seperti title
 
 import type { Metadata } from 'next';
 import './globals.css';
