@@ -242,6 +242,7 @@ export default function ReportsPage() {
               {/* Input Tahun: Memasukkan angka tahun (misal: 2026) */}
               <input type="number" value={year} onChange={(e) => setYear(Number(e.target.value))} className="border rounded-md px-3 py-2" />
             </div>
+            {/* Tombol Aksi Bulanan */}
             <div className="mt-4 flex gap-2">
               <button className="btn-primary" onClick={loadMonthly}>Load Chart</button>
               <button className="btn-ghost" onClick={downloadPdf}>Download PDF</button>
