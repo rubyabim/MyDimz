@@ -18,7 +18,7 @@ export function getAuthToken(): string | null {
 }
 // Menghapus token autentikasi (logout)
 export function clearAuthToken() {
-  // Cegah 
+  // Cegah error 
   if (typeof window === "undefined") return;
   localStorage.removeItem(TOKEN_KEY);
 }
