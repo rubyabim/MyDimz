@@ -218,6 +218,7 @@ export default function ReportsPage() {
         {mode === 'daily' && (
           <div className="card p-4 mb-6">
             <label className="block mb-2">Tanggal</label>
+            {/* Input Tanggal: Memungkinkan admin memilih hari spesifik yang ingin dipantau */}
             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="border rounded-md px-3 py-2" />
             <div className="mt-4 flex gap-2">
               <button className="btn-primary" onClick={loadDaily}>Load Chart</button>
