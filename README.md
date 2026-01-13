@@ -84,7 +84,7 @@ Website Public:
 
 DATABASE
 
-Menggunakan SQLite dengan Prisma ORM. File database: backend/dev.db
+Menggunakan posgl . File database: backend/dev.db
 
 Tabel:
 - users- Data user admin/kasir
