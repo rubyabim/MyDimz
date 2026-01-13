@@ -25,6 +25,7 @@ export default function AdminDashboard() {
   const [search, setSearch] = useState('');
   // Memastikan komponen sudah menempel di layar (cegah error hydration)
   const [mounted, setMounted] = useState(false);
+  // Menyimpan kunci akses (token) untuk otorisasi ke server
   const [token, setToken] = useState<string | null>(null);
   const router = useRouter();
 
