@@ -87,7 +87,7 @@ export default function ReportsPage() {
       // Jika respon server bukan "OK" (misal error 404 atau 500)
       if (!res.ok) {
         setErrorMessage('Failed to fetch monthly data');
-        // Mencoba membaca detail pesan error dari body respon untuk bantuan debug
+        // Mencoba membaca detail pesan error dari body respon untuk bantuan debug.
         const body = await res.text().catch(() => null);
         console.error('Monthly fetch failed', res.status, body);
         return;
