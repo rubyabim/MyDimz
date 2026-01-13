@@ -120,6 +120,7 @@ export default function ReportsPage() {
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk melihat laporan ini'); return; }
     let data: any;
     try {
+      // Ambil data dari server berdasarkan parameter Tahun (misal: 2026)
       const res = await authFetch(`/reports/yearly/json?year=${year}`, { method: 'GET' }, token || undefined);
       if (!res.ok) {
         setErrorMessage('Failed to fetch yearly data');
