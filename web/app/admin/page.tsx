@@ -43,6 +43,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const load = async () => {
       setLoading(true);
+      // Keamanan: Jika tidak ada token (belum login), kosongkan daftar dan berhenti
       if (!token) {
         setProducts([]);
         setLoading(false);
