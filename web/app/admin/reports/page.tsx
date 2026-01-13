@@ -32,6 +32,7 @@ export default function ReportsPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
+    // Set tanggal otomatis ke hari ini (format: YYYY-MM-DD)
     setDate(new Date().toISOString().slice(0, 10));
     setIsAdmin(!!getAuthToken());
   }, []);
