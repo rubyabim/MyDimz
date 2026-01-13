@@ -11,7 +11,7 @@ import './globals.css';
 
 import { CartProvider } from './components/CartContext';
 // Metadata website (SEO)
-// Akan  otomatis  digunakan  oleh 
+// Akan  otomatis  digunakan  oleh  Next.js
 export const metadata: Metadata = {
   title: 'Toko Kelontong MyDimz',
   description: 'Belanja kebutuhan sehari-hari dengan mudah',
