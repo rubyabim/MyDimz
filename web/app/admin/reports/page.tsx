@@ -130,6 +130,7 @@ export default function ReportsPage() {
       }
       data = await res.json();
     } catch (err: any) {
+      // Tangkap error dan tampilkan pesan yang bisa dibaca admin
       setErrorMessage(String(err.message || err));
       console.error('Yearly fetch error', err);
       return;
