@@ -69,6 +69,7 @@ export default function CartPage() {
       router.push("/");
     } catch (error) {
       // Mencatat detail teknis di konsol browser
+      // Sangat berguna bagi pengembang untuk mendiagnosa apakah masalahnya ada di koneksi atau logika server
       console.error("Error:", error);
       alert("Gagal melakukan checkout. Silakan coba lagi.");
     } finally {
