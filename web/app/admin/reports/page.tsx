@@ -153,6 +153,7 @@ export default function ReportsPage() {
   };
 
   const downloadPdf = async () => {
+    // Ambil token keamanan
     const token = getAuthToken();
     let path = '';
     if (mode === 'daily') path = `/reports/daily?date=${encodeURIComponent(date)}`;
