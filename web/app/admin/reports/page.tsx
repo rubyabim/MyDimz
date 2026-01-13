@@ -133,6 +133,7 @@ export default function ReportsPage() {
       // Tangkap error dan tampilkan pesan yang bisa dibaca admin
       // Menggunakan String() untuk memastikan apa pun jenis errornya bisa tampil sebagai teks
       setErrorMessage(String(err.message || err));
+      // Catat detail teknis di log developer
       console.error('Yearly fetch error', err);
       return;
     }
