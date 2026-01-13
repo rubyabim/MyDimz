@@ -27,6 +27,7 @@ export default function AdminDashboard() {
   const [mounted, setMounted] = useState(false);
   // Menyimpan kunci akses (token) untuk otorisasi ke server
   const [token, setToken] = useState<string | null>(null);
+  // Alat navigasi untuk pindah-pindah halaman (misal ke form tambah produk)
   const router = useRouter();
 
   // Get token on client side only to avoid hydration mismatch
