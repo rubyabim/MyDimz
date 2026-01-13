@@ -31,7 +31,7 @@ export default function EditProductPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [file, setFile] = useState<File | null>(null);
-//
+// Cek apakah user adalah admin
   const isAdmin = typeof window !== "undefined" && Boolean(getAuthToken());
 
   // Load product data
