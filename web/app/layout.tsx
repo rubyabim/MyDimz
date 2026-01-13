@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 // Import global CSS
 // Biasanya berisi reset  CSS , font, dan variabel  warna
 import './globals.css';
-// Import 
+// Import CartProvider
 
 import { CartProvider } from './components/CartContext';
 
