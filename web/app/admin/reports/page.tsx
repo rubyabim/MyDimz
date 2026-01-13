@@ -22,6 +22,7 @@ export default function ReportsPage() {
   const [date, setDate] = useState('');
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
+  // Menyimpan data untuk grafik (misal: grafik batang atau garis penjualan)
   const [chartData, setChartData] = useState(null as any);
   const [summary, setSummary] = useState<any>(null);
   const [isAdmin, setIsAdmin] = useState(false);
