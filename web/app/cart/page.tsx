@@ -71,6 +71,7 @@ export default function CartPage() {
       // Mencatat detail teknis di konsol browser
       // Sangat berguna bagi pengembang untuk mendiagnosa apakah masalahnya ada di koneksi atau logika server
       console.error("Error:", error);
+      // Memberikan peringatan kepada pengguna
       alert("Gagal melakukan checkout. Silakan coba lagi.");
     } finally {
       setProcessing(false);
