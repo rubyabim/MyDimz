@@ -4,7 +4,7 @@
 
 import type { Metadata } from 'next';
 // Import global CSS
-// Biasanya berisi reset  CSS , font,
+// Biasanya berisi reset  CSS , font, dan 
 import './globals.css';
 import { CartProvider } from './components/CartContext';
 
