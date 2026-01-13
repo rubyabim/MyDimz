@@ -28,7 +28,7 @@ export async function getUserProfile() {
     // Ambil token dari localStorage
     const token = getAuthToken();
 
-    // Jika token 
+    // Jika token tidak 
     if (!token) return null;
 
     const response = await fetch(
