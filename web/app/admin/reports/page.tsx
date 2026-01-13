@@ -92,6 +92,7 @@ export default function ReportsPage() {
         console.error('Monthly fetch failed', res.status, body);
         return;
       }
+      // Jika sukses, ubah format respon mentah menjadi objek JSON
       data = await res.json();
     } catch (err: any) {
       setErrorMessage(String(err.message || err));
