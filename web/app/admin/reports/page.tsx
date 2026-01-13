@@ -70,6 +70,7 @@ export default function ReportsPage() {
     });
     // Simpan hasil ke state untuk ditampilkan di Grafik
     setChartData({ labels: hours.map(h => `${h}:00`), datasets: [{ label: `Penjualan ${date}`, data: vals, backgroundColor: 'rgba(31,122,235,0.6)' }] });
+    // Simpan ringkasan: Total Uang dan Total Transaksi
     setSummary({ totalSales: (data.sales || []).reduce((a: number, s: any) => a + s.total, 0), transactions: (data.sales || []).length });
   };
 
