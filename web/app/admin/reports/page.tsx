@@ -167,6 +167,7 @@ export default function ReportsPage() {
     try {
       // Melakukan pemanggilan ke server (Request)
       const res = await authFetch(path, { method: 'GET' }, token || undefined);
+      // Jika respon kosong atau statusnya bukan "Sukses" (misal error 404, 401, atau 500)
       if (!res || !res.ok) {
         setErrorMessage('Failed to download PDF');
         const body = await res.text().catch(() => null);
