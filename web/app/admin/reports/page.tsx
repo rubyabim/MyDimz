@@ -82,6 +82,7 @@ export default function ReportsPage() {
     // Siapkan variabel kosong untuk menampung hasil dari server nanti
     let data: any;
     try {
+      // Mengambil data dari server dengan menyertakan parameter Tahun, Bulan, dan Token
       const res = await authFetch(`/reports/monthly/json?year=${year}&month=${String(month)}`, { method: 'GET' }, token || undefined);
       if (!res.ok) {
         setErrorMessage('Failed to fetch monthly data');
