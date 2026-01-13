@@ -41,6 +41,7 @@ export default function CartPage() {
             // Memberitahu server bahwa data yang dikirim berbentuk JSON
             "Content-Type": "application/json",
           },
+          // Body: Data pesanan yang sudah dikonversi menjadi teks (string)
           body: JSON.stringify({
             customerId: 0, // Untuk customer umum
             items: items.map((item) => ({
