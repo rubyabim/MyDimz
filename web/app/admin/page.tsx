@@ -74,6 +74,7 @@ export default function AdminDashboard() {
   if (!token) {
     return (
       <div className="min-h-screen bg-gray-50">
+        {/* Tetap tampilkan Header agar user bisa navigasi ke tempat lain */}
         <Header />
         <div className="container mx-auto px-4 py-12">
           <div className="card p-6">
