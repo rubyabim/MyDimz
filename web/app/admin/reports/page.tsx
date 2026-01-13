@@ -148,6 +148,7 @@ export default function ReportsPage() {
     const vals = monthKeys.map(k => data.monthlyTotals[k]);
     // Kirim data yang sudah rapi ke state grafik untuk ditampilkan di layar
     setChartData({ labels, datasets: [{ label: `Penjualan ${year}`, data: vals, backgroundColor: 'rgba(31,122,235,0.6)' }] });
+    // Hitung ringkasan akhir: akumulasi omzet setahun dan jumlah total transaksi
     setSummary({ totalSales: vals.reduce((a: number, b: number) => a + b, 0), transactions: (data.sales || []).length });
   };
 
