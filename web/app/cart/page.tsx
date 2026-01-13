@@ -55,6 +55,7 @@ export default function CartPage() {
         }
       );
 
+      // Mengecek apakah status respon dari server berada di luar rentang sukses (200-299)
       if (!response.ok) {
         throw new Error("Checkout gagal");
       }
