@@ -68,6 +68,7 @@ export default function ReportsPage() {
       const total = (data.sales || []).filter((s: any) => new Date(s.date).getHours() === h).reduce((a: number, s: any) => a + s.total, 0);
       return total;
     });
+    // Simpan hasil ke state untuk ditampilkan di Grafik
     setChartData({ labels: hours.map(h => `${h}:00`), datasets: [{ label: `Penjualan ${date}`, data: vals, backgroundColor: 'rgba(31,122,235,0.6)' }] });
     setSummary({ totalSales: (data.sales || []).reduce((a: number, s: any) => a + s.total, 0), transactions: (data.sales || []).length });
   };
