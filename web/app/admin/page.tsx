@@ -21,6 +21,7 @@ export default function AdminDashboard() {
   const [products, setProducts] = useState<Product[]>([]);
   // Status loading untuk nampilin spinner saat ambil data
   const [loading, setLoading] = useState(true);
+  // Menyimpan teks pencarian kalau admin mau cari barang tertentu
   const [search, setSearch] = useState('');
   const [mounted, setMounted] = useState(false);
   const [token, setToken] = useState<string | null>(null);
