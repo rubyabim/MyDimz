@@ -44,8 +44,8 @@ export default function CartPage() {
           // Body: Data pesanan yang sudah dikonversi menjadi teks (string)
           body: JSON.stringify({
             customerId: 0, // Identitas pelanggan (0 berarti pelanggan anonim/umum)
-            items: items.map((item) => ({ // Hanya mengirimkan ID produk
-              productId: item.id,
+            items: items.map((item) => ({ 
+              productId: item.id, // Hanya mengirimkan ID produk
               quantity: item.quantity,
             })),
             paymentMethod,
