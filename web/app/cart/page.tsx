@@ -22,6 +22,7 @@ export default function CartPage() {
       // Tampilkan peringatan instan kepada pengguna
       alert("Keranjang kosong!");
       // Berhenti di sini (Early Return)
+      // Jangan biarkan kode pembayaran di bawahnya berjalan
       return;
     }
 
