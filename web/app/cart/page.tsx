@@ -72,6 +72,7 @@ export default function CartPage() {
       // Sangat berguna bagi pengembang untuk mendiagnosa apakah masalahnya ada di koneksi atau logika server
       console.error("Error:", error);
       // Memberikan peringatan kepada pengguna
+      // Menggunakan alert agar pengguna tahu bahwa transaksi belum tercatat dan mereka perlu mencoba lagi
       alert("Gagal melakukan checkout. Silakan coba lagi.");
     } finally {
       setProcessing(false);
