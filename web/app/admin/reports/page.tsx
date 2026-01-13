@@ -239,6 +239,7 @@ export default function ReportsPage() {
               <select value={month} onChange={(e) => setMonth(Number(e.target.value))} className="border rounded-md px-3 py-2">
                 {Array.from({ length: 12 }, (_, idx) => <option key={idx} value={idx + 1}>{idx + 1}</option>)}
               </select>
+              {/* Input Tahun: Memasukkan angka tahun (misal: 2026) */}
               <input type="number" value={year} onChange={(e) => setYear(Number(e.target.value))} className="border rounded-md px-3 py-2" />
             </div>
             <div className="mt-4 flex gap-2">
