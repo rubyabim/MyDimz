@@ -25,7 +25,7 @@ export function clearAuthToken() {
 // Mengambil data profil user  yang sedang login Menggunakan endpoint /auth/me
 export async function getUserProfile() {
   try {
-    // Ambil token dari 
+    // Ambil token dari localStorage
     const token = getAuthToken();
     if (!token) return null;
 
