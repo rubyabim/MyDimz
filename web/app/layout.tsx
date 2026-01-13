@@ -1,5 +1,7 @@
 // Import tipe Metadata dari Next.js
 
+// 
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { CartProvider } from './components/CartContext';
