@@ -26,6 +26,7 @@ export default function ReportsPage() {
   const [chartData, setChartData] = useState(null as any);
   // Menyimpan ringkasan angka (misal: total omzet, total barang terjual)
   const [summary, setSummary] = useState<any>(null);
+  // Status keamanan untuk memastikan yang melihat adalah admin
   const [isAdmin, setIsAdmin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
