@@ -103,6 +103,7 @@ export default function AdminDashboard() {
           <input value={search} onChange={(e) => setSearch(e.target.value)} className="w-full border rounded-md px-4 py-2" placeholder="Search products..." />
         </div>
 
+        {/* Pengecekan status: Jika sedang memuat, tampilkan teks loading */}
         {loading ? (
           <div>Loading admin products...</div>
         ) : (
