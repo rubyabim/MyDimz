@@ -122,6 +122,7 @@ export default function AdminDashboard() {
                     <div className="text-sm text-primary-600">{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(p.price)}</div>
                   </div>
                   <div className="flex flex-col gap-2">
+                    {/* Tombol Edit: Mengarahkan admin ke halaman edit berdasarkan ID produk */}
                     <Link href={`/products/${p.id}`} className="btn-ghost">Edit</Link>
                     <button
                       className="btn-ghost"
