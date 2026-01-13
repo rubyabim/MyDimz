@@ -95,6 +95,7 @@ export default function ReportsPage() {
       // Jika sukses, ubah format respon mentah menjadi objek JSON
       data = await res.json();
     } catch (err: any) {
+      // Tampilkan pesan kesalahan ke layar agar admin tahu ada masalah
       setErrorMessage(String(err.message || err));
       console.error('Monthly fetch error', err);
       return;
