@@ -14,7 +14,7 @@ import { CartProvider } from './components/CartContext';
 // Akan  otomatis  digunakan  oleh  Next.js
 export const metadata: Metadata = {
   title: 'Toko Kelontong MyDimz',   // Judul website
-  description: 'Belanja kebutuhan sehari-hari dengan mudah', //
+  description: 'Belanja kebutuhan sehari-hari dengan mudah', // Deskripsi 
 };
 
 export default function RootLayout({
