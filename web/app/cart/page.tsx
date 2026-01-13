@@ -27,6 +27,7 @@ export default function CartPage() {
     }
 
     try {
+      // Aktifkan status "sedang diproses"
       setProcessing(true);
 
       // Simpan transaksi ke API
