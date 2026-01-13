@@ -46,6 +46,7 @@ export default function ReportsPage() {
     if (!token) { setErrorMessage('Anda harus login sebagai admin untuk melihat laporan ini'); return; }
     let data: any;
     try {
+      // Ambil data dari API untuk tanggal tertentu
       const res = await authFetch(`/reports/daily/json?date=${encodeURIComponent(date)}`, { method: 'GET' }, token || undefined);
       if (!res.ok) {
         setErrorMessage('Failed to fetch daily data');
