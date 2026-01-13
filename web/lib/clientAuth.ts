@@ -7,7 +7,7 @@ const TOKEN_KEY = "wiibuk_token";
 export function setAuthToken(token: string) {
   // Cek agar tidak dijalankan di server (SSR)
   if (typeof window === "undefined") return;
-  // Simpan token 
+  // Simpan token  ke localStorage
   localStorage.setItem(TOKEN_KEY, token);
 }
 
