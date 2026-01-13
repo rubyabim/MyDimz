@@ -1,4 +1,4 @@
-// Import tipe Metadata
+// Import tipe Metadata ari 
 
 import type { Metadata } from 'next';
 import './globals.css';
