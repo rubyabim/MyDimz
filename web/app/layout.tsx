@@ -3,7 +3,7 @@
 // Digunakan untuk mengatur SEO seperti title dan description
 
 import type { Metadata } from 'next';
-// Import global
+// Import global CSS
 import './globals.css';
 import { CartProvider } from './components/CartContext';
 
