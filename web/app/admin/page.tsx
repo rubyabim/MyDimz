@@ -70,6 +70,7 @@ export default function AdminDashboard() {
     return <div className="min-h-screen bg-gray-50" />;
   }
 
+  // Jika tidak ada token (admin belum login), tampilkan pesan peringatan
   if (!token) {
     return (
       <div className="min-h-screen bg-gray-50">
