@@ -12,7 +12,7 @@ export function setAuthToken(token: string) {
 }
 
 export function getAuthToken(): string | null {
-  // Pastikan kode hanya 
+  // Pastikan kode hanya berjalan 
   if (typeof window === "undefined") return null;
   return localStorage.getItem(TOKEN_KEY);
 }
