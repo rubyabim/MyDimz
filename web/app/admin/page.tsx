@@ -107,6 +107,7 @@ export default function AdminDashboard() {
         {loading ? (
           <div>Loading admin products...</div>
         ) : (
+          // Membuat tata letak kotak-kotak (grid) yang responsif
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {products.map((p) => (
               <div key={p.id} className="card p-4">
