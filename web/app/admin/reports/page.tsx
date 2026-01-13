@@ -246,6 +246,7 @@ export default function ReportsPage() {
             <div className="mt-4 flex gap-2">
               {/* Tombol 1: Memicu pembaruan visual di layar */}
               <button className="btn-primary" onClick={loadMonthly}>Load Chart</button>
+              {/* Tombol 2: Memicu proses pembuatan dan pengunduhan dokumen */}
               <button className="btn-ghost" onClick={downloadPdf}>Download PDF</button>
             </div>
           </div>
