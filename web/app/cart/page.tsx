@@ -32,6 +32,7 @@ export default function CartPage() {
 
       // Simpan transaksi ke API
       const response = await fetch(
+        // Mengambil alamat server dari variabel lingkungan atau default ke localhost
         `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:500/api"}/sales`,
         {
           method: "POST",
