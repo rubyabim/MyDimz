@@ -35,6 +35,7 @@ export default function ReportsPage() {
     // Set tanggal otomatis ke hari ini (format: YYYY-MM-DD)
     // slice(0, 10) mengambil 10 karakter pertama: contoh "2026-01-13"
     setDate(new Date().toISOString().slice(0, 10));
+    // Cek apakah pengguna adalah admin
     setIsAdmin(!!getAuthToken());
   }, []);
 
