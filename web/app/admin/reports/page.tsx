@@ -192,6 +192,7 @@ export default function ReportsPage() {
       setErrorMessage(String(err?.message || err));
       // Catat detail kesalahan di sistem log untuk pemeriksaan teknis
       console.error('Download PDF error', err);
+      // Berhenti di sini (Return)
       return;
     }
   };
