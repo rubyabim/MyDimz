@@ -180,6 +180,7 @@ export default function ReportsPage() {
         return;
       }
       // Ubah data mentah dari server menjadi objek "Blob" (Binary Large Object)
+      // Ini diperlukan karena PDF adalah file biner, bukan teks biasa.
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       window.open(url);
