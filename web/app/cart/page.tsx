@@ -38,6 +38,7 @@ export default function CartPage() {
           // Menggunakan POST karena kita mengirim data baru untuk disimpan
           method: "POST",
           headers: {
+            // Memberitahu server bahwa data yang dikirim berbentuk JSON
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
