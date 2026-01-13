@@ -95,6 +95,7 @@ export default function AdminDashboard() {
         {/* Bagian Judul dan Tombol Tambah Produk */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+          {/* Link untuk mengarahkan admin ke halaman pembuatan produk baru */}
           <Link href="/products/new" className="btn-primary">+ New Product</Link>
         </div>
         <div className="mb-6">
