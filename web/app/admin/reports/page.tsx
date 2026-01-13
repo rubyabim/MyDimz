@@ -286,6 +286,7 @@ export default function ReportsPage() {
             // Kondisi Alternatif: Jika data belum ada (belum diklik atau gagal)
             <div>
               {errorMessage ? (
+                // Jika ada masalah (misal token habis atau server mati)
                 <div className="text-red-600">{errorMessage}</div>
               ) : (
                 <div>Silakan pilih periode dan klik "Load Chart" untuk menampilkan grafik.</div>
