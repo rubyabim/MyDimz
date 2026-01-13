@@ -102,6 +102,7 @@ export default function ReportsPage() {
       // Keluar dari fungsi agar aplikasi tidak mencoba mengolah data yang tidak ada
       return;
     }
+    // Ambil semua tanggal (key) dari ringkasan harian dan urutkan dari tanggal awal ke akhir
     const dayKeys = Object.keys(data.dailySummary).sort();
     const labels = dayKeys.map(d => new Date(d).toLocaleDateString('id-ID', { day: 'numeric' }));
     const vals = dayKeys.map(k => data.dailySummary[k]);
