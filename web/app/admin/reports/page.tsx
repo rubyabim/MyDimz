@@ -176,6 +176,7 @@ export default function ReportsPage() {
         const body = await res.text().catch(() => null);
         // Catat kode error (status) dan isi pesan untuk keperluan perbaikan (debug)
         console.error('Download PDF failed', res?.status, body);
+        // Hentikan proses agar aplikasi tidak mencoba mengolah data yang rusak/kosong
         return;
       }
       const blob = await res.blob();
