@@ -61,6 +61,7 @@ export default function ReportsPage() {
       return;
     }
     // Create hourly summary
+    // MEMBUAT GRAFIK PER JAM
     // Buat deret angka 0 sampai 23 (untuk 24 jam)
     const hours = Array.from({ length: 24 }, (_, i) => i);
     const vals = hours.map((h) => {
