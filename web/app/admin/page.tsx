@@ -50,6 +50,7 @@ export default function AdminDashboard() {
         return;
       }
       try {
+        // Ambil data dari server menggunakan token dan kata kunci pencarian
         const data = await fetchAdminProducts(token, { search: search || undefined });
         if (Array.isArray(data)) setProducts(data);
         else if (data && Array.isArray(data.products)) setProducts(data.products);
