@@ -41,7 +41,7 @@ export async function getUserProfile() {
         },
       }
     );
-// Jika response gagal 
+// Jika response gagal (401 / 403 / dll)
     if (!response.ok) return null;
     return await response.json();
   } catch (error) {
