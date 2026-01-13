@@ -92,6 +92,7 @@ export default function AdminDashboard() {
       {/* Header utama aplikasi */}
       <Header />
       <div className="container mx-auto px-4 py-12">
+        {/* Bagian Judul dan Tombol Tambah Produk */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
           <Link href="/products/new" className="btn-primary">+ New Product</Link>
