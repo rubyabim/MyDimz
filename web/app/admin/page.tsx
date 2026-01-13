@@ -23,6 +23,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   // Menyimpan teks pencarian kalau admin mau cari barang tertentu
   const [search, setSearch] = useState('');
+  // Memastikan komponen sudah menempel di layar (cegah error hydration)
   const [mounted, setMounted] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const router = useRouter();
