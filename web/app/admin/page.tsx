@@ -136,7 +136,7 @@ export default function AdminDashboard() {
                           alert('Failed to delete product');
                           return;
                         }
-                        // Refresh list
+                        // Update Tampilan: Hapus barang tersebut dari layar tanpa perlu reload halaman
                         setProducts((prev) => prev.filter((x) => x.id !== p.id));
                       }}
                     >
