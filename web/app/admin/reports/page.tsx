@@ -16,6 +16,7 @@ function formatCurrency(num: number) {
 
 // page laporan penjualan untuk admin
 export default function ReportsPage() {
+  // Menentukan jenis laporan: apakah mau lihat harian, bulanan, atau tahunan
   const [mode, setMode] = useState<'daily' | 'monthly' | 'yearly'>('daily');
   const [date, setDate] = useState('');
   const [year, setYear] = useState(new Date().getFullYear());
