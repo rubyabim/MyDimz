@@ -179,6 +179,7 @@ export default function ReportsPage() {
         // Hentikan proses agar aplikasi tidak mencoba mengolah data yang rusak/kosong
         return;
       }
+      // Ubah data mentah dari server menjadi objek "Blob" (Binary Large Object)
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       window.open(url);
