@@ -4,7 +4,7 @@
 
 import type { Metadata } from 'next';
 // Import global CSS
-// Biasanya
+// Biasanya berisi 
 import './globals.css';
 import { CartProvider } from './components/CartContext';
 
