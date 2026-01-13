@@ -46,7 +46,7 @@ export default function CartPage() {
             customerId: 0, // Identitas pelanggan (0 berarti pelanggan anonim/umum)
             items: items.map((item) => ({ 
               productId: item.id, // Hanya mengirimkan ID produk
-              quantity: item.quantity,
+              quantity: item.quantity, // Hanya mengirimkan ID produk
             })),
             paymentMethod,
             notes: `Online order via web`,
