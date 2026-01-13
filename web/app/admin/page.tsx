@@ -36,6 +36,7 @@ export default function AdminDashboard() {
     const clientToken = getAuthToken();
     // Simpan token tersebut ke dalam state agar bisa dipakai komponen lain
     setToken(clientToken);
+    // Tandai bahwa aplikasi sudah sepenuhnya siap di sisi user (Client)
     setMounted(true);
   }, []);
 
