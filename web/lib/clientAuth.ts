@@ -52,7 +52,7 @@ export async function getUserProfile() {
     return null;
   }
 }
-// Mengecek apakah user memiliki role admin atau 
+// Mengecek apakah user memiliki role admin atau pembeli
 export function isAdmin(user: any): boolean {
   return user?.role === "admin" || user?.role === "seller";
 }
