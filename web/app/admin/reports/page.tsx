@@ -208,6 +208,7 @@ export default function ReportsPage() {
         <div className="flex gap-2 mb-6">
           {/* Tombol Harian: Akan berwarna biru (btn-primary) jika mode aktif adalah 'daily' */}
           <button className={`btn ${mode === 'daily' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('daily')}>Harian</button>
+          {/* Tombol Bulanan */}
           <button className={`btn ${mode === 'monthly' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('monthly')}>Bulanan</button>
           <button className={`btn ${mode === 'yearly' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('yearly')}>Tahunan</button>
         </div>
