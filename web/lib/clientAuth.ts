@@ -3,7 +3,7 @@
 // Diperlukan karena menggunakan localStorage dan window
 // Key untuk menyimpan token di localStorage
 const TOKEN_KEY = "wiibuk_token";
-// Menyimpan token 
+// Menyimpan token autentikasi 
 export function setAuthToken(token: string) {
   if (typeof window === "undefined") return;
   localStorage.setItem(TOKEN_KEY, token);
