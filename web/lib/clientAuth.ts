@@ -22,7 +22,7 @@ export function clearAuthToken() {
   if (typeof window === "undefined") return;
   localStorage.removeItem(TOKEN_KEY);
 }
-// Mengambil data profil user  yang sedang login
+// Mengambil data profil user  yang sedang login Menggunakan 
 export async function getUserProfile() {
   try {
     const token = getAuthToken();
