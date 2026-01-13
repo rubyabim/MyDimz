@@ -1,4 +1,4 @@
-// Import tipe Metadata ari 
+// Import tipe Metadata dari Next.js
 
 import type { Metadata } from 'next';
 import './globals.css';
