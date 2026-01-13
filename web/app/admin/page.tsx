@@ -124,6 +124,7 @@ export default function AdminDashboard() {
                   <div className="flex flex-col gap-2">
                     {/* Tombol Edit: Mengarahkan admin ke halaman edit berdasarkan ID produk */}
                     <Link href={`/products/${p.id}`} className="btn-ghost">Edit</Link>
+                    {/* bagian button delete */}
                     <button
                       className="btn-ghost"
                       onClick={async () => {
