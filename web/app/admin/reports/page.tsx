@@ -244,6 +244,7 @@ export default function ReportsPage() {
             </div>
             {/* Tombol Aksi Bulanan */}
             <div className="mt-4 flex gap-2">
+              {/* Tombol 1: Memicu pembaruan visual di layar */}
               <button className="btn-primary" onClick={loadMonthly}>Load Chart</button>
               <button className="btn-ghost" onClick={downloadPdf}>Download PDF</button>
             </div>
