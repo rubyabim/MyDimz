@@ -210,6 +210,7 @@ export default function ReportsPage() {
           <button className={`btn ${mode === 'daily' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('daily')}>Harian</button>
           {/* Tombol Bulanan */}
           <button className={`btn ${mode === 'monthly' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('monthly')}>Bulanan</button>
+          Tombol Tahunan
           <button className={`btn ${mode === 'yearly' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setMode('yearly')}>Tahunan</button>
         </div>
 
