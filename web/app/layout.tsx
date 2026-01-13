@@ -10,7 +10,7 @@ import './globals.css';
 // Berfungsi  sebagai Context untuk state keranjang belanja
 
 import { CartProvider } from './components/CartContext';
-// Metadata website 
+// Metadata website (SEO)
 export const metadata: Metadata = {
   title: 'Toko Kelontong MyDimz',
   description: 'Belanja kebutuhan sehari-hari dengan mudah',
