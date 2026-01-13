@@ -129,6 +129,7 @@ export default function AdminDashboard() {
                       onClick={async () => {
                         // Konfirmasi: Biar nggak sengaja kepencet hapus
                         if (!confirm(`Delete product ${p.name}?`)) return;
+                        // Proses Hapus: Kirim perintah DELETE ke server pakai token keamanan
                         const res = await authFetch(`/products/${p.id}`, { method: 'DELETE' }, token || undefined);
                         if (!res || !res.ok) {
                           alert('Failed to delete product');
