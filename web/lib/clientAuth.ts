@@ -18,7 +18,7 @@ export function getAuthToken(): string | null {
 }
 // Menghapus token autentikasi (logout)
 export function clearAuthToken() {
-  // Cegah error saat 
+  // Cegah error saat dijalankan 
   if (typeof window === "undefined") return;
   localStorage.removeItem(TOKEN_KEY);
 }
