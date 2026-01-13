@@ -18,6 +18,7 @@ function formatCurrency(num: number) {
 export default function ReportsPage() {
   // Menentukan jenis laporan: apakah mau lihat harian, bulanan, atau tahunan
   const [mode, setMode] = useState<'daily' | 'monthly' | 'yearly'>('daily');
+  // State untuk memfilter waktu (tanggal spesifik, tahun, atau bulan tertentu)
   const [date, setDate] = useState('');
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
