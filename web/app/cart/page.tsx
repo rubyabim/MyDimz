@@ -21,6 +21,7 @@ export default function CartPage() {
     if (items.length === 0) {
       // Tampilkan peringatan instan kepada pengguna
       alert("Keranjang kosong!");
+      // Berhenti di sini (Early Return)
       return;
     }
 
