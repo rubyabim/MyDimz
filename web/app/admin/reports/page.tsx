@@ -193,6 +193,7 @@ export default function ReportsPage() {
       // Catat detail kesalahan di sistem log untuk pemeriksaan teknis
       console.error('Download PDF error', err);
       // Berhenti di sini (Return)
+      // Mencegah aplikasi mencoba membuka file yang tidak pernah berhasil diunduh
       return;
     }
   };
