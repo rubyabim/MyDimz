@@ -11,6 +11,7 @@ export default function CartPage() {
   const { items, updateQuantity, removeFromCart, clearCart, total } = useCart();
   // State untuk mengontrol status loading saat proses bayar/checkout
   const [processing, setProcessing] = useState(false);
+  // State untuk memilih cara bayar (default: tunai)
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const router = useRouter();
 
