@@ -142,6 +142,7 @@ export default function ReportsPage() {
     }
     // Ambil semua kunci bulan (01, 02, dst) dari data server dan urutkan
     const monthKeys = Object.keys(data.monthlyTotals).sort();
+    // Ubah format angka bulan menjadi nama pendek (misal: "01" jadi "Jan")
     const labels = monthKeys.map(m => new Date(`${year}-${m}-01`).toLocaleString('id-ID', { month: 'short' }));
     const vals = monthKeys.map(k => data.monthlyTotals[k]);
     setChartData({ labels, datasets: [{ label: `Penjualan ${year}`, data: vals, backgroundColor: 'rgba(31,122,235,0.6)' }] });
