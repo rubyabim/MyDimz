@@ -11,6 +11,7 @@ import './globals.css';
 
 import { CartProvider } from './components/CartContext';
 // Metadata website (SEO)
+//
 export const metadata: Metadata = {
   title: 'Toko Kelontong MyDimz',
   description: 'Belanja kebutuhan sehari-hari dengan mudah',
