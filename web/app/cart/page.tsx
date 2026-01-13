@@ -75,6 +75,7 @@ export default function CartPage() {
       // Menggunakan alert agar pengguna tahu bahwa transaksi belum tercatat dan mereka perlu mencoba lagi
       alert("Gagal melakukan checkout. Silakan coba lagi.");
     } finally {
+      // Mengembalikan status processing menjadi normal (false)
       setProcessing(false);
     }
   };
