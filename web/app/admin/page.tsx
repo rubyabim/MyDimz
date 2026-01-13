@@ -98,6 +98,7 @@ export default function AdminDashboard() {
           {/* Link untuk mengarahkan admin ke halaman pembuatan produk baru */}
           <Link href="/products/new" className="btn-primary">+ New Product</Link>
         </div>
+        {/* Kolom Pencarian Produk */}
         <div className="mb-6">
           <input value={search} onChange={(e) => setSearch(e.target.value)} className="w-full border rounded-md px-4 py-2" placeholder="Search products..." />
         </div>
