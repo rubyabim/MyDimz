@@ -10,6 +10,7 @@ import { Chart, CategoryScale, LinearScale, PointElement, LineElement, BarElemen
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
 
 function formatCurrency(num: number) {
+  // Mengubah angka (misal: 1500000) menjadi format Rupiah (Rp1.500.000,00)
   return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(num);
 }
 
