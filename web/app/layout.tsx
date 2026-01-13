@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: 'Belanja kebutuhan sehari-hari dengan mudah', // Deskripsi website 
 };
 // RootLayout adalah  layout utama  aplikasi
-// Semua  halaman  akan dibungkus oleh 
+// Semua  halaman  akan dibungkus oleh komponen 
 export default function RootLayout({
   children,
 }: {
