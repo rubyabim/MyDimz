@@ -99,6 +99,7 @@ export default function ReportsPage() {
       setErrorMessage(String(err.message || err));
       // Catat detail teknis di konsol untuk keperluan perbaikan (debugging)
       console.error('Monthly fetch error', err);
+      // Keluar dari fungsi agar aplikasi tidak mencoba mengolah data yang tidak ada
       return;
     }
     const dayKeys = Object.keys(data.dailySummary).sort();
