@@ -14,6 +14,7 @@ function formatCurrency(num: number) {
   return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(num);
 }
 
+// page laporan penjualan untuk admin
 export default function ReportsPage() {
   const [mode, setMode] = useState<'daily' | 'monthly' | 'yearly'>('daily');
   const [date, setDate] = useState('');
