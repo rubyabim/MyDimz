@@ -110,6 +110,7 @@ export default function ReportsPage() {
     const vals = dayKeys.map(k => data.dailySummary[k]);
     // Masukkan data yang sudah siap ke dalam state ChartData untuk digambar oleh library grafik
     setChartData({ labels, datasets: [{ label: `Penjualan ${month}/${year}`, data: vals, backgroundColor: 'rgba(31,122,235,0.6)' }] });
+    // Hitung ringkasan akhir: total omzet sebulan dan jumlah transaksi yang terjadi
     setSummary({ totalSales: vals.reduce((a: number, b: number) => a + b, 0), transactions: (data.sales || []).length });
   };
 
