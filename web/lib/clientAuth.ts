@@ -41,7 +41,7 @@ export async function getUserProfile() {
         },
       }
     );
-// 
+// Jika 
     if (!response.ok) return null;
     return await response.json();
   } catch (error) {
