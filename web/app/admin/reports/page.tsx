@@ -36,6 +36,7 @@ export default function ReportsPage() {
     // slice(0, 10) mengambil 10 karakter pertama: contoh "2026-01-13"
     setDate(new Date().toISOString().slice(0, 10));
     // Cek apakah pengguna adalah admin
+    // Tanda !! mengubah nilai token (ada/tidak) menjadi boolean (true/false)
     setIsAdmin(!!getAuthToken());
   }, []);
 
