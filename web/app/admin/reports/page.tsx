@@ -252,6 +252,7 @@ export default function ReportsPage() {
           </div>
         )}
 
+        {/* Kondisi: Hanya tampil jika admin memilih tab 'Tahunan' */}
         {mode === 'yearly' && (
           <div className="card p-4 mb-6">
             <label className="block mb-2">Tahun</label>
