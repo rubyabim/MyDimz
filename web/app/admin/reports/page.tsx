@@ -187,6 +187,7 @@ export default function ReportsPage() {
       // Buka tab baru yang menampilkan file PDF tersebut
       window.open(url);
     } catch (err: any) {
+      // Ambil pesan kesalahan dan tampilkan ke layar (User Friendly)
       setErrorMessage(String(err?.message || err));
       console.error('Download PDF error', err);
       return;
