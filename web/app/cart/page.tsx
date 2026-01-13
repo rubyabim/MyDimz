@@ -17,6 +17,7 @@ export default function CartPage() {
   const router = useRouter();
 
   const handleCheckout = async () => {
+    // Mengecek apakah ada barang di dalam keranjang
     if (items.length === 0) {
       alert("Keranjang kosong!");
       return;
