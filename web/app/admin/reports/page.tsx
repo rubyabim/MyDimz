@@ -283,6 +283,7 @@ export default function ReportsPage() {
               </div>
             </div>
           ) : (
+            // Kondisi Alternatif: Jika data belum ada (belum diklik atau gagal)
             <div>
               {errorMessage ? (
                 <div className="text-red-600">{errorMessage}</div>
