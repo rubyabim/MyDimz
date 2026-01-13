@@ -200,6 +200,7 @@ export default function ReportsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Menampilkan Header di bagian atas halaman */}
       <Header />
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-2xl font-bold mb-4">Laporan Penjualan</h1>
