@@ -55,8 +55,6 @@ export default function ReportsPage() {
         return;
       }
       data = await res.json();
-      // MEMBUAT GRAFIK PER JAM
-      // Buat deret angka 0 sampai 23 (untuk 24 jam)
     } catch (err: any) {
       setErrorMessage(String(err.message || err));
       console.error('Daily fetch error', err);
