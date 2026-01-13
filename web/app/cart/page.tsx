@@ -65,6 +65,7 @@ export default function CartPage() {
       clearCart();
       // Memberikan konfirmasi visual kepada pelanggan/kasir
       alert("Pembelian berhasil! Terima kasih telah berbelanja.");
+      // Mengarahkan pengguna kembali ke halaman utama (Beranda)
       router.push("/");
     } catch (error) {
       console.error("Error:", error);
