@@ -172,6 +172,7 @@ export default function ReportsPage() {
         // Beritahu admin bahwa ada yang salah melalui pesan di layar
         setErrorMessage('Failed to download PDF');
         // Coba ambil detail alasan kegagalan dari server (jika ada)
+        // catch(() => null) memastikan aplikasi tidak crash jika server tidak mengirim teks error
         const body = await res.text().catch(() => null);
         console.error('Download PDF failed', res?.status, body);
         return;
