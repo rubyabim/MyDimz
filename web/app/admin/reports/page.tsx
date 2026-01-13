@@ -134,6 +134,7 @@ export default function ReportsPage() {
       // Menggunakan String() untuk memastikan apa pun jenis errornya bisa tampil sebagai teks
       setErrorMessage(String(err.message || err));
       // Catat detail teknis di log developer
+      // Ini membantu kamu melacak apakah errornya karena server mati atau format data salah
       console.error('Yearly fetch error', err);
       return;
     }
