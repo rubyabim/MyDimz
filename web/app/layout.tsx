@@ -13,7 +13,7 @@ import { CartProvider } from './components/CartContext';
 // Metadata website (SEO)
 // Akan  otomatis  digunakan  oleh  Next.js
 export const metadata: Metadata = {
-  title: 'Toko Kelontong MyDimz',   //
+  title: 'Toko Kelontong MyDimz',   // Judul website
   description: 'Belanja kebutuhan sehari-hari dengan mudah',
 };
 
