@@ -52,6 +52,8 @@ export default function AdminDashboard() {
       try {
         // Ambil data dari server menggunakan token dan kata kunci pencarian
         const data = await fetchAdminProducts(token, { search: search || undefined });
+
+        // Validasi Data: Pastikan data yang diterima berbentuk Array agar aplikasi tidak crash
         if (Array.isArray(data)) setProducts(data);
         else if (data && Array.isArray(data.products)) setProducts(data.products);
       } catch (error) {
